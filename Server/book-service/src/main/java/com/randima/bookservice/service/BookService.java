@@ -5,6 +5,7 @@ import com.randima.bookservice.model.Book;
 import java.util.Optional;
 
 public interface BookService {
-    void saveBook(Book book);
+    Book saveBook(Book book);
     Optional<Book> findById(Integer id);
+    Book updateBook(Integer id, Book book);
 }

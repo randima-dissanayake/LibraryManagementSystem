@@ -14,12 +14,18 @@ public class BookServiceImpl implements BookService{
     BookRepository bookRepository;
 
     @Override
-    public void saveBook(Book book) {
-        bookRepository.save(book);
+    public Book saveBook(Book book) {
+        return bookRepository.save(book);
     }
 
     @Override
     public Optional<Book> findById(Integer id){
         return bookRepository.findById(id);
+    }
+
+    //need to change
+    @Override
+    public Book updateBook(Integer id, Book book) {
+        return bookRepository.save(book);
     }
 }
