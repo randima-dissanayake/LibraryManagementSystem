@@ -29,5 +29,17 @@ public class User {
     @JsonIgnore
     List<Book> waitingBooks = new ArrayList<Book>();
 
+    public User(String useremail, String password, String role, boolean enabled) {
+        this.useremail = useremail;
+        this.password = password;
+        this.role = role;
+        this.enabled = enabled;
+    }
+
+    public User(){
+        this.enabled = false;
+    }
+
+
 
 }

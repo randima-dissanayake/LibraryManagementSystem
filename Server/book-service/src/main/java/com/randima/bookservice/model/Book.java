@@ -17,13 +17,16 @@ public class Book {
     private String title;
     private String author;
     private String publisher;
-    private String yearOfPublication;
-    private String locationInTheLibrary;
-    private Integer numberOfCopies;
+    private String year_of_publication;
+    private String location;
+    private Integer num_of_copies;
+    private String last_available_date;
+    private
 //    private byte[] coverageImage;
     @OneToMany(mappedBy = "book", cascade = {CascadeType.REMOVE})
     List<Book_User> currentUsers = new ArrayList<Book_User>();
 
+    @Autowired
     @ManyToMany(cascade = {CascadeType.ALL})
     @JoinTable
             (
@@ -31,4 +34,18 @@ public class Book {
                     inverseJoinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id", unique = true)}
             )
     private List<User> waitUsers = new LinkedList<User>();
+
+    public Book(String author, String title, String publisher, String year_of_publication, String location, int num_of_copies) {
+        this.author = author;
+        this.title = title;
+        this.publisher = publisher;
+        this.year_of_publication = year_of_publication;
+        this.location = location;
+        this.num_of_copies = num_of_copies;
+        this.last_available_date = null;
+
+    }
+
+    public Book() {
+    }
 }
