@@ -16,8 +16,10 @@ public class Book_User {
     @JoinColumn
     @JsonIgnore
     private Book book;
+
     @ManyToOne(cascade = CascadeType.ALL)
     private User user;
+
     private String checkout_date;
     private Integer renew_flag;
     private Integer fine;

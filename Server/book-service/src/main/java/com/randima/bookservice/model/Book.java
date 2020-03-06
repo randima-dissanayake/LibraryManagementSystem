@@ -21,7 +21,7 @@ public class Book {
     private String location;
     private Integer num_of_copies;
     private String last_available_date;
-    private
+
 //    private byte[] coverageImage;
     @OneToMany(mappedBy = "book", cascade = {CascadeType.REMOVE})
     List<Book_User> currentUsers = new ArrayList<Book_User>();
