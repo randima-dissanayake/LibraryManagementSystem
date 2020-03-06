@@ -7,9 +7,8 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-@Entity
 @Data
-public class Book_User {
+public class Transaction {
     @Id
     private Integer id;
     @ManyToOne
@@ -24,20 +23,20 @@ public class Book_User {
     private Integer renew_flag;
     private Integer fine;
 
-    public Book_User() {
+//    public Book_User() {
+//
+//    }
 
-    }
-
-    public Book_User(Book b, User u, LocalDateTime f, Integer renewFlag) {
-//         create primary key
-
-        // initialize attributes
-        this.book = b;
-        this.user = u;
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
-        this.checkout_date = dtf.format(f);
-        this.renew_flag = renewFlag;
-        this.fine = 0;
-
-    }
+//    public Book_User(Book b, User u, LocalDateTime f, Integer renewFlag) {
+////         create primary key
+//
+//        // initialize attributes
+//        this.book = b;
+//        this.user = u;
+//        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+//        this.checkout_date = dtf.format(f);
+//        this.renew_flag = renewFlag;
+//        this.fine = 0;
+//
+//    }
 }

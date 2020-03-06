@@ -24,7 +24,7 @@ public class Book {
 
 //    private byte[] coverageImage;
     @OneToMany(mappedBy = "book", cascade = {CascadeType.REMOVE})
-    List<Book_User> currentUsers = new ArrayList<Book_User>();
+    List<Transaction> currentUsers = new ArrayList<Transaction>();
 
     @Autowired
     @ManyToMany(cascade = {CascadeType.ALL})
