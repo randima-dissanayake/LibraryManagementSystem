@@ -1,4 +1,4 @@
-package com.randima.bookservice.model;
+package com.randima.userservice.model;
 
 import lombok.Data;
 
@@ -10,5 +10,4 @@ public class Transaction {
     private String checkout_date;
     private Integer renew_flag;
     private Integer fine;
-
 }
