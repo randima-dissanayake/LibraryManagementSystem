@@ -1,8 +1,5 @@
-package com.randima.userservice.model;
+package com.randima.transactionservice.model;
 
-import lombok.Data;
-
-@Data
 public class Book {
     private Integer id;
     private String title;

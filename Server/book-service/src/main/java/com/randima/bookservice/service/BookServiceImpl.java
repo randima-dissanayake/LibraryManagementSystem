@@ -16,9 +16,9 @@ public class BookServiceImpl implements BookService{
 
     @Override
     public Book saveBook(Book book) {
-        for (BookCopy bookCopy: book.getBookCopies()){
-            bookCopy.setBook(book);
-        }
+//        for (BookCopy bookCopy: book.getBookCopies()){
+//            bookCopy.setBook(book);
+//        }
         return bookRepository.save(book);
     }
 

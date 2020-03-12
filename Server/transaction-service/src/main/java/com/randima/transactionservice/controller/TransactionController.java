@@ -1,5 +1,6 @@
 package com.randima.transactionservice.controller;
 
+import com.randima.transactionservice.model.Book;
 import com.randima.transactionservice.model.Transaction;
 import com.randima.transactionservice.service.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,8 +30,15 @@ public class TransactionController {
         return transactionService.findByUserId(id);
     }
 
+    @RequestMapping(value = "/user/currentbooks/{id}",method = RequestMethod.GET)
+    public List<Book> getCurrentBookListByUserId(@PathVariable Integer id){
+        return transactionService.getCurrentBookListByUserId(id);
+    }
+
     @RequestMapping(value = "/book/{id}",method = RequestMethod.GET)
     public List<Transaction> findByBookId(@PathVariable Integer id){
         return transactionService.findByBookId(id);
     }
+
+
 }

@@ -10,4 +10,5 @@ public class Transaction {
     private String checkout_date;
     private Integer renew_flag;
     private Integer fine;
+
 }

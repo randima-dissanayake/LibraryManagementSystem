@@ -12,8 +12,8 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private Integer id;
-    private Long studentId;
-    private String useremail;
+    private String studentId;
+    private String userEmail;
     private String password;
     private String role;
     private boolean enabled;
@@ -23,11 +23,10 @@ public class User {
 
     public User(User user) {
         this.studentId = user.getStudentId();
-        this.useremail = user.getUseremail();
+        this.userEmail = user.getUseremail();
         this.password = user.getPassword();
         this.role = user.getRole();
         this.enabled = user.isEnabled();
-        this.currentBookList = user.getCurrentBookList();
     }
     public  User(){
 
@@ -41,20 +40,20 @@ public class User {
         this.id = id;
     }
 
-    public Long getStudentId() {
+    public String getStudentId() {
         return studentId;
     }
 
-    public void setStudentId(Long studentId) {
+    public void setStudentId(String studentId) {
         this.studentId = studentId;
     }
 
     public String getUseremail() {
-        return useremail;
+        return userEmail;
     }
 
     public void setUseremail(String useremail) {
-        this.useremail = useremail;
+        this.userEmail = useremail;
     }
 
     public String getPassword() {
