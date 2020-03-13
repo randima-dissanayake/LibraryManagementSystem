@@ -5,6 +5,7 @@ import lombok.Data;
 @Data
 public class Book {
     private Integer id;
+    private String isbn;
     private String title;
     private String author;
     private String publisher;
@@ -12,7 +13,15 @@ public class Book {
     private String location;
     private Integer num_of_copies;
 
-    private User user;
+//    private User user;
+
+    public String getIsbn() {
+        return isbn;
+    }
+
+    public void setIsbn(String isbn) {
+        this.isbn = isbn;
+    }
 
     public Integer getId() {
         return id;
@@ -70,11 +79,11 @@ public class Book {
         this.num_of_copies = num_of_copies;
     }
 
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
+//    public User getUser() {
+//        return user;
+//    }
+//
+//    public void setUser(User user) {
+//        this.user = user;
+//    }
 }

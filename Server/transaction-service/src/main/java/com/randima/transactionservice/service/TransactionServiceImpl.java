@@ -36,8 +36,12 @@ public class TransactionServiceImpl implements TransactionService {
     }
 
     @Override
-    public Optional<Transaction> findById(Integer id) {
-        return transactionRepository.findById(id);
+    public Transaction findById(Integer id) {
+        Optional<Transaction> transaction = transactionRepository.findById(id);
+        if (transaction.isPresent()){
+            return transaction.get();
+        }
+        return null;
     }
 
     @Override
@@ -61,7 +65,6 @@ public class TransactionServiceImpl implements TransactionService {
             ResponseEntity<Book> responseEntity=restTemplate.exchange("http://localhost:8080/book/"+transaction.getBookId(),
                     HttpMethod.GET,httpEntity, Book.class);
             Book book=responseEntity.getBody();
-            System.out.println("rrrrrrrrrrrrr"+book);
             booklist.add(book);
         }
         return booklist;
@@ -78,10 +81,26 @@ public class TransactionServiceImpl implements TransactionService {
             ResponseEntity<User> responseEntity=restTemplate.exchange("http://localhost:8181/user/"+transaction.getUserId(),
                     HttpMethod.GET,httpEntity, User.class);
             User user=responseEntity.getBody();
-            System.out.println("rrrrrrrrrrrrr"+user);
             userlist.add(user);
         }
 
         return userlist;
+    }
+
+    @Override
+    public List<Transaction> findAll() {
+        List<Transaction> transactions = new ArrayList<>();
+        HttpHeaders httpHeaders=new HttpHeaders();
+        HttpEntity<String> httpEntity=new HttpEntity<>("",httpHeaders);
+        for (Transaction transaction: transactionRepository.findAll()){
+            ResponseEntity<User> user=restTemplate.exchange("http://localhost:8181/user/"+transaction.getUserId(),
+                    HttpMethod.GET,httpEntity, User.class);
+            transaction.setUser(user.getBody());
+            ResponseEntity<Book> book=restTemplate.exchange("http://localhost:8080/book/"+transaction.getBookId(),
+                    HttpMethod.GET,httpEntity, Book.class);
+            transaction.setBook(book.getBody());
+            transactions.add(transaction);
+        }
+        return transactions;
     }
 }

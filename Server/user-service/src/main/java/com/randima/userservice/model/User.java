@@ -18,12 +18,12 @@ public class User {
     private String role;
     private boolean enabled;
     @Transient
-    private List<Transaction> currentBookList = new ArrayList<Transaction>();
+    private List<Book> currentBookList = new ArrayList<Book>();
 //    private List<Book> waitingList = new ArrayList<Book>();
 
     public User(User user) {
         this.studentId = user.getStudentId();
-        this.userEmail = user.getUseremail();
+        this.userEmail = user.getUserEmail();
         this.password = user.getPassword();
         this.role = user.getRole();
         this.enabled = user.isEnabled();
@@ -48,12 +48,12 @@ public class User {
         this.studentId = studentId;
     }
 
-    public String getUseremail() {
+    public String getUserEmail() {
         return userEmail;
     }
 
-    public void setUseremail(String useremail) {
-        this.userEmail = useremail;
+    public void setUserEmail(String userEmail) {
+        this.userEmail = userEmail;
     }
 
     public String getPassword() {
@@ -80,11 +80,11 @@ public class User {
         this.enabled = enabled;
     }
 
-    public List<Transaction> getCurrentBookList() {
+    public List<Book> getCurrentBookList() {
         return currentBookList;
     }
 
-    public void setCurrentBookList(List<Transaction> currentBookList) {
+    public void setCurrentBookList(List<Book> currentBookList) {
         this.currentBookList = currentBookList;
     }
 

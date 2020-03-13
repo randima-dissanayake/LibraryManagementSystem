@@ -9,9 +9,10 @@ import java.util.Optional;
 
 public interface TransactionService {
     Transaction saveTransaction(Transaction transaction);
-    Optional<Transaction> findById(Integer id);
+    Transaction findById(Integer id);
     List<Transaction> findByUserId(Integer id);
     List<Transaction> findByBookId(Integer id);
     List<Book> getCurrentBookListByUserId(Integer id);
     List<User> getUserListByBookId(Integer id);
+    List<Transaction> findAll();
 }

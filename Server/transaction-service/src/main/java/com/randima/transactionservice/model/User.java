@@ -2,8 +2,8 @@ package com.randima.transactionservice.model;
 
 public class User {
     private Integer id;
-    private Long studentId;
-    private String useremail;
+    private String studentId;
+    private String userEmail;
     private String password;
     private String role;
     private boolean enabled;
@@ -16,20 +16,20 @@ public class User {
         this.id = id;
     }
 
-    public Long getStudentId() {
+    public String getStudentId() {
         return studentId;
     }
 
-    public void setStudentId(Long studentId) {
+    public void setStudentId(String studentId) {
         this.studentId = studentId;
     }
 
-    public String getUseremail() {
-        return useremail;
+    public String getUserEmail() {
+        return userEmail;
     }
 
-    public void setUseremail(String useremail) {
-        this.useremail = useremail;
+    public void setUserEmail(String userEmail) {
+        this.userEmail = userEmail;
     }
 
     public String getPassword() {

@@ -10,4 +10,5 @@ public interface UserService {
     User saveUser(User user);
     List<Book> getCurrentBook(Integer id);
     User getUserById(Integer id);
+    List<User> getAll();
 }

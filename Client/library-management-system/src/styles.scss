@@ -1,1 +1,16 @@
-/* You can add global styles to this file, and also import other style files */
+
+body {
+    // height: 100vh;
+    // background: #e8eccf;    
+    margin: 0;
+    box-sizing: content-box;
+}
+
+.actionForm{
+    display: flex;
+    flex-direction: column;
+}
+
+.actionForm> * {
+    width: 40%;
+}

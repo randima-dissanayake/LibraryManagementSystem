@@ -42,27 +42,26 @@ public class UserServiceImpl implements UserService{
         ResponseEntity<Book[]> responseEntity=restTemplate.exchange("http://localhost:8081/transaction/user/currentbooks/"+userId,
                 HttpMethod.GET,httpEntity,Book[].class);
         Book[] books=responseEntity.getBody();
-        System.out.println("kkkkkkkkkkkkkkkkkkkkkkkkkkkkkk"+books);
         List<Book> booklist = new ArrayList<>();
 
         for (Book book : books) {
-            System.out.println("kkkkkkkkkkkkkkkkkkkkkkkkkkkkkk"+book);
-            book.setUser(this.getUserById(book.getId()));
             booklist.add(book);
         }
         return booklist;
     }
 
-
-//    public Optional<User> getUserById(Integer id){
-//        return userRepository.findById(id);
-//    }
-
     @Override
     public User getUserById(Integer id) {
-        Optional<User> users = userRepository.findById(id);
-        if (users.isPresent())
-            return users.get();
+        Optional<User> user = userRepository.findById(id);
+        if (user.isPresent()){
+            user.get().setCurrentBookList(this.getCurrentBook(id));
+            return user.get();
+        }
         return null;
+    }
+
+    @Override
+    public List<User> getAll() {
+        return userRepository.findAll();
     }
 }

@@ -2,10 +2,7 @@ package com.randima.transactionservice.model;
 
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 @Data
@@ -18,6 +15,26 @@ public class Transaction {
     private String checkout_date;
     private Integer renew_flag;
     private Integer fine;
+    @Transient
+    private User user;
+    @Transient
+    private Book book;
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Book getBook() {
+        return book;
+    }
+
+    public void setBook(Book book) {
+        this.book = book;
+    }
 
     public Integer getId() {
         return id;

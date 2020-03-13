@@ -16,8 +16,13 @@ public class UserController {
     UserService userService;
 
     @RequestMapping(value = "",method = RequestMethod.POST)
-    public User saveTransaction(@RequestBody User transaction){
+    public User saveUser(@RequestBody User transaction){
         return userService.saveUser(transaction);
+    }
+
+    @RequestMapping(value = "",method = RequestMethod.GET)
+    public List<User> getAll(){
+        return userService.getAll();
     }
 
     @RequestMapping(value = "/currentbooks/{id}",method = RequestMethod.GET)

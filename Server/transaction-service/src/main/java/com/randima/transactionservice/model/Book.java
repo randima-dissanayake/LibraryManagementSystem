@@ -2,6 +2,7 @@ package com.randima.transactionservice.model;
 
 public class Book {
     private Integer id;
+    private String isbn;
     private String title;
     private String author;
     private String publisher;
@@ -10,6 +11,14 @@ public class Book {
     private Integer num_of_copies;
 
     private User user;
+
+    public String getIsbn() {
+        return isbn;
+    }
+
+    public void setIsbn(String isbn) {
+        this.isbn = isbn;
+    }
 
     public Integer getId() {
         return id;

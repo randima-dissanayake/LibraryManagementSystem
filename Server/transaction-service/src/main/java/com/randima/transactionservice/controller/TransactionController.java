@@ -22,8 +22,13 @@ public class TransactionController {
     }
 
     @RequestMapping(value = "/{id}",method = RequestMethod.GET)
-    public Optional<Transaction> findById(@PathVariable Integer id){
+    public Transaction findById(@PathVariable Integer id){
         return transactionService.findById(id);
+    }
+
+    @RequestMapping(value = "",method = RequestMethod.GET)
+    public List<Transaction> findAll(){
+        return transactionService.findAll();
     }
 
     @RequestMapping(value = "/user/{id}",method = RequestMethod.GET)
