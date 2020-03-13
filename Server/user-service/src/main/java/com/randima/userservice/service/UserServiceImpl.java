@@ -39,7 +39,7 @@ public class UserServiceImpl implements UserService{
     public List<Book> getCurrentBook(Integer userId) {
         HttpHeaders httpHeaders=new HttpHeaders();
         HttpEntity<String> httpEntity=new HttpEntity<>("",httpHeaders);
-        ResponseEntity<Book[]> responseEntity=restTemplate.exchange("http://localhost:8081/transaction/user/"+userId,
+        ResponseEntity<Book[]> responseEntity=restTemplate.exchange("http://localhost:8081/transaction/user/currentbooks/"+userId,
                 HttpMethod.GET,httpEntity,Book[].class);
         Book[] books=responseEntity.getBody();
         System.out.println("kkkkkkkkkkkkkkkkkkkkkkkkkkkkkk"+books);

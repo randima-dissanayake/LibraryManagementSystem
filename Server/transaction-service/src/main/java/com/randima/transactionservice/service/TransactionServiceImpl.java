@@ -82,14 +82,6 @@ public class TransactionServiceImpl implements TransactionService {
             userlist.add(user);
         }
 
-
-
-
-//        for (User user : users) {
-//            System.out.println("rrrrrrrrrrrrr"+user);
-//            user.setUser(this.getUserById(user.getId()));
-//            userlist.add(user);
-//        }
         return userlist;
     }
 }
