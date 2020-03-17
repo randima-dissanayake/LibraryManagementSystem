@@ -1,16 +1,68 @@
+/* You can add global styles to this file, and also import other style files */
+form.user .custom-checkbox.small label {
+    line-height: 1.5rem;
+  }
+  
+  form.user .form-control-user {
+    font-size: 0.8rem;
+    border-radius: 10rem;
+    padding: 1.5rem 1rem;
+  }
+  
+  form.user .btn-user {
+    font-size: 0.8rem;
+    border-radius: 10rem;
+    padding: 0.75rem 1rem;
+  }
 
-body {
-    // height: 100vh;
-    // background: #e8eccf;    
-    margin: 0;
-    box-sizing: content-box;
-}
+.btn-primary {
+    color: #fff;
+    background-color: #4e73df;
+    border-color: #4e73df;
+  }
+  
+  .btn-primary:hover {
+    color: #fff;
+    background-color: #2e59d9;
+    border-color: #2653d4;
+  }
+  
+  .btn-primary:focus, .btn-primary.focus {
+    color: #fff;
+    background-color: #2e59d9;
+    border-color: #2653d4;
+    box-shadow: 0 0 0 0.2rem rgba(105, 136, 228, 0.5);
+  }
+  
+  .btn-primary.disabled, .btn-primary:disabled {
+    color: #fff;
+    background-color: #4e73df;
+    border-color: #4e73df;
+  }
+  
+  .btn-primary:not(:disabled):not(.disabled):active, .btn-primary:not(:disabled):not(.disabled).active,
+  .show > .btn-primary.dropdown-toggle {
+    color: #fff;
+    background-color: #2653d4;
+    border-color: #244ec9;
+  }
+  
+  .btn-primary:not(:disabled):not(.disabled):active:focus, .btn-primary:not(:disabled):not(.disabled).active:focus,
+  .show > .btn-primary.dropdown-toggle:focus {
+    box-shadow: 0 0 0 0.2rem rgba(105, 136, 228, 0.5);
+  }
 
-.actionForm{
-    display: flex;
-    flex-direction: column;
-}
-
-.actionForm> * {
-    width: 40%;
-}
+//   .btn-block {
+//     display: block;
+//     width: 100%;
+//   }
+  
+//   .btn-block + .btn-block {
+//     margin-top: 0.5rem;
+//   }
+  
+//   input[type="submit"].btn-block,
+//   input[type="reset"].btn-block,
+//   input[type="button"].btn-block {
+//     width: 100%;
+//   }
