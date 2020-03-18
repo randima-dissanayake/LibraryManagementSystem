@@ -1,4 +1,4 @@
-<div class="card shadow mb-4" *ngIf="bookObj">
+<div class="card shadow mb-4" *ngIf="bookObj" (click)=showBookDetalis(bookObj)>
     <div class="card-header py-3">
       <h6 class="m-0 font-weight-bold text-primary">{{bookObj.title}}</h6>
     </div>
@@ -13,7 +13,7 @@
 
   <div class="card shadow mb-4" *ngIf="transactionObj">
     <div class="card-header py-3">
-      <h6 class="m-0 font-weight-bold text-primary">{{transactionObj.checkout_date}}</h6>
+      <h6 class="m-0 font-weight-bold text-primary">{{transactionObj.user.userEmail}}</h6>
     </div>
     <div class="card-body">
       <div class="text-center">
@@ -26,7 +26,7 @@
 
   <div class="card shadow mb-4" *ngIf="userObj">
     <div class="card-header py-3">
-      <h6 class="m-0 font-weight-bold text-primary">{{userObj.userEmail}}</h6>
+      <h6 class="m-0 font-weight-bold text-primary">{{userObj.studentId}}</h6>
     </div>
     <div class="card-body">
       <div class="text-center">

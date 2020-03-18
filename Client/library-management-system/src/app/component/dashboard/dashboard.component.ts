@@ -23,6 +23,10 @@ export class DashboardComponent implements OnInit {
   users: Array<User>=[];
 
   selectedTab = this.book;
+  bookColor:string = '#fff'; 
+  transactionColor: string = '#fff'; 
+  fineColor: string = '#fff'; 
+  userColor : string = '#fff';
 
   constructor(private bookService: BookService, private transactionService : TransactionService, private userService: UserService) { }
 
@@ -30,14 +34,27 @@ export class DashboardComponent implements OnInit {
     this.fetchAllBooks();
   }
 
-  changeSelectedTab(value){
+  changeSelectedTab( event: any,value: string){
     this.selectedTab = value;
     if(this.selectedTab == 'Book'){
+      this.bookColor = '#17a2b8'
+      this.transactionColor = '#fff'; 
+      this.fineColor = '#fff'; 
+      this.userColor = '#fff';
       this.fetchAllBooks();
     } else if(this.selectedTab == 'Transaction'){
+      this.bookColor = '#fff'
+      this.transactionColor = '#17a2b8'
+      this.fineColor = '#fff'; 
+      this.userColor = '#fff';
       this.fetchAllTransactions();
     } else if(this.selectedTab == 'User') {
+      this.userColor = '#17a2b8'
+      this.bookColor = '#fff'
+      this.transactionColor = '#fff'
+      this.fineColor = '#fff'; 
       this.fetchAllUsers();
+
     }
   }
 

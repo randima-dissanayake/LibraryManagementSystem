@@ -23,23 +23,23 @@
           <div class="row">
 
             <!-- Earnings (Monthly) Card Example -->
-            <div class="col-xl-3 col-md-6 mb-4" (click)="changeSelectedTab('Book')">
-                <app-card [childItem]="book"></app-card>
+            <div class="col-xl-3 col-md-6 mb-4" (click)="changeSelectedTab($event,'Book')">
+                <app-card [color]="bookColor" [childItem]="book"></app-card>
             </div>
 
             <!-- Earnings (Monthly) Card Example -->
-            <div class="col-xl-3 col-md-6 mb-4" (click)="changeSelectedTab('Transaction')">
-                <app-card [childItem]="transaction"></app-card>
+            <div class="col-xl-3 col-md-6 mb-4" (click)="changeSelectedTab($event,'Transaction')">
+                <app-card [color]="transactionColor" [childItem]="transaction"></app-card>
             </div>
 
             <!-- Earnings (Monthly) Card Example -->
-            <div class="col-xl-3 col-md-6 mb-4" (click)="changeSelectedTab('Fine')">
-                <app-card [childItem]="fine"></app-card>
+            <div class="col-xl-3 col-md-6 mb-4" (click)="changeSelectedTab($event,'Fine')">
+                <app-card [color]="fineColor" [childItem]="fine"></app-card>
             </div>
 
             <!-- Pending Requests Card Example -->
-            <div class="col-xl-3 col-md-6 mb-4" (click)="changeSelectedTab('User')">
-                <app-card [childItem]="user"></app-card>
+            <div class="col-xl-3 col-md-6 mb-4" (click)="changeSelectedTab($event,'User')">
+                <app-card [color]="userColor" [childItem]="user"></app-card>
             </div>
           </div>
 
@@ -61,7 +61,7 @@
             </div>
             <div class="row" *ngIf="selectedTab == 'User'">
               <div class="col-xl-3 col-md-6 mb-4" *ngFor= "let user of users">
-                <app-item-card [bookObj]="user"></app-item-card>
+                <app-item-card [userObj]="user"></app-item-card>
               </div>
             </div>
 
