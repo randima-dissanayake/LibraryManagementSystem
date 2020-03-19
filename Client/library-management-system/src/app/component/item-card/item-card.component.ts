@@ -21,8 +21,18 @@ export class ItemCardComponent implements OnInit {
   }
 
   showBookDetalis(bookObj){
-    console.log("qqqqqqqqqqqqqqqqqq"+bookObj.title)
-    this.router.navigate(["bookdetails"],bookObj);
+    localStorage.setItem('book', JSON.stringify(bookObj));
+    this.router.navigate(["bookdetails"]);
+  }
+
+  showTransactionDetalis(transactionObj){
+    localStorage.setItem('transaction', JSON.stringify(transactionObj));
+    this.router.navigate(["transactiondetails"]);
+  }
+
+  showUserDetalis(userObj){
+    localStorage.setItem('user', JSON.stringify(userObj));
+    this.router.navigate(["userdetails"]);
   }
 
 }

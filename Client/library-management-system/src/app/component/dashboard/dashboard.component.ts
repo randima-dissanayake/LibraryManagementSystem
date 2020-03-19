@@ -28,6 +28,8 @@ export class DashboardComponent implements OnInit {
   fineColor: string = '#fff'; 
   userColor : string = '#fff';
 
+  loadComponent : boolean = false;
+
   constructor(private bookService: BookService, private transactionService : TransactionService, private userService: UserService) { }
 
   ngOnInit(): void {
@@ -81,6 +83,10 @@ export class DashboardComponent implements OnInit {
       (data: User[])=> this.users = data,
       (error)=>console.log(error)
     )
+  }
+
+  loadMyChildComponent() {
+    this.loadComponent = true;
   }
 
 }

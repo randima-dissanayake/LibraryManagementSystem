@@ -8,12 +8,12 @@ import { Book } from 'src/app/model/Book';
 })
 export class BookDetailsComponent implements OnInit {
 
-  @Input() bookObj: Book
+  bookObj: Book
   
   constructor() { }
 
   ngOnInit(): void {
-    console.log("oooooooooooo"+this.bookObj.title)
+    this.bookObj = JSON.parse(localStorage.getItem('book'))
   }
 
 }

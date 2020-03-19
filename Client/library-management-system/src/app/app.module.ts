@@ -11,6 +11,9 @@ import { NavBarComponent } from './component/nav-bar/nav-bar.component';
 import { CardComponent } from './component/card/card.component';
 import { ItemCardComponent } from './component/item-card/item-card.component';
 import { BookDetailsComponent } from './component/book-details/book-details.component';
+import { TransactionDetailsComponent } from './component/transaction-details/transaction-details.component';
+import { UserDetailsComponent } from './component/user-details/user-details.component';
+import { AddBookComponent } from './component/add-book/add-book.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +24,10 @@ import { BookDetailsComponent } from './component/book-details/book-details.comp
     NavBarComponent,
     CardComponent,
     ItemCardComponent,
-    BookDetailsComponent
+    BookDetailsComponent,
+    TransactionDetailsComponent,
+    UserDetailsComponent,
+    AddBookComponent
   ],
   imports: [
     BrowserModule,

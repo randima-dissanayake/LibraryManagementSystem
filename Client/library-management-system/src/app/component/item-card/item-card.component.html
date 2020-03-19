@@ -11,7 +11,7 @@
     </div>
   </div>
 
-  <div class="card shadow mb-4" *ngIf="transactionObj">
+  <div class="card shadow mb-4" *ngIf="transactionObj" (click)=showTransactionDetalis(transactionObj)>
     <div class="card-header py-3">
       <h6 class="m-0 font-weight-bold text-primary">{{transactionObj.user.userEmail}}</h6>
     </div>
@@ -24,7 +24,7 @@
     </div>
   </div>
 
-  <div class="card shadow mb-4" *ngIf="userObj">
+  <div class="card shadow mb-4" *ngIf="userObj" (click)=showUserDetalis(userObj)>
     <div class="card-header py-3">
       <h6 class="m-0 font-weight-bold text-primary">{{userObj.studentId}}</h6>
     </div>
