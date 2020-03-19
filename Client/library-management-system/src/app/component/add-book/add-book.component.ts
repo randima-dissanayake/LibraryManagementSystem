@@ -1,5 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import {FormControl, FormGroup, Validators} from "@angular/forms";
+import { Component, OnInit, Input } from '@angular/core';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { FormBuilder } from '@angular/forms';
+import { BookService } from 'src/app/service/book.service';
+import { Book } from 'src/app/model/Book';
 
 @Component({
   selector: 'app-add-book',
@@ -7,29 +10,31 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
   styleUrls: ['./add-book.component.scss']
 })
 export class AddBookComponent implements OnInit {
-
-  validatingForm: FormGroup;
   
-  constructor() { }
-
-  ngOnInit(): void {
-    this.validatingForm = new FormGroup({
-      signupFormModalName: new FormControl('', Validators.required),
-      signupFormModalEmail: new FormControl('', Validators.email),
-      signupFormModalPassword: new FormControl('', Validators.required),
+  // @Input() name;
+  checkoutForm;
+  constructor(public activeModal: NgbActiveModal, private bookService: BookService, private formBuilder: FormBuilder) { 
+    this.checkoutForm = this.formBuilder.group({
+      title: '',
+      isbn: '',
+      author:'',
+      publisher:'',
+      year_of_publication:'',
+      location: '',
+      num_of_copies:0
     });
   }
 
-  get signupFormModalName() {
-    return this.validatingForm.get('signupFormModalName');
+  ngOnInit(): void {
   }
 
-  get signupFormModalEmail() {
-    return this.validatingForm.get('signupFormModalEmail');
+  addNewBook(data){
+    console.log(data);
+    this.bookService.save(data).subscribe(
+      (data: Book)=>  console.log(data),
+      (error)=>console.log(error)
+    );
+    this.checkoutForm.reset();
   }
-
-  get signupFormModalPassword() {
-    return this.validatingForm.get('signupFormModalPassword');
-  }
-
+  
 }

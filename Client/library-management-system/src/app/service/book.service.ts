@@ -9,8 +9,9 @@ export class BookService {
 
   constructor(private http : HttpClient) { }
 
-  save(){
-    console.log("hariii");
+  save(data){
+    console.log("book service"+data)
+    return this.http.post<Book>("http://localhost:8080/book",data);
   }
 
   fetchAllBooks(){

@@ -1,48 +1,49 @@
-<div mdbModal #frame="mdbModal" class="modal fade left" id="frameModalTop" tabindex="-1" role="dialog"
-     aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header text-center">
-        <h4 class="modal-title w-100 font-weight-bold">Sign in</h4>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="frame.hide()">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body mx-3">
-        <div class="md-form mb-5">
-          <mdb-icon fas icon="envelope" class="prefix grey-text"></mdb-icon>
-          <input type="email" id="defaultForm-email" [formControl]="loginFormModalEmail" class="form-control"
-                 mdbInput mdbValidate>
-          <label for="defaultForm-email">Your email</label>
-          <mdb-error
-            *ngIf="loginFormModalEmail.invalid && (loginFormModalEmail.dirty || loginFormModalEmail.touched)">
-            Input invalid
-          </mdb-error>
-          <mdb-success
-            *ngIf="loginFormModalEmail.valid && (loginFormModalEmail.dirty || loginFormModalEmail.touched)">Input
-            valid
-          </mdb-success>
-        </div>
+<div class="modal-header">
+  <h4 class="modal-title">Add book</h4>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
 
-        <div class="md-form mb-4">
-          <mdb-icon fas icon="lock" class="prefix grey-text"></mdb-icon>
-          <input type="password" id="defaultForm-pass" [formControl]="loginFormModalPassword" class="form-control"
-                 mdbInput mdbValidate>
-          <label for="defaultForm-pass">Your password</label>
-          <mdb-error
-            *ngIf="loginFormModalPassword.invalid && (loginFormModalPassword.dirty || loginFormModalPassword.touched)">
-            Input invalid
-          </mdb-error>
-          <mdb-success
-            *ngIf="loginFormModalPassword.valid && (loginFormModalPassword.dirty || loginFormModalPassword.touched)">
-            Input valid
-          </mdb-success>
-        </div>
-
-      </div>
-      <div class="modal-footer d-flex justify-content-center">
-        <button mdbBtn color="default" class="waves-light" mdbWavesEffect>Login</button>
-      </div>
+  <form [formGroup]="checkoutForm" (ngSubmit)= "addNewBook(checkoutForm.value)">
+    <div class="form-group">
+      <label for="exampleInputEmail1">Title</label>
+      <input type="text" class="form-control" formControlName="title" id="title" aria-describedby="emailHelp" placeholder="Enter Title">
+      <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
     </div>
-  </div>
+    <div class="form-group">
+      <label for="exampleInputPassword1">ISBN</label>
+      <input type="text" class="form-control" formControlName="isbn" id="isbn" placeholder="ISBN">
+    </div>
+    <div class="form-group">
+      <label for="exampleInputPassword1">Author</label>
+      <input type="text" class="form-control" formControlName="author" id="author" placeholder="Author">
+    </div>
+    <div class="form-group">
+      <label for="exampleInputPassword1">Publisher</label>
+      <input type="text" class="form-control" formControlName="publisher" id="publisher" placeholder="Publisher">
+    </div>
+    <div class="form-group">
+      <label for="exampleInputPassword1">Year of publication</label>
+      <input type="text" class="form-control" formControlName="year_of_publication" id="year_of_publication" placeholder="Year of publication">
+    </div>
+    <div class="form-group">
+      <label for="exampleInputPassword1">Location</label>
+      <input type="text" class="form-control" formControlName="location" id="location" placeholder="Location">
+    </div>
+    <div class="form-group">
+      <label for="exampleInputPassword1">Number of copies</label>
+      <input type="number" class="form-control" formControlName="num_of_copies" id="num_of_copies" placeholder="Number of copies">
+    </div>
+    <!-- <div class="form-check">
+      <input type="checkbox" class="form-check-input" id="exampleCheck1">
+      <label class="form-check-label" for="exampleCheck1">Check me out</label>
+    </div> -->
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Close</button>
 </div>

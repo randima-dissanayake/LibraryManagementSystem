@@ -14,6 +14,9 @@ import { BookDetailsComponent } from './component/book-details/book-details.comp
 import { TransactionDetailsComponent } from './component/transaction-details/transaction-details.component';
 import { UserDetailsComponent } from './component/user-details/user-details.component';
 import { AddBookComponent } from './component/add-book/add-book.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AddUserComponent } from './component/add-user/add-user.component';
+import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -27,14 +30,20 @@ import { AddBookComponent } from './component/add-book/add-book.component';
     BookDetailsComponent,
     TransactionDetailsComponent,
     UserDetailsComponent,
-    AddBookComponent
+    AddBookComponent,
+    AddUserComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
-  providers: [],
+  providers: [
+    FormBuilder
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,10 +1,13 @@
-import { Component, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { BookService } from 'src/app/service/book.service';
 import { Book } from 'src/app/model/Book';
 import { TransactionService } from 'src/app/service/transaction.service';
 import { Transaction } from 'src/app/model/Transaction';
 import { UserService } from 'src/app/service/user.service';
 import { User } from 'src/app/model/User';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { AddBookComponent } from '../add-book/add-book.component';
+import { AddUserComponent } from '../add-user/add-user.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -28,9 +31,7 @@ export class DashboardComponent implements OnInit {
   fineColor: string = '#fff'; 
   userColor : string = '#fff';
 
-  loadComponent : boolean = false;
-
-  constructor(private bookService: BookService, private transactionService : TransactionService, private userService: UserService) { }
+  constructor(private bookService: BookService, private transactionService : TransactionService, private userService: UserService, private modalService: NgbModal) { }
 
   ngOnInit(): void {
     this.fetchAllBooks();
@@ -56,12 +57,7 @@ export class DashboardComponent implements OnInit {
       this.transactionColor = '#fff'
       this.fineColor = '#fff'; 
       this.fetchAllUsers();
-
     }
-  }
-
-  save(){
-    this.bookService.save();
   }
 
   fetchAllBooks(){
@@ -85,8 +81,15 @@ export class DashboardComponent implements OnInit {
     )
   }
 
-  loadMyChildComponent() {
-    this.loadComponent = true;
+  open() {
+    if(this.selectedTab=='Book')
+      this.modalService.open(AddBookComponent);
+    else if(this.selectedTab=='Transaction')
+      this.modalService.open(AddBookComponent);
+    else if(this.selectedTab=='User')
+      this.modalService.open(AddUserComponent);
+    // modalRef.componentInstance.name = 'World';
   }
+
 
 }

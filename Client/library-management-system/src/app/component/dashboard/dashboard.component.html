@@ -46,10 +46,9 @@
 
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-0 text-gray-800">{{selectedTab}}</h1>
-            <a (click)="loadMyChildComponent();" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i>Add {{selectedTab}}</a>
+            <button class="btn btn-lg btn-outline-primary" (click)="open()">Add {{selectedTab}}</button>
           </div>
 
-          <app-add-book *ngIf="loadComponent"></app-add-book>
 
           <!-- Content Row -->
             <div class="row" *ngIf="selectedTab == 'Book'">

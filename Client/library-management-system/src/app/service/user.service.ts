@@ -12,4 +12,8 @@ export class UserService {
   fetchAllUsers() {
     return this.http.get<User[]>("http://localhost:8181/user");
   }
+
+  save(data){
+    return this.http.post<User>("http://localhost:8181/user",data);
+  }
 }
