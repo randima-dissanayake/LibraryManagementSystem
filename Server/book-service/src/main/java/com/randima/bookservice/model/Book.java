@@ -19,6 +19,8 @@ public class Book {
     private String year_of_publication;
     private String location;
     private Integer num_of_copies;
+    @Lob
+    private byte[] book_image;
 //    private String last_available_date;
     @Transient
     List<Transaction> currentUsers = new ArrayList<Transaction>();
@@ -26,7 +28,7 @@ public class Book {
 //    @Transient
 //    private List<User> waitUsers = new LinkedList<User>();
 
-    public Book(String author, String title, String publisher, String year_of_publication, String location, int num_of_copies) {
+    public Book(String author, String title, String publisher, String year_of_publication, String location, int num_of_copies, byte[] book_image) {
         this.author = author;
         this.title = title;
         this.publisher = publisher;
@@ -110,5 +112,13 @@ public class Book {
 
     public void setCurrentUsers(List<Transaction> currentUsers) {
         this.currentUsers = currentUsers;
+    }
+
+    public byte[] getBook_image() {
+        return book_image;
+    }
+
+    public void setBook_image(byte[] book_image) {
+        this.book_image = book_image;
     }
 }

@@ -6,10 +6,11 @@
 </div>
 <div class="modal-body">
 
-  <form [formGroup]="checkoutForm" (ngSubmit)= "addNewBook(checkoutForm.value)">
+  <form [formGroup]="checkoutForm"  (ngSubmit)="addNewBook(checkoutForm.value)">
     <div class="form-group">
       <label for="exampleInputEmail1">Title</label>
-      <input type="text" class="form-control" formControlName="title" id="title" aria-describedby="emailHelp" placeholder="Enter Title">
+      <input type="text" class="form-control" formControlName="title" id="title" aria-describedby="emailHelp"
+        placeholder="Enter Title">
       <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
     </div>
     <div class="form-group">
@@ -26,7 +27,8 @@
     </div>
     <div class="form-group">
       <label for="exampleInputPassword1">Year of publication</label>
-      <input type="text" class="form-control" formControlName="year_of_publication" id="year_of_publication" placeholder="Year of publication">
+      <input type="text" class="form-control" formControlName="year_of_publication" id="year_of_publication"
+        placeholder="Year of publication">
     </div>
     <div class="form-group">
       <label for="exampleInputPassword1">Location</label>
@@ -34,8 +36,14 @@
     </div>
     <div class="form-group">
       <label for="exampleInputPassword1">Number of copies</label>
-      <input type="number" class="form-control" formControlName="num_of_copies" id="num_of_copies" placeholder="Number of copies">
+      <input type="number" class="form-control" formControlName="num_of_copies" id="num_of_copies"
+        placeholder="Number of copies">
     </div>
+    <div class="form-group">
+      <label for="exampleInputPassword1">Image</label>
+      <input type="file" class="form-control" accept="image/*" (change)="onSelectFile($event)" id="image">
+    </div>
+
     <!-- <div class="form-check">
       <input type="checkbox" class="form-check-input" id="exampleCheck1">
       <label class="form-check-label" for="exampleCheck1">Check me out</label>

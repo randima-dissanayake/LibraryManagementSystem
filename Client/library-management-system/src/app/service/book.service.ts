@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Book } from '../model/Book';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -9,9 +10,9 @@ export class BookService {
 
   constructor(private http : HttpClient) { }
 
-  save(data){
-    console.log("book service"+data)
-    return this.http.post<Book>("http://localhost:8080/book",data);
+  save(formData : FormData):Observable<any>{
+    console.log("book service"+formData)
+    return this.http.post("http://localhost:8080/book",formData);
   }
 
   fetchAllBooks(){
