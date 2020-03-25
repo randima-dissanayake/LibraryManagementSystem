@@ -19,6 +19,7 @@ public class Book {
     private String year_of_publication;
     private String location;
     private Integer num_of_copies;
+    private String file_name;
     @Lob
     private byte[] book_image;
 //    private String last_available_date;
@@ -120,5 +121,13 @@ public class Book {
 
     public void setBook_image(byte[] book_image) {
         this.book_image = book_image;
+    }
+
+    public String getFile_name() {
+        return file_name;
+    }
+
+    public void setFile_name(String file_name) {
+        this.file_name = file_name;
     }
 }

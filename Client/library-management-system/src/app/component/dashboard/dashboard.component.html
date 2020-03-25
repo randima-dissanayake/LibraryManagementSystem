@@ -52,7 +52,7 @@
 
           <!-- Content Row -->
             <div class="row" *ngIf="selectedTab == 'Book'">
-              <div class="col-xl-3 col-md-6 mb-4" *ngFor= "let book of books">
+              <div class="col-xl-3 col-md-6 mb-4" *ngFor= "let book of books" style="height: 20rem;">
                 <app-item-card [bookObj]="book"></app-item-card>
               </div>
             </div>

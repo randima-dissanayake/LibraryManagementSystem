@@ -1,8 +1,11 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { BookService } from 'src/app/service/book.service';
 import { Book } from 'src/app/model/Book';
+import { FileUploader } from 'ng2-file-upload';
+
+const URL = 'http://localhost:3000/fileupload/';
 
 @Component({
   selector: 'app-add-book',
@@ -27,6 +30,17 @@ export class AddBookComponent implements OnInit {
     });
   }
 
+  public uploader: FileUploader = new FileUploader({
+    // url: URL,
+    disableMultipart : false,
+    // autoUpload: true,
+    // method: 'post',
+    // itemAlias: 'attachment',
+    allowedFileType: ['image']
+
+
+    });
+
   ngOnInit(): void {
   }
 
@@ -44,14 +58,20 @@ export class AddBookComponent implements OnInit {
     this.checkoutForm.reset();
   }
 
-  onSelectFile(event) {
-    if (event.target.files.length > 0) {
-      this.bookFile = event.target.files[0];
-    console.log("onselect method image"+this.bookFile)
-    // this.bookFile = file;
-    } else{
-      console.log("no any image")
-    }
+  // onSelectFile(filelist:FileList) {
+  //   // if (event.target.files.length > 0) {
+  //     this.bookFile = filelist[0];
+  //   console.log("onselect method image"+this.bookFile)
+  //   // this.bookFile = file;
+  //   // } else{
+  //     // console.log("no any image")
+  //   // }
+  // }
+
+  public onFileSelected(event: EventEmitter<File[]>) {
+    const file : File = event[0];
+    this.bookFile = file;
+    console.log(this.bookFile);
   }
 
 }

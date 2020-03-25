@@ -8,6 +8,7 @@ import { User } from 'src/app/model/User';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AddBookComponent } from '../add-book/add-book.component';
 import { AddUserComponent } from '../add-user/add-user.component';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-dashboard',
@@ -31,7 +32,12 @@ export class DashboardComponent implements OnInit {
   fineColor: string = '#fff'; 
   userColor : string = '#fff';
 
-  constructor(private bookService: BookService, private transactionService : TransactionService, private userService: UserService, private modalService: NgbModal) { }
+  constructor(private bookService: BookService, 
+    private transactionService : TransactionService, 
+    private userService: UserService, 
+    private modalService: NgbModal,
+    private sanitizer: DomSanitizer
+    ) { }
 
   ngOnInit(): void {
     this.fetchAllBooks();
@@ -62,8 +68,9 @@ export class DashboardComponent implements OnInit {
 
   fetchAllBooks(){
     this.bookService.fetchAllBooks().subscribe(
-      (data: Book[])=> this.books = data,
-      (error)=>console.log(error)
+      (data: Book[])=> {
+        this.books = data
+      },(error)=>console.log(error)
     )
   } 
 

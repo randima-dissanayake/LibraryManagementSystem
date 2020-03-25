@@ -29,6 +29,7 @@ public class BookController {
     public Book saveBook(@RequestParam("file") MultipartFile file, @RequestParam("book") String book) throws IOException {
         Book book_new = new ObjectMapper().readValue(book, Book.class);
         book_new.setBook_image((file.getBytes()));
+        book_new.setFile_name(file.getOriginalFilename());
         System.out.println("eeee"+book_new);
 //
 //        boolean isExist= new File(servletContext.getRealPath("/bookprofile")).exists();
