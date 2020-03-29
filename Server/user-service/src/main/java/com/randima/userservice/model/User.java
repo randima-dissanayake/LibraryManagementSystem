@@ -12,6 +12,8 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private Integer id;
+    private String fristName;
+    private String lastName;
     private String studentId;
     private String userEmail;
     private String password;
@@ -88,4 +90,19 @@ public class User {
         this.currentBookList = currentBookList;
     }
 
+    public String getFristName() {
+        return fristName;
+    }
+
+    public void setFristName(String fristName) {
+        this.fristName = fristName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
 }

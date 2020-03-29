@@ -18,6 +18,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AddUserComponent } from './component/add-user/add-user.component';
 import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FileUploadModule } from 'ng2-file-upload';
+import { RegisterComponent } from './component/register/register.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { FileUploadModule } from 'ng2-file-upload';
     TransactionDetailsComponent,
     UserDetailsComponent,
     AddBookComponent,
-    AddUserComponent
+    AddUserComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,

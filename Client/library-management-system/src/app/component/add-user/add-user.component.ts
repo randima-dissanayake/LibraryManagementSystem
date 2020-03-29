@@ -15,6 +15,8 @@ export class AddUserComponent implements OnInit {
   constructor(public activeModal: NgbActiveModal, private formBuilder: FormBuilder, private userService: UserService) { 
     this.checkoutForm = this.formBuilder.group({
       studentId : 0,
+      fristName : '',
+      lastName : '',
       userEmail : '',
       password : '',
       role : '',

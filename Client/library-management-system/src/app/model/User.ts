@@ -1,5 +1,7 @@
 export interface User{
-    id : number,
+	id : number,
+	fristName : string,
+	lastName : string,
     studentId : number,
 	userEmail : string,
 	password : string,
