@@ -24,7 +24,7 @@ public class User {
 //    private List<Book> waitingList = new ArrayList<Book>();
 
     public User(User user) {
-        this.studentId = user.getStudentId();
+//        this.studentId = user.getStudentId();
         this.userEmail = user.getUserEmail();
         this.password = user.getPassword();
         this.role = user.getRole();

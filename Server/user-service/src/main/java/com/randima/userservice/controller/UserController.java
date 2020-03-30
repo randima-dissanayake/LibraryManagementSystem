@@ -16,10 +16,10 @@ public class UserController {
     @Autowired
     UserService userService;
 
-    @RequestMapping(value = "",method = RequestMethod.POST)
-    public User saveUser(@RequestBody User user){
-        return userService.saveUser(user);
-    }
+//    @RequestMapping(value = "",method = RequestMethod.POST)
+//    public User saveUser(@RequestBody User user){
+//        return userService.saveUser(user);
+//    }
 
     @RequestMapping(value = "",method = RequestMethod.GET)
     public List<User> getAll(){
@@ -34,13 +34,6 @@ public class UserController {
     @RequestMapping(value = "/{id}",method = RequestMethod.GET)
     public User findById(@PathVariable Integer id){
         return userService.getUserById(id);
-    }
-
-    @GetMapping(produces = "application/json")
-    @RequestMapping({ "/validateLogin" })
-    public User validateLogin() {
-        System.out.println("kkkkkkk");
-        return userService.getUserById(1);
     }
 
 }
