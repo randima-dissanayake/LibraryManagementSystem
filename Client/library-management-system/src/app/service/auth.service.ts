@@ -22,12 +22,13 @@ export class AuthService {
     //   return false;
     // }
     console.log("username", username)
-    const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(username + ':' + password) });
-    return this.httpClient.get<User>('http://localhost:8181/user/validateLogin',{headers}).pipe(
+    // const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(username + ':' + password) });
+    return this.httpClient.post<any>('http://localhost:8181/authenticate',formData).pipe(
      map(
        userData => {
         console.log("eeeeeeeeeeeee",userData)
         sessionStorage.setItem('username',username);
+        sessionStorage.setItem('token', 'Bearer '+userData.token)
         return true;
        }
      )

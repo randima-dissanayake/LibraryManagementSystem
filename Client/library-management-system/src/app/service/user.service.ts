@@ -14,6 +14,6 @@ export class UserService {
   }
 
   save(data){
-    return this.http.post<User>("http://localhost:8181/user",data);
+    return this.http.post<User>("http://localhost:8181/register",data);
   }
 }
