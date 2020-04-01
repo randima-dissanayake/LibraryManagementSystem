@@ -6,7 +6,8 @@ import { User } from '../model/User';
   providedIn: 'root'
 })
 export class UserService {
-  
+  // baseUrl = "http://localhost:8181/"
+  baseUrl = "http://192.168.8.100:8181/"
   constructor(private http : HttpClient) { }
 
   fetchAllUsers() {
@@ -14,6 +15,6 @@ export class UserService {
   }
 
   save(data){
-    return this.http.post<User>("http://localhost:8181/register",data);
+    return this.http.post<User>(this.baseUrl+"register",data);
   }
 }
