@@ -23,13 +23,25 @@ export class LoginComponent implements OnInit {
   }
 
   login(data) {
-    console.log("qqqqqqqqqqqq",data)
-    if (this.authService.authenticate(data)) {
-      console.log("oooooooo")
+    // let data1 = {
+    //   userEmail : "randima@gmail.com",
+	  //   password : "123"
+    // }
+    // console.log("qqqqqqqqqqqq",JSON.stringify(data1))
+    // if (this.authService.authenticate(JSON.stringify(data))) {
+    //   console.log("oooooooo")
+    //   this.router.navigate(['dashboard'])
+    //   this.invalidLogin = false
+    // } else
+    //   this.invalidLogin = true
+    this.authService.authenticate(JSON.stringify(data)).subscribe(res=>{
+      console.log("login ts",res)
       this.router.navigate(['dashboard'])
-      this.invalidLogin = false
-    } else
+    },error=>{
+      console.log("error",error)
       this.invalidLogin = true
+    })
+
   }
 
 }

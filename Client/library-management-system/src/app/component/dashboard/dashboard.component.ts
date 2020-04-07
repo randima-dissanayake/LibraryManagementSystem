@@ -83,7 +83,7 @@ export class DashboardComponent implements OnInit {
 
   fetchAllUsers(){
     this.userService.fetchAllUsers().subscribe(
-      (data: User[])=> this.users = data,
+      (data: any)=> this.users = data,
       (error)=>console.log(error)
     )
   }
