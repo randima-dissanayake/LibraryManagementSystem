@@ -13,6 +13,7 @@ import java.util.ArrayList;
 
 @Service
 public class JwtUserDetailsService implements UserDetailsService {
+    public static User user;
     @Autowired
     private UserRepository userRepository;
 
@@ -21,12 +22,13 @@ public class JwtUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepository.findByUserEmail(username);
+        user = userRepository.findByUserEmail(username);
         if (user == null) {
             throw new UsernameNotFoundException("User not found with username: " + username);
         }
         return new org.springframework.security.core.userdetails.User(user.getUserEmail(), user.getPassword(),
                 new ArrayList<>());
+//        return user;
     }
 
     public User save(User user) {

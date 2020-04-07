@@ -4,14 +4,17 @@ import com.randima.userservice.model.Book;
 import com.randima.userservice.model.User;
 import com.randima.userservice.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping("/user")
-@CrossOrigin("*")
+
 public class UserController {
     @Autowired
     UserService userService;
@@ -22,9 +25,15 @@ public class UserController {
 //    }
 
     @RequestMapping(value = "",method = RequestMethod.GET)
-    public List<User> getAll(){
+    public List<User> getAll(@RequestHeader HttpHeaders headers){
+        System.out.println("tttttttttt "+headers.getContentType());
         return userService.getAll();
     }
+
+//    @RequestMapping(value = "/user",method = RequestMethod.GET)
+//    public ResponseEntity<?> getAll(){
+//        return ResponseEntity.ok(userService.getAll());
+//    }
 
     @RequestMapping(value = "/currentbooks/{id}",method = RequestMethod.GET)
     public List<Book> getBookList(@PathVariable Integer id){

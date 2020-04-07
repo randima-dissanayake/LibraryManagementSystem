@@ -1,6 +1,5 @@
 package com.randima.bookservice.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.randima.bookservice.model.Book;
 import com.randima.bookservice.model.User;
@@ -10,14 +9,12 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.ServletContext;
-import java.io.File;
 import java.io.IOException;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping("/book")
-@CrossOrigin("http://localhost:4200")
 public class BookController {
 
     @Autowired
