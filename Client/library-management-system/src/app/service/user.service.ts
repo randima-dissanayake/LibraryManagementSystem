@@ -2,20 +2,23 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { User } from '../model/User';
 import { map } from 'rxjs/operators';
+import { AppConstants } from '../app.component';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-  // baseUrl = "http://localhost:8181/"
-  baseUrl = "http://192.168.8.102:8181/"
+
+  baseUrl;
   private httpOptions = {
     headers: new HttpHeaders({
       'Authorization':  sessionStorage.getItem('token'),
       'Content-Type': 'application/json',
     })
   };
-  constructor(private http : HttpClient) { }
+  constructor(private http : HttpClient) {
+    this.baseUrl=AppConstants.baseURL+"8181/";
+   }
 
   fetchAllUsers() {
     // const headers = new HttpHeaders();

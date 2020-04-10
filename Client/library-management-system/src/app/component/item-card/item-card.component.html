@@ -1,41 +1,43 @@
 <div class="card shadow mb-4 h-100" *ngIf="bookObj" (click)=showBookDetalis(bookObj)>
-    <!-- <div class="card-header py-3">
+  <!-- <div class="card-header py-3">
       <h6 class="m-0 font-weight-bold text-primary">{{bookObj.title}}</h6>
     </div> -->
-    <div class="card-body d-flex p-0">
-      <div class="text-center p-2">
-        <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 15rem; height: auto;" src="data:image/jpeg;base64,{{bookObj.book_image}}" alt="">
-      </div>
-      <div class="pt-5">
-        <p>{{bookObj.title}} by {{bookObj.author}}</p>
-        <!-- <a target="_blank" rel="nofollow" href="https://undraw.co/">{{bookObj.author}} &rarr;</a> -->
-      </div>
-      
+  <div class="card-body d-flex p-0">
+    <div class="text-center p-2">
+      <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 15rem; height: auto;"
+        src="data:image/jpeg;base64,{{bookObj.book_image}}" alt="">
     </div>
-  </div>
+    <div class="pt-5">
+      <p>{{bookObj.title}} by {{bookObj.author}}</p>
+      <!-- <a target="_blank" rel="nofollow" href="https://undraw.co/">{{bookObj.author}} &rarr;</a> -->
+    </div>
 
-  <div class="card shadow mb-4" *ngIf="transactionObj" (click)=showTransactionDetalis(transactionObj)>
-    <div class="card-header py-3">
-      <h6 class="m-0 font-weight-bold text-primary">{{transactionObj.user.userEmail}}</h6>
-    </div>
-    <div class="card-body">
-      <div class="text-center">
-        <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="height: 20rem;" src="img/undraw_posting_photo.svg" alt="">
-      </div>
-      <p>Add some quality, svg illustrations to your project courtesy of <a target="_blank" rel="nofollow" href="https://undraw.co/">unDraw</a>, a constantly updated collection of beautiful svg images that you can use completely free and without attribution!</p>
-      <a target="_blank" rel="nofollow" href="https://undraw.co/">Browse Illustrations on unDraw &rarr;</a>
-    </div>
   </div>
+</div>
 
-  <div class="card shadow mb-4" *ngIf="userObj" (click)=showUserDetalis(userObj)>
-    <div class="card-header py-3">
-      <h6 class="m-0 font-weight-bold text-primary">{{userObj.studentId}}</h6>
-    </div>
-    <div class="card-body">
-      <div class="text-center">
-        <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 25rem;" src="img/undraw_posting_photo.svg" alt="">
-      </div>
-      <p>Add some quality, svg illustrations to your project courtesy of <a target="_blank" rel="nofollow" href="https://undraw.co/">unDraw</a>, a constantly updated collection of beautiful svg images that you can use completely free and without attribution!</p>
-      <a target="_blank" rel="nofollow" href="https://undraw.co/">Browse Illustrations on unDraw &rarr;</a>
-    </div>
+<div class="card shadow mb-4" *ngIf="transactionObj" (click)=showTransactionDetalis(transactionObj)>
+  <div class="card-header py-3">
+    <h6 class="m-0 font-weight-bold text-primary">{{transactionObj.user.userEmail}}</h6>
   </div>
+  <div class="card-body">
+    <div class="text-center">
+      <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="height: 20rem;" src="img/undraw_posting_photo.svg" alt="">
+    </div>
+    <p>Add some quality, svg illustrations to your project courtesy of <a target="_blank" rel="nofollow"
+        href="https://undraw.co/">unDraw</a>, a constantly updated collection of beautiful svg images that you can use
+      completely free and without attribution!</p>
+    <a target="_blank" rel="nofollow" href="https://undraw.co/">Browse Illustrations on unDraw &rarr;</a>
+  </div>
+</div>
+
+<div class="card shadow mb-4" *ngIf="userObj" (click)=showUserDetalis(userObj)>
+  <div class="card-body">
+    <div class="text-center">
+      <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 25rem;" src="assets/img/user.png" alt="">
+    </div>
+    <h3 class="m-0 font-weight-bold text-primary text-center">{{userObj.firstName}}</h3>
+    <div>Student Id : {{userObj.studentId}}</div>
+    <div>Email Address : {{userObj.userEmail}}</div>
+    <div>Role : {{userObj.role}}</div>
+  </div>
+</div>

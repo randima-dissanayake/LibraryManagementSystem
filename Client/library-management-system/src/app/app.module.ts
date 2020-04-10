@@ -19,6 +19,11 @@ import { AddUserComponent } from './component/add-user/add-user.component';
 import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FileUploadModule } from 'ng2-file-upload';
 import { RegisterComponent } from './component/register/register.component';
+import { AddTransactionComponent } from './component/add-transaction/add-transaction.component';
+import { MyProfileComponent } from './component/my-profile/my-profile.component';
+import { ManageUsersComponent } from './component/manage-users/manage-users.component';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -34,7 +39,10 @@ import { RegisterComponent } from './component/register/register.component';
     UserDetailsComponent,
     AddBookComponent,
     AddUserComponent,
-    RegisterComponent
+    RegisterComponent,
+    AddTransactionComponent,
+    MyProfileComponent,
+    ManageUsersComponent
   ],
   imports: [
     BrowserModule,
@@ -43,7 +51,9 @@ import { RegisterComponent } from './component/register/register.component';
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
-    FileUploadModule
+    FileUploadModule,
+    Ng2SearchPipeModule,
+    NgxPaginationModule
   ],
   providers: [
     FormBuilder

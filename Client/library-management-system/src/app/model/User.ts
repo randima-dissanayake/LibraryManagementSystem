@@ -1,6 +1,6 @@
 export interface User{
 	id : number,
-	fristName : string,
+	firstName : string,
 	lastName : string,
     studentId : number,
 	userEmail : string,

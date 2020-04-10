@@ -2,14 +2,17 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Book } from '../model/Book';
 import { Observable } from 'rxjs';
+import { AppConstants } from '../app.component';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BookService {
 
-  baseUrl = "http://192.168.8.102:8080/book"
-  constructor(private http : HttpClient) { }
+  baseUrl
+  constructor(private http : HttpClient) {
+    this.baseUrl = AppConstants.baseURL+"8080/"
+   }
 
   save(formData : FormData):Observable<any>{
     const headers = new HttpHeaders({
@@ -18,10 +21,10 @@ export class BookService {
       'Access-Control-Allow-Origin': '*'
     });
     console.log("book service"+formData)
-    return this.http.post(this.baseUrl,formData,{headers:headers});
+    return this.http.post(this.baseUrl+"book",formData,{headers:headers});
   }
 
   fetchAllBooks(){
-    return this.http.get<Book[]>(this.baseUrl);
+    return this.http.get<Book[]>(this.baseUrl+"book");
   }
 }

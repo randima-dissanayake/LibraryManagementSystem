@@ -7,6 +7,8 @@ import { TransactionDetailsComponent } from './component/transaction-details/tra
 import { UserDetailsComponent } from './component/user-details/user-details.component';
 import { RegisterComponent } from './component/register/register.component';
 import { AuthGaurdService } from './service/auth-gaurd.service';
+import { MyProfileComponent } from './component/my-profile/my-profile.component';
+import { ManageUsersComponent } from './component/manage-users/manage-users.component';
 
 
 const routes: Routes = [
@@ -15,7 +17,9 @@ const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent, canActivate:[AuthGaurdService] },
   { path: 'bookdetails', component: BookDetailsComponent, canActivate:[AuthGaurdService] },
   { path: 'transactiondetails', component: TransactionDetailsComponent, canActivate:[AuthGaurdService] },
-  { path: 'userdetails', component: UserDetailsComponent, canActivate:[AuthGaurdService] }
+  { path: 'userdetails', component: UserDetailsComponent, canActivate:[AuthGaurdService] },
+  { path: 'myprofile', component: MyProfileComponent, canActivate:[AuthGaurdService] },
+  { path: 'users', component: ManageUsersComponent, canActivate:[AuthGaurdService] }
 ];
 
 @NgModule({

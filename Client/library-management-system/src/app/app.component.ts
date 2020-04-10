@@ -8,3 +8,7 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'library-management-system';
 }
+
+export class AppConstants {
+  public static get baseURL(): string { return "http://192.168.8.101:"; }
+}

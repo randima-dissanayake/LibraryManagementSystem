@@ -5,6 +5,7 @@ import { map } from 'rxjs/operators';
 import { BehaviorSubject } from 'rxjs';
 import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { AppConstants } from '../app.component';
 
 const helper = new JwtHelperService();
 
@@ -14,8 +15,9 @@ const helper = new JwtHelperService();
 export class AuthService {
 
   authenticationState = new BehaviorSubject(false);
-  baseUrl = "http://192.168.8.102:8181/"
+  baseUrl
   constructor(private httpClient:HttpClient, private router: Router) { 
+    this.baseUrl = AppConstants.baseURL+"8181/"
     this.checkToken();
   }
 
@@ -26,10 +28,9 @@ export class AuthService {
      map(
       userData => {
        console.log("eeeeeeeeeeeee",userData.user)
-       // sessionStorage.setItem('username',username);
        sessionStorage.setItem('token', 'Bearer '+userData.token)
        sessionStorage.setItem('user', JSON.stringify(userData.user))
-       sessionStorage.setItem('username', userData.user.fristName)
+       sessionStorage.setItem('username', userData.user.firstName)
        this.authenticationState.next(true);
        return true;
       }

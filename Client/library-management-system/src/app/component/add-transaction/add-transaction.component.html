@@ -1,0 +1,30 @@
+<div class="modal-header">
+    <h4 class="modal-title">Add transaction</h4>
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+  
+    <form [formGroup]="addTransactionForm" (ngSubmit)="addNewTransaction(addTransactionForm.value)">
+      <div class="form-group">
+        <label for="exampleInputEmail1">bookId</label>
+        <input type="text" class="form-control" formControlName="bookId" id="studentId" placeholder="Enter First Name">
+      </div>
+      <div class="form-group">
+        <label for="exampleInputEmail1">userId</label>
+        <input type="text" class="form-control" formControlName="userId" id="studentId" placeholder="Enter Last Name">
+      </div>
+      <div class="form-group">
+        <label for="exampleInputEmail1">Checkout date</label>
+        <input type="number" class="form-control" formControlName="checkout_date" id="studentId" aria-describedby="emailHelp"
+          placeholder="Enter Title">
+        <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Close</button>
+  </div>

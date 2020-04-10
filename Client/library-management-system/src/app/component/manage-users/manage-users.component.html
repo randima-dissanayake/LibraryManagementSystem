@@ -1,0 +1,66 @@
+<div id="wrapper">
+    <app-side-bar></app-side-bar>
+    <div id="content-wrapper" class="d-flex flex-column">
+        <div id="content">
+            <app-nav-bar></app-nav-bar>
+            <!-- <div class="card-header py-3">
+      <h6 class="m-0 font-weight-bold text-primary">{{bookObj.title}}</h6>
+    </div> -->
+
+
+
+            <div class="container-fluid">
+
+                <form>
+                    <div class="form-group form-inline">
+                        Full text search: <input class="form-control ml-2" type="text" name="searchTerm"
+                            [(ngModel)]="searchTerm" />
+                    </div>
+
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Name</th>
+                                <th>Student Id</th>
+                                <th>Email</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr
+                                *ngFor="let user of users | filter:searchTerm | paginate: {itemsPerPage: 5, currentPage: p};let i=index">
+                                <th scope="row">{{ i }}</th>
+                                <td>
+                                    <!-- <img [src]="'https://upload.wikimedia.org/wikipedia/commons/' + country.flag" class="mr-2" style="width: 20px">
+        <ngb-highlight [result]="country.name" [term]="service.searchTerm"></ngb-highlight> -->
+                                    {{ user.firstName }} {{user.lastName}}
+                                </td>
+
+                                <td>
+                                    <!-- <ngb-highlight [result]="country.area | number" [term]="service.searchTerm"></ngb-highlight> -->
+                                    {{user.studentId}}
+                                </td>
+                                <td>
+                                    <!-- <ngb-highlight [result]="country.population | number" [term]="service.searchTerm"></ngb-highlight> -->
+                                    {{user.userEmail}}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+
+
+                    <!-- <div class="col-xl-3 col-md-6 mb-4" *ngFor= "let user of users | filter:searchTerm | paginate: {itemsPerPage: 2, currentPage: p}">
+    <app-item-card [userObj]="user"></app-item-card>
+  </div> -->
+
+
+
+                    <pagination-controls (pageChange)="p= $event"></pagination-controls>
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>

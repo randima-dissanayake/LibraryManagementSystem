@@ -9,6 +9,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AddBookComponent } from '../add-book/add-book.component';
 import { AddUserComponent } from '../add-user/add-user.component';
 import { DomSanitizer } from '@angular/platform-browser';
+import { AddTransactionComponent } from '../add-transaction/add-transaction.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -83,7 +84,10 @@ export class DashboardComponent implements OnInit {
 
   fetchAllUsers(){
     this.userService.fetchAllUsers().subscribe(
-      (data: any)=> this.users = data,
+      (data: any)=> {
+        if(data!=null)
+          this.users = data
+      },
       (error)=>console.log(error)
     )
   }
@@ -92,7 +96,7 @@ export class DashboardComponent implements OnInit {
     if(this.selectedTab=='Book')
       this.modalService.open(AddBookComponent);
     else if(this.selectedTab=='Transaction')
-      this.modalService.open(AddBookComponent);
+      this.modalService.open(AddTransactionComponent);
     else if(this.selectedTab=='User')
       this.modalService.open(AddUserComponent);
     // modalRef.componentInstance.name = 'World';
