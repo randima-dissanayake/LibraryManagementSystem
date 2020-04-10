@@ -12,7 +12,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private Integer id;
-    private String fristName;
+    private String firstName;
     private String lastName;
     private String studentId;
     private String userEmail;
@@ -25,6 +25,8 @@ public class User {
 
     public User(User user) {
 //        this.studentId = user.getStudentId();
+        this.firstName = user.getFirstName();
+        this.lastName = user.getLastName();
         this.userEmail = user.getUserEmail();
         this.password = user.getPassword();
         this.role = user.getRole();
@@ -32,6 +34,14 @@ public class User {
     }
     public  User(){
 
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
     public Integer getId() {
@@ -88,14 +98,6 @@ public class User {
 
     public void setCurrentBookList(List<Book> currentBookList) {
         this.currentBookList = currentBookList;
-    }
-
-    public String getFristName() {
-        return fristName;
-    }
-
-    public void setFristName(String fristName) {
-        this.fristName = fristName;
     }
 
     public String getLastName() {
