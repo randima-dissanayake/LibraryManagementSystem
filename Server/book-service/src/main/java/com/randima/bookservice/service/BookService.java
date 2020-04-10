@@ -11,7 +11,7 @@ import java.util.Optional;
 public interface BookService {
     Book saveBook(Book book);
     Book findById(Integer id);
-    Book updateBook(Integer id, Book book);
+    Book updateBook(Book book);
     List<User> getUserList(Integer id);
     List<Book> findAll();
 }

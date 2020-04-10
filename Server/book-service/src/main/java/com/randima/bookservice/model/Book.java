@@ -20,24 +20,27 @@ public class Book {
     private String location;
     private Integer num_of_copies;
     private String file_name;
+    private boolean enabled;
+    private boolean isDelete;
     @Lob
     private byte[] book_image;
-//    private String last_available_date;
+    private String last_available_date;
     @Transient
     List<Transaction> currentUsers = new ArrayList<Transaction>();
 
 //    @Transient
 //    private List<User> waitUsers = new LinkedList<User>();
 
-    public Book(String author, String title, String publisher, String year_of_publication, String location, int num_of_copies, byte[] book_image) {
+    public Book(String author, String title, String publisher, String year_of_publication, String location, int num_of_copies, boolean enabled, boolean isDelete, String last_available_date, byte[] book_image) {
         this.author = author;
         this.title = title;
         this.publisher = publisher;
         this.year_of_publication = year_of_publication;
         this.location = location;
         this.num_of_copies = num_of_copies;
-//        this.last_available_date = null;
-
+        this.last_available_date = last_available_date;
+        this.enabled = enabled;
+        this.isDelete = isDelete;
     }
 
     public Book() {
@@ -129,5 +132,29 @@ public class Book {
 
     public void setFile_name(String file_name) {
         this.file_name = file_name;
+    }
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
+
+    public boolean isDelete() {
+        return isDelete;
+    }
+
+    public void setDelete(boolean delete) {
+        isDelete = delete;
+    }
+
+    public String getLast_available_date() {
+        return last_available_date;
+    }
+
+    public void setLast_available_date(String last_available_date) {
+        this.last_available_date = last_available_date;
     }
 }

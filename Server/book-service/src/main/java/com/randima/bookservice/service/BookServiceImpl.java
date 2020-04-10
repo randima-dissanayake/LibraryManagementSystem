@@ -50,7 +50,7 @@ public class BookServiceImpl implements BookService{
 
     //need to change
     @Override
-    public Book updateBook(Integer id, Book book) {
+    public Book updateBook(Book book) {
         return bookRepository.save(book);
     }
 
