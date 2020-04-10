@@ -1,6 +1,7 @@
 package com.randima.userservice.service;
 
 import com.randima.userservice.model.Book;
+import com.randima.userservice.model.Telephone;
 import com.randima.userservice.model.User;
 import com.randima.userservice.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,5 +64,17 @@ public class UserServiceImpl implements UserService{
     @Override
     public List<User> getAll() {
         return userRepository.findAll();
+    }
+
+    @Override
+    public User updateUser(User user){
+        if (user.getId()!=0) {
+            for (Telephone telephone : user.getTelephones()) {
+                telephone.setUser(user);
+            }
+            return userRepository.save(user);
+        } else {
+            return null;
+        }
     }
 }

@@ -30,6 +30,11 @@ public class UserController {
         return userService.getAll();
     }
 
+    @RequestMapping(value = "",method = RequestMethod.PUT)
+    public User updateUser(@RequestBody User user){
+        return userService.updateUser(user);
+    }
+
 //    @RequestMapping(value = "/user",method = RequestMethod.GET)
 //    public ResponseEntity<?> getAll(){
 //        return ResponseEntity.ok(userService.getAll());

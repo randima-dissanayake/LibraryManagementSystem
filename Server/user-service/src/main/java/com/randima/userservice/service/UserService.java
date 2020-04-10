@@ -11,4 +11,5 @@ public interface UserService {
     List<Book> getCurrentBook(Integer id);
     User getUserById(Integer id);
     List<User> getAll();
+    User updateUser(User user);
 }

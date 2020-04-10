@@ -1,5 +1,6 @@
 package com.randima.userservice.service;
 
+import com.randima.userservice.model.Telephone;
 import com.randima.userservice.model.User;
 import com.randima.userservice.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,9 @@ public class JwtUserDetailsService implements UserDetailsService {
     }
 
     public User save(User user) {
+        for (Telephone t: user.getTelephones()){
+            t.setUser(user);
+        }
         user.setPassword(bcryptEncoder.encode(user.getPassword()));
         return userRepository.save(user);
     }
