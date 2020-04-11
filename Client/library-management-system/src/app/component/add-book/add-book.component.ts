@@ -45,8 +45,6 @@ export class AddBookComponent implements OnInit {
   }
 
   addNewBook(data: FormGroup) {
-    console.log("qqqq"+JSON.stringify(data));
-    console.log("oooo"+this.bookFile)
     const formData = new FormData();
     formData.append('book', JSON.stringify(data));
     formData.append('file', this.bookFile)

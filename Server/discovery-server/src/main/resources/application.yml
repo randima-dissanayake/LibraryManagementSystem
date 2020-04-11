@@ -4,3 +4,14 @@ eureka:
     client:
         register-with-eureka: false
         fetch-registry: false
+    datacenter: Colombo-SriLanka
+    environment: production
+zuul:
+    routes:
+        book:
+            path: /book/**
+            url: http://localhost:8080
+        transaction:
+            path: /transaction/**
+            url: http://localhost:8081
+
