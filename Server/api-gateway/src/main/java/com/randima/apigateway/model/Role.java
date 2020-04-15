@@ -16,7 +16,7 @@ public class Role {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn
     @JsonIgnore
-    private User users;
+    private LibUser users;
 
     public Integer getId() {
         return id;
@@ -34,11 +34,11 @@ public class Role {
         this.role = role;
     }
 
-    public User getUsers() {
+    public LibUser getUsers() {
         return users;
     }
 
-    public void setUsers(User users) {
+    public void setUsers(LibUser users) {
         this.users = users;
     }
 

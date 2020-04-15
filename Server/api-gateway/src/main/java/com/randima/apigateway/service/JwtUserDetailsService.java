@@ -1,21 +1,25 @@
 package com.randima.apigateway.service;
 
-import com.randima.apigateway.model.Role;
-import com.randima.apigateway.model.User;
+import com.randima.apigateway.config.JwtTokenUtil;
+import com.randima.apigateway.model.*;
 import com.randima.apigateway.repository.RoleRepository;
 import com.randima.apigateway.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.DisabledException;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 
 @Service
 public class JwtUserDetailsService implements UserDetailsService {
-    public static User user;
+    public static LibUser libUser;
+
     @Autowired
     private UserRepository userRepository;
 
@@ -23,25 +27,40 @@ public class JwtUserDetailsService implements UserDetailsService {
     RoleRepository roleRepository;
 
     @Autowired
-    private PasswordEncoder bcryptEncoder;
+    private AuthenticationManager authenticationManager;
+
+    @Autowired
+    private JwtTokenUtil jwtTokenUtil;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        user = userRepository.findByUsername(username);
-        if (user == null) {
+        libUser = userRepository.findByUsername(username);
+        if (libUser == null) {
             throw new UsernameNotFoundException("User not found with username: " + username);
         }
-        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(),
+        return new org.springframework.security.core.userdetails.User(libUser.getUsername(), libUser.getPassword(),
                 new ArrayList<>());
 //        return user;
     }
 
-    public User save(User user) {
-        user.setPassword(bcryptEncoder.encode(user.getPassword()));
-        for (Role r : user.getRoles()) {
-            r.setUsers(user);
+    public LibUser save(LibUser libUser) throws Exception {
+        return userRepository.save(libUser);
+    }
+
+    public String createAuthenticationToken(String username, String password) throws Exception {
+        authenticate(username, password);
+        final UserDetails userDetails = loadUserByUsername(username);
+        System.out.println("create Authentication token method    "+userDetails);
+        return jwtTokenUtil.generateToken(userDetails);
+    }
+
+    private void authenticate(String userEmail, String password) throws Exception {
+        try {
+            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(userEmail, password));
+        } catch (DisabledException e) {
+            throw new Exception("USER_DISABLED", e);
+        } catch (BadCredentialsException e) {
+            throw new Exception("INVALID_CREDENTIALS", e);
         }
-//        roleRepository.saveAll(user.getRoles());
-        return userRepository.save(user);
     }
 }

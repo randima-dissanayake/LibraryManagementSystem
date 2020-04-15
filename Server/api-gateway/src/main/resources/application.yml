@@ -24,10 +24,17 @@ zuul:
   routes:
     book:
       path: /book/**
-      url: http://localhost:8080
+      url: book
     transaction:
       path: /transaction/**
-      url: http://localhost:8081
+      url: transaction
+    user:
+      path: /user/**
+      url: user
+
+ribbon:
+  ConnectTimeout: 60000
+  ReadTimeout: 60000
 
 jwt:
   secret: javainuse

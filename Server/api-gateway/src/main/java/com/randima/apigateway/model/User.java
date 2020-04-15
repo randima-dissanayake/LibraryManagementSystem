@@ -1,84 +1,51 @@
 package com.randima.apigateway.model;
 
-import org.hibernate.annotations.NaturalId;
-
-import javax.persistence.*;
-import javax.validation.constraints.Email;
 import java.util.List;
 
-@Entity
 public class User {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private String firstName;
+    private String lastName;
+    private String studentId;
+    private String userEmail;
+    private List<Telephone> telephones;
 
-    @NaturalId
-    @Email(message = "*Please provide a valid username")
-//    @NotEmpty(message = "*Please provide an username")
-    private String username;
-    //    @NotEmpty(message = "*Please provide your firstName")
-    private String password;
-
-    private Integer active = 1;
-    private boolean locked;
-    private boolean enabled = true;
-
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "users",cascade = CascadeType.ALL, orphanRemoval=true)
-    private List<Role> roles;
-
-    public Integer getId() {
-        return id;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public String getUsername() {
-        return username;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
-    public String getPassword() {
-        return password;
+    public String getStudentId() {
+        return studentId;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setStudentId(String studentId) {
+        this.studentId = studentId;
     }
 
-    public Integer getActive() {
-        return active;
+    public String getUserEmail() {
+        return userEmail;
     }
 
-    public void setActive(Integer active) {
-        this.active = active;
+    public void setUserEmail(String userEmail) {
+        this.userEmail = userEmail;
     }
 
-    public boolean isLocked() {
-        return locked;
+    public List<Telephone> getTelephones() {
+        return telephones;
     }
 
-    public void setLocked(boolean locked) {
-        this.locked = locked;
-    }
-
-    public boolean isEnabled() {
-        return enabled;
-    }
-
-    public void setEnabled(boolean enabled) {
-        this.enabled = enabled;
-    }
-
-    public List<Role> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(List<Role> roles) {
-        this.roles = roles;
+    public void setTelephones(List<Telephone> telephones) {
+        this.telephones = telephones;
     }
 }

@@ -16,10 +16,7 @@ public class User {
     private String lastName;
     private String studentId;
     private String userEmail;
-    private String password;
-    private String role;
-    private boolean enabled;
-    private boolean isDelete;
+    private boolean isDelete = false;
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user",cascade = CascadeType.ALL, orphanRemoval=true)
     private List<Telephone> telephones;
     @Transient
@@ -31,11 +28,7 @@ public class User {
         this.firstName = user.getFirstName();
         this.lastName = user.getLastName();
         this.userEmail = user.getUserEmail();
-        this.password = user.getPassword();
-        this.role = user.getRole();
-        this.isDelete = user.isDelete();
         this.telephones = user.getTelephones();
-        this.enabled = user.isEnabled();
     }
     public  User(){
 
@@ -73,22 +66,6 @@ public class User {
         this.userEmail = userEmail;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
-    }
-
     public List<Book> getCurrentBookList() {
         return currentBookList;
     }
@@ -105,14 +82,6 @@ public class User {
         this.lastName = lastName;
     }
 
-    public boolean isDelete() {
-        return isDelete;
-    }
-
-    public void setDelete(boolean delete) {
-        isDelete = delete;
-    }
-
     public List<Telephone> getTelephones() {
         return telephones;
     }
@@ -121,11 +90,11 @@ public class User {
         this.telephones = telephones;
     }
 
-    public boolean isEnabled() {
-        return enabled;
+    public boolean isDelete() {
+        return isDelete;
     }
 
-    public void setEnabled(boolean enabled) {
-        this.enabled = enabled;
+    public void setDelete(boolean delete) {
+        isDelete = delete;
     }
 }
