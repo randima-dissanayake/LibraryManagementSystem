@@ -6,6 +6,7 @@ import com.randima.apigateway.service.JwtUserDetailsService;
 import com.randima.apigateway.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.DisabledException;
@@ -13,6 +14,8 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @CrossOrigin(origins = "*")
@@ -72,6 +75,12 @@ public class JwtAuthenticationController {
         String token = userDetailsService.createAuthenticationToken(userModel.getUsername(),userModel.getPassword());
         System.out.println("token    " +token);
         return ResponseEntity.ok(userService.saveInUserService(user,token));
+    }
+
+    @PreAuthorize("hasRole('LIBRARIAN')")
+    @RequestMapping(value = "/users", method = RequestMethod.GET)
+    public List<LibUser> getAll() {
+        return userDetailsService.getAll();
     }
 
 

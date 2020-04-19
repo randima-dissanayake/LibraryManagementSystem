@@ -12,7 +12,7 @@ export class MyProfileComponent implements OnInit {
   user;
   constructor(private modalService: NgbModal) {
     this.user = JSON.parse(sessionStorage.getItem('user'));
-   }
+  }
 
   ngOnInit(): void {
   }
