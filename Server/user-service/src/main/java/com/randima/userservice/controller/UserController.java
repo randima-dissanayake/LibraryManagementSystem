@@ -5,7 +5,6 @@ import com.randima.userservice.model.User;
 import com.randima.userservice.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -13,16 +12,16 @@ import java.util.List;
 
 @RestController
 @CrossOrigin(origins = "*")
-@RequestMapping("/user")
-
+@RequestMapping("")
 public class UserController {
     @Autowired
     UserService userService;
 
-//    @RequestMapping(value = "",method = RequestMethod.POST)
-//    public User saveUser(@RequestBody User user){
-//        return userService.saveUser(user);
-//    }
+    @RequestMapping(value = "",method = RequestMethod.POST)
+    public User saveUser(@RequestBody User user){
+        System.out.println("wopopopo "+user);
+        return userService.saveUser(user);
+    }
 
     @RequestMapping(value = "",method = RequestMethod.GET)
     public List<User> getAll(@RequestHeader HttpHeaders headers){

@@ -34,14 +34,14 @@ export class UserService {
     // };
     const headers = new HttpHeaders({
       'Content-Type':'application/json',
-      'Authorization' : sessionStorage.getItem('token'),
-      'Access-Control-Allow-Origin': '*'
+      'Authorization' : sessionStorage.getItem('token')
     });
     console.log("wwwwwwwwwwwwwww",this.httpOptions)
     return this.http.get<User[]>(this.baseUrl+"user",{headers:headers})
   }
 
   save(data){
+    console.log("rrrrrrrrrrrrrrr",data)
     return this.http.post<User>(this.baseUrl+"register",data);
   }
 }

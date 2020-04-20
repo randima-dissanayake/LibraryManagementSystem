@@ -22,6 +22,9 @@ export class RegisterComponent implements OnInit {
       repeatPassword:'',
       telephones : this.formBuilder.array([]) ,
       roles : this.formBuilder.array([{"role":"USER"}]),
+      // telephone : '',
+      // role : "USER",
+      enable : false,
       locked: false
     });
   }

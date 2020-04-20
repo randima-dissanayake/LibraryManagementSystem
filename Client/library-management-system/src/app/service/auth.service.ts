@@ -27,10 +27,10 @@ export class AuthService {
     return this.httpClient.post<any>(this.baseUrl+"authenticate",formData,{headers: headers}).pipe(
      map(
       userData => {
-       console.log("eeeeeeeeeeeee",userData.libUser)
+       console.log("eeeeeeeeeeeee",userData.user)
        sessionStorage.setItem('token', 'Bearer '+userData.token)
-       sessionStorage.setItem('user', JSON.stringify(userData.libUser))
-       sessionStorage.setItem('username', userData.libUser.username)
+       sessionStorage.setItem('user', JSON.stringify(userData.user))
+       sessionStorage.setItem('username', userData.user.firstName)
        this.authenticationState.next(true);
        return true;
       }

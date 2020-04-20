@@ -69,9 +69,9 @@ public class UserServiceImpl implements UserService{
     @Override
     public User updateUser(User user){
         if (user.getId()!=0) {
-            for (Telephone telephone : user.getTelephones()) {
-                telephone.setUser(user);
-            }
+//            for (Telephone telephone : user.getTelephones()) {
+//                telephone.setUser(user);
+//            }
             return userRepository.save(user);
         } else {
             return null;

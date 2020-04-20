@@ -7,7 +7,7 @@ export interface User{
 	password : string,
 	roles : String,
 	telephones : Telephone[],
-	lockes : false
+	enable : false
 }
 
 export interface Role{

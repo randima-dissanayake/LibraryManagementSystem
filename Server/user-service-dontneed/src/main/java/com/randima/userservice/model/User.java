@@ -15,10 +15,14 @@ public class User {
     private String firstName;
     private String lastName;
     private String studentId;
-    private String userEmail;
+    private String username;
+    private String password;
+    private String role;
+    private boolean enabled;
     private boolean isDelete = false;
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user",cascade = CascadeType.ALL, orphanRemoval=true)
-    private List<Telephone> telephones;
+//    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user",cascade = CascadeType.ALL, orphanRemoval=true)
+//    private List<Telephone> telephones;
+    private String telephone;
     @Transient
     private List<Book> currentBookList = new ArrayList<Book>();
 //    private List<Book> waitingList = new ArrayList<Book>();
@@ -27,8 +31,12 @@ public class User {
         this.studentId = user.getStudentId();
         this.firstName = user.getFirstName();
         this.lastName = user.getLastName();
-        this.userEmail = user.getUserEmail();
-        this.telephones = user.getTelephones();
+        this.username = user.getUsername();
+        this.password = user.getPassword();
+        this.role = user.getRole();
+        this.isDelete = user.isDelete();
+        this.telephone = user.getTelephone();
+        this.enabled = user.isEnabled();
     }
     public  User(){
 
@@ -58,12 +66,20 @@ public class User {
         this.studentId = studentId;
     }
 
-    public String getUserEmail() {
-        return userEmail;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUserEmail(String userEmail) {
-        this.userEmail = userEmail;
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public List<Book> getCurrentBookList() {
@@ -82,19 +98,44 @@ public class User {
         this.lastName = lastName;
     }
 
-    public List<Telephone> getTelephones() {
-        return telephones;
-    }
-
-    public void setTelephones(List<Telephone> telephones) {
-        this.telephones = telephones;
-    }
-
     public boolean isDelete() {
         return isDelete;
     }
 
     public void setDelete(boolean delete) {
         isDelete = delete;
+    }
+
+//    public List<Telephone> getTelephones() {
+//        return telephones;
+//    }
+//
+//    public void setTelephones(List<Telephone> telephones) {
+//        this.telephones = telephones;
+//    }
+
+
+    public String getTelephone() {
+        return telephone;
+    }
+
+    public void setTelephone(String telephone) {
+        this.telephone = telephone;
+    }
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 }
