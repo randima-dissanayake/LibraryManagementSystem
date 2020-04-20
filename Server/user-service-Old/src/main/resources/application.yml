@@ -8,11 +8,7 @@ spring:
     hibernate:
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
-      ddl-auto: create
-
-server:
-  port: 8181
-
+      ddl-auto: update
 
 jwt:
   secret: javainuse
