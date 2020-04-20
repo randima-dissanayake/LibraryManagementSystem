@@ -3,6 +3,8 @@ package com.randima.apigateway.config;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import javax.servlet.FilterChain;
@@ -15,15 +17,16 @@ import java.io.IOException;
 @Order(Ordered.HIGHEST_PRECEDENCE)
 public class CORSFilter extends OncePerRequestFilter {
     @Override
-    protected void doFilterInternal(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, FilterChain filterChain) throws ServletException, IOException {
-        httpServletResponse.setHeader("Access-Control-Allow-Origin","*");
-        httpServletResponse.setHeader("Access-Control-Allow-Methods","GET,POST,PUT,DELETE,OPTIONS");
-        httpServletResponse.setHeader("Access-Control-Max-Age","3600");
-        httpServletResponse.setHeader("Access-Control-Allow-Headers","Authorization,Content-Type");
-        if ("OPTIONS".equals(httpServletRequest.getMethod())){
-            httpServletResponse.setStatus(HttpServletResponse.SC_OK);
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+        response.setHeader("Access-Control-Allow-Origin", "*");
+        response.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+        response.setHeader("Access-Control-Max-Age", "3600");
+        response.setHeader("Access-Control-Allow-Headers", "authorization, content-type");
+
+        if ("OPTIONS".equals(request.getMethod())){
+            response.setStatus(HttpServletResponse.SC_OK);
         } else {
-            filterChain.doFilter(httpServletRequest,httpServletResponse);
+            filterChain.doFilter(request,response);
         }
     }
 }

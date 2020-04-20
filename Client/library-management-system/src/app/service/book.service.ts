@@ -11,7 +11,7 @@ export class BookService {
 
   baseUrl
   constructor(private http : HttpClient) {
-    this.baseUrl = AppConstants.baseURL+"8080/"
+    this.baseUrl = AppConstants.baseURL+"8082/"
    }
 
   save(formData : FormData):Observable<any>{
@@ -25,6 +25,12 @@ export class BookService {
   }
 
   fetchAllBooks(){
-    return this.http.get<Book[]>(this.baseUrl+"book");
+    const headers = new HttpHeaders({
+      'Content-Type':'application/json',
+      'Authorization' : sessionStorage.getItem('token'),
+      'Access-Control-Allow-Origin': '*'
+    });
+    
+    return this.http.get<Book[]>(this.baseUrl+"book",{headers:headers});
   }
 }

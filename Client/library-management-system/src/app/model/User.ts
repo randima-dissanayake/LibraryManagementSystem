@@ -3,8 +3,17 @@ export interface User{
 	firstName : string,
 	lastName : string,
     studentId : number,
-	userEmail : string,
+	username : string,
 	password : string,
-	role : string,
-	enabled : boolean
+	roles : String,
+	telephones : Telephone[],
+	lockes : false
+}
+
+export interface Role{
+	role : String
+}
+
+export interface Telephone{
+	number : String
 }

@@ -10,5 +10,6 @@ export class AppComponent {
 }
 
 export class AppConstants {
-  public static get baseURL(): string { return "http://192.168.8.101:"; }
+  // public static get baseURL(): string { return "http://192.168.8.103:"; }
+  public static get baseURL(): string { return "http://localhost:"; }
 }

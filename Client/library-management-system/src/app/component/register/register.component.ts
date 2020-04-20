@@ -17,11 +17,12 @@ export class RegisterComponent implements OnInit {
       studentId : 0,
       firstName : '',
       lastName : '',
-      userEmail : '',
+      username : '',
       password : '',
       repeatPassword:'',
-      role : 'borrower',
-      enabled : true
+      telephones : this.formBuilder.array([]) ,
+      roles : this.formBuilder.array([{"role":"USER"}]),
+      locked: false
     });
   }
 
@@ -30,7 +31,6 @@ export class RegisterComponent implements OnInit {
 
   addNewUser(registerForm) {
     console.log("qqqq"+JSON.stringify(registerForm));
-
     this.userService.save(registerForm).subscribe(
       (data: User) => {
         this.router.navigate(["dashboard"]);

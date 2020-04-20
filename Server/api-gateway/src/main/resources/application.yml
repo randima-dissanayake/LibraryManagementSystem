@@ -4,7 +4,7 @@ spring:
   datasource:
     url: jdbc:mysql://localhost:3306/apiGatewayDB?createDatabaseIfNotExist=true
     username: root
-    password: randima@94
+    password: 123
     driver-class-name: com.mysql.jdbc.Driver
   jpa:
     hibernate:
@@ -18,7 +18,7 @@ eureka:
     register-with-eureka: true
     fetchRegistry: true
     serviceUrl:
-      defaultZone: http://localhost:8761/eureka/
+      defaultZone: http://192.168.8.103:8761/eureka/
 
 zuul:
   routes:

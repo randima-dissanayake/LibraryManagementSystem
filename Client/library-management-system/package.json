@@ -23,6 +23,7 @@
     "@angular/router": "~9.0.5",
     "@auth0/angular-jwt": "^4.0.0",
     "@ng-bootstrap/ng-bootstrap": "^6.0.0",
+    "cors": "^2.8.5",
     "ng2-file-upload": "^1.4.0",
     "ng2-search-filter": "^0.5.1",
     "ngx-pagination": "^5.0.0",

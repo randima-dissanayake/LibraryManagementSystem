@@ -14,10 +14,11 @@ export class UserService {
     headers: new HttpHeaders({
       'Authorization':  sessionStorage.getItem('token'),
       'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*'
     })
   };
   constructor(private http : HttpClient) {
-    this.baseUrl=AppConstants.baseURL+"8181/";
+    this.baseUrl=AppConstants.baseURL+"8082/";
    }
 
   fetchAllUsers() {
@@ -31,7 +32,13 @@ export class UserService {
     //     'Authorization': sessionStorage.getItem('token')
     //   })
     // };
-    return this.http.get<User[]>(this.baseUrl+"user",this.httpOptions)
+    const headers = new HttpHeaders({
+      'Content-Type':'application/json',
+      'Authorization' : sessionStorage.getItem('token'),
+      'Access-Control-Allow-Origin': '*'
+    });
+    console.log("wwwwwwwwwwwwwww",this.httpOptions)
+    return this.http.get<User[]>(this.baseUrl+"user",{headers:headers})
   }
 
   save(data){

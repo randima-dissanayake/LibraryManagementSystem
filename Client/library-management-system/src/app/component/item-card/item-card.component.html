@@ -17,7 +17,7 @@
 
 <div class="card shadow mb-4" *ngIf="transactionObj" (click)=showTransactionDetalis(transactionObj)>
   <div class="card-header py-3">
-    <h6 class="m-0 font-weight-bold text-primary">{{transactionObj.user.userEmail}}</h6>
+    <h6 class="m-0 font-weight-bold text-primary">{{transactionObj.user.username}}</h6>
   </div>
   <div class="card-body">
     <div class="text-center">
@@ -37,7 +37,7 @@
     </div>
     <h3 class="m-0 font-weight-bold text-primary text-center">{{userObj.firstName}}</h3>
     <div>Student Id : {{userObj.studentId}}</div>
-    <div>Email Address : {{userObj.userEmail}}</div>
-    <div>Role : {{userObj.role}}</div>
+    <div>Email Address : {{userObj.username}}</div>
+    <!-- <div>Role : {{userObj.role}}</div> -->
   </div>
 </div>

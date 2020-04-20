@@ -13,6 +13,7 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 @SpringBootApplication
 @EnableEurekaClient
@@ -33,13 +34,23 @@ public class ApiGatewayApplication {
 //		return new InMemoryUserDetailsManager(user);
 //	}
 //
+//	@Bean
+//	public WebMvcConfigurer corsConfigurer(){
+//		return new WebMvcConfigurer() {
+//			@Override
+//			public void addCorsMappings(CorsRegistry registry) {
+////                registry.addMapping("/*").allowedOrigins("192.168.8.102:4200");
+//				registry.addMapping("/**").allkowedOrigins("*");
+//			}
+//		};
+//	}
+
 	@Bean
-	public WebMvcConfigurer corsConfigurer(){
-		return new WebMvcConfigurer() {
+	public WebMvcConfigurer corsConfigurer() {
+		return new WebMvcConfigurerAdapter() {
 			@Override
 			public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/*").allowedOrigins("192.168.8.102:4200");
-				registry.addMapping("/**").allowedOrigins("*");
+				registry.addMapping("/**");
 			}
 		};
 	}
