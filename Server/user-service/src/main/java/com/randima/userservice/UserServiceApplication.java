@@ -15,15 +15,15 @@ public class UserServiceApplication {
         SpringApplication.run(UserServiceApplication.class, args);
     }
 
-    @Bean
-    public WebMvcConfigurer corsConfigurer(){
-        return new WebMvcConfigurer() {
-            @Override
-            public void addCorsMappings(CorsRegistry registry) {
-//                registry.addMapping("/user").allowedOrigins("192.168.8.102:4200");
-                registry.addMapping("/**").allowedOrigins("*");
-            }
-        };
-    }
+//    @Bean
+//    public WebMvcConfigurer corsConfigurer(){
+//        return new WebMvcConfigurer() {
+//            @Override
+//            public void addCorsMappings(CorsRegistry registry) {
+////                registry.addMapping("/user").allowedOrigins("192.168.8.102:4200");
+//                registry.addMapping("/**").allowedOrigins("*");
+//            }
+//        };
+//    }
 
 }
