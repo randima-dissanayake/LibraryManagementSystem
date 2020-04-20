@@ -11,6 +11,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.provisioning.UserDetailsManager;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @SpringBootApplication
 @EnableEurekaClient
@@ -21,14 +23,25 @@ public class ApiGatewayApplication {
 		SpringApplication.run(ApiGatewayApplication.class, args);
 	}
 
-	@Autowired
-	private PasswordEncoder bcryptEncoder;
-
+//	@Autowired
+//	private PasswordEncoder bcryptEncoder;
+//
+//	@Bean
+//	public UserDetailsManager userDetailsService() {
+//		UserDetails user = User.withDefaultPasswordEncoder().username("randima@gmail.com").password(bcryptEncoder.encode("123")).roles("LIBRARIAN")
+//				.build();
+//		return new InMemoryUserDetailsManager(user);
+//	}
+//
 	@Bean
-	public UserDetailsManager userDetailsService() {
-		UserDetails user = User.withDefaultPasswordEncoder().username("randima@gmail.com").password(bcryptEncoder.encode("123")).roles("LIBRARIAN")
-				.build();
-		return new InMemoryUserDetailsManager(user);
+	public WebMvcConfigurer corsConfigurer(){
+		return new WebMvcConfigurer() {
+			@Override
+			public void addCorsMappings(CorsRegistry registry) {
+                registry.addMapping("/*").allowedOrigins("192.168.8.102:4200");
+				registry.addMapping("/**").allowedOrigins("*");
+			}
+		};
 	}
 
 }
