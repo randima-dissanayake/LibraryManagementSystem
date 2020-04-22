@@ -10,13 +10,12 @@ public class Role {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    @Enumerated(EnumType.STRING)
-    private UserRole role;
+    private String role;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     @JoinColumn
     @JsonIgnore
-    private LibUser users;
+    private LibUser user;
 
     public Integer getId() {
         return id;
@@ -26,20 +25,20 @@ public class Role {
         this.id = id;
     }
 
-    public UserRole getRole() {
+    public String getRole() {
         return role;
     }
 
-    public void setRole(UserRole role) {
+    public void setRole(String role) {
         this.role = role;
     }
 
-    public LibUser getUsers() {
-        return users;
+    public LibUser getUser() {
+        return user;
     }
 
-    public void setUsers(LibUser users) {
-        this.users = users;
+    public void setUser(LibUser user) {
+        this.user = user;
     }
 
 //    public String getRole() {

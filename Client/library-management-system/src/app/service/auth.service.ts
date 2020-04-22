@@ -17,7 +17,7 @@ export class AuthService {
   authenticationState = new BehaviorSubject(false);
   baseUrl
   constructor(private httpClient:HttpClient, private router: Router) { 
-    this.baseUrl = AppConstants.baseURL+"8082/"
+    this.baseUrl = AppConstants.baseURL;
     this.checkToken();
   }
 
@@ -27,10 +27,10 @@ export class AuthService {
     return this.httpClient.post<any>(this.baseUrl+"authenticate",formData,{headers: headers}).pipe(
      map(
       userData => {
-       console.log("eeeeeeeeeeeee",userData.user)
+       console.log("eeeeeeeeeeeee",userData.libUser)
        sessionStorage.setItem('token', 'Bearer '+userData.token)
-       sessionStorage.setItem('user', JSON.stringify(userData.user))
-       sessionStorage.setItem('username', userData.user.firstName)
+       sessionStorage.setItem('user', JSON.stringify(userData.libUser))
+       sessionStorage.setItem('username', userData.libUser.username)
        this.authenticationState.next(true);
        return true;
       }
@@ -71,4 +71,9 @@ export class AuthService {
        this.router.navigate(['login']);
      }
  }
+
+ save(data){
+  console.log("rrrrrrrrrrrrrrr",data)
+  return this.httpClient.post<User>(this.baseUrl+"register",data);
+}
 }

@@ -17,16 +17,23 @@
 
 <div class="card shadow mb-4" *ngIf="transactionObj" (click)=showTransactionDetalis(transactionObj)>
   <div class="card-header py-3">
-    <h6 class="m-0 font-weight-bold text-primary">{{transactionObj.user.username}}</h6>
+    <h6 class="m-0 font-weight-bold text-primary">{{transactionObj.book.title}}</h6>
   </div>
   <div class="card-body">
     <div class="text-center">
-      <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="height: 20rem;" src="img/undraw_posting_photo.svg" alt="">
+      <div class="text-center p-2">
+        <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 15rem; height: auto;"
+          src="data:image/jpeg;base64,{{transactionObj.book.book_image}}" alt="">
+      </div>
     </div>
-    <p>Add some quality, svg illustrations to your project courtesy of <a target="_blank" rel="nofollow"
-        href="https://undraw.co/">unDraw</a>, a constantly updated collection of beautiful svg images that you can use
-      completely free and without attribution!</p>
-    <a target="_blank" rel="nofollow" href="https://undraw.co/">Browse Illustrations on unDraw &rarr;</a>
+    <div>
+      Borrowed by {{transactionObj.user.firstName}} {{transactionObj.user.lastName}}<br>
+      Checkin date {{transactionObj.checkin_date}}<br>
+      Checkout_date {{transactionObj.checkout_date}}<br>
+      Fine {{transactionObj.fine}}<br>
+      {{transactionObj.renew_flag}} time renewed<br>
+    </div>
+    
   </div>
 </div>
 
@@ -36,7 +43,7 @@
       <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 25rem;" src="assets/img/user.png" alt="">
     </div>
     <h3 class="m-0 font-weight-bold text-primary text-center">{{userObj.firstName}}</h3>
-    <div>Student Id : {{userObj.studentId}}</div>
+    <div>University Id : {{userObj.universityId}}</div>
     <div>Email Address : {{userObj.username}}</div>
     <!-- <div>Role : {{userObj.role}}</div> -->
   </div>

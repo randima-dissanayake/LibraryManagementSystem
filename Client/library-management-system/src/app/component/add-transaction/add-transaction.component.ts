@@ -14,11 +14,8 @@ export class AddTransactionComponent implements OnInit {
   addTransactionForm
   constructor(public activeModal: NgbActiveModal, private formBuilder: FormBuilder, private transactionService: TransactionService) { 
     this.addTransactionForm = this.formBuilder.group({
-      userId : 0,
-      bookId : '',
-      checkout_date : '',
-      renew_flag : 0,
-      fine : 0
+      universityId : 0,
+      bookId : ''
     });
   }
 

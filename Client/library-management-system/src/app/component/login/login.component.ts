@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/service/auth.service';
+import { UserService } from 'src/app/service/user.service';
 
 @Component({
   selector: 'app-login',
@@ -12,21 +13,26 @@ export class LoginComponent implements OnInit {
 
   invalidLogin = false
   loginForm
-  constructor(private router: Router, private authService: AuthService, private formBuilder: FormBuilder) {
+  submitted = false
+  constructor(private router: Router, private authService: AuthService, private formBuilder: FormBuilder, private userService: UserService) {
     this.loginForm = this.formBuilder.group({
-      username : '',
-      password : ''
+      username : ['',[Validators.required, Validators.email]],
+      password : ['', Validators.required]
     });
    }
 
   ngOnInit(): void {
   }
 
+  get f() { return this.loginForm.controls; }
+
   login(data) {
-    // let data1 = {
-    //   userEmail : "randima@gmail.com",
-	  //   password : "123"
-    // }
+    this.submitted = true;
+    if (this.loginForm.valid) {
+      let userData = {
+        "username": this.f.username.value,
+        "password": this.f.password.value
+    }
     // console.log("qqqqqqqqqqqq",JSON.stringify(data1))
     // if (this.authService.authenticate(JSON.stringify(data))) {
     //   console.log("oooooooo")
@@ -34,14 +40,13 @@ export class LoginComponent implements OnInit {
     //   this.invalidLogin = false
     // } else
     //   this.invalidLogin = true
-    this.authService.authenticate(JSON.stringify(data)).subscribe(res=>{
-      console.log("login ts",res)
+    this.authService.authenticate(userData).subscribe(res=>{
       this.router.navigate(['dashboard'])
     },error=>{
       console.log("error",error)
       this.invalidLogin = true
     })
-
+  }
   }
 
 }

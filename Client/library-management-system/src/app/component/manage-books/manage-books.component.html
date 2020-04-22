@@ -20,34 +20,45 @@
                     <table class="table table-striped">
                         <thead>
                             <tr>
-                                <th>#</th>
-                                <th>Name</th>
-                                <th>Student Id</th>
-                                <th>Email Address</th>
-                                <th>Telephone Number(s)</th>
+                                <th>ISBN</th>
+                                <th>Title</th>
+                                <th>Author</th>
+                                <th>Publisher</th>
+                                <th>Year of publication</th>
+                                <th>Location</th>
+                                <th>Number of copies</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr
-                                *ngFor="let user of users | filter:searchTerm | paginate: {itemsPerPage: 5, currentPage: p};let i=index">
-                                <th scope="row">{{ i }}</th>
+                                *ngFor="let book of books | filter:searchTerm | paginate: {itemsPerPage: 5, currentPage: p}">
+                                <!-- <th scope="row">{{ i }}</th> -->
                                 <td>
                                     <!-- <img [src]="'https://upload.wikimedia.org/wikipedia/commons/' + country.flag" class="mr-2" style="width: 20px">
         <ngb-highlight [result]="country.name" [term]="service.searchTerm"></ngb-highlight> -->
-                                    {{ user.firstName }} {{user.lastName}}
+                                    {{ book.isbn }}
                                 </td>
 
                                 <td>
                                     <!-- <ngb-highlight [result]="country.area | number" [term]="service.searchTerm"></ngb-highlight> -->
-                                    {{user.studentId}}
+                                    {{book.title}}
                                 </td>
                                 <td>
                                     <!-- <ngb-highlight [result]="country.population | number" [term]="service.searchTerm"></ngb-highlight> -->
-                                    {{user.userEmail}}
+                                    {{book.author}}
                                 </td>
                                 <td>
-                                    {{user.telephones[0].number}}  {{user.telephones[1].number}}
+                                    {{book.publisher}}
+                                </td>
+                                <td>
+                                    {{book.year_of_publication}}
+                                </td>
+                                <td>
+                                    {{book.location}}
+                                </td>
+                                <td>
+                                    {{book.num_of_copies}}
                                 </td>
                                 <td>
                                     <i class="fa fa-pencil-square-o" aria-hidden="true"></i>

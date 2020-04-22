@@ -26,7 +26,8 @@ export class AddBookComponent implements OnInit {
       publisher: '',
       year_of_publication: '',
       location: '',
-      num_of_copies: 0
+      num_of_copies: 0,
+      price: ''
     });
   }
 

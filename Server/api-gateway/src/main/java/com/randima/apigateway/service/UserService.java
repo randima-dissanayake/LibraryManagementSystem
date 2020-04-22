@@ -25,8 +25,10 @@ public class UserService {
         HttpHeaders httpHeaders=new HttpHeaders();
         httpHeaders.add("Authorization","Bearer "+token);
         HttpEntity<User> request = new HttpEntity<>(user,httpHeaders);
+//        ResponseEntity<User> response = restTemplate
+//                .exchange("http://localhost:8082/user", HttpMethod.POST, request, User.class);
         ResponseEntity<User> response = restTemplate
-                .exchange("http://localhost:8082/user", HttpMethod.POST, request, User.class);
+                .exchange("http://192.168.8.103:8181/user", HttpMethod.POST, request, User.class);
         return response.getBody();
     }
 

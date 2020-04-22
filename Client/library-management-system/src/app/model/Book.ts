@@ -1,4 +1,3 @@
-import { SafeResourceUrl } from '@angular/platform-browser';
 
 export interface Book {
     id: number,
@@ -10,6 +9,5 @@ export interface Book {
     location:string,
     num_of_copies:number,
     book_image : string | ArrayBuffer,
-    file_name : string
-    // image_url: SafeResourceUrl
+    price : string
 }

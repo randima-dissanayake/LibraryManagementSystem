@@ -9,6 +9,8 @@ import { RegisterComponent } from './component/register/register.component';
 import { AuthGaurdService } from './service/auth-gaurd.service';
 import { MyProfileComponent } from './component/my-profile/my-profile.component';
 import { ManageUsersComponent } from './component/manage-users/manage-users.component';
+import { ManageBooksComponent } from './component/manage-books/manage-books.component';
+import { ManageTransactionsComponent } from './component/manage-transactions/manage-transactions.component';
 
 
 const routes: Routes = [
@@ -19,7 +21,9 @@ const routes: Routes = [
   { path: 'transactiondetails', component: TransactionDetailsComponent, canActivate:[AuthGaurdService] },
   { path: 'userdetails', component: UserDetailsComponent, canActivate:[AuthGaurdService] },
   { path: 'myprofile', component: MyProfileComponent, canActivate:[AuthGaurdService] },
-  { path: 'users', component: ManageUsersComponent, canActivate:[AuthGaurdService] }
+  { path: 'users', component: ManageUsersComponent, canActivate:[AuthGaurdService] },
+  { path: 'books', component: ManageBooksComponent, canActivate:[AuthGaurdService] },
+  { path: 'transactions', component: ManageTransactionsComponent, canActivate:[AuthGaurdService] }
 ];
 
 @NgModule({

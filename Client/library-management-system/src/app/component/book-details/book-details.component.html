@@ -21,10 +21,11 @@
           </div>
           <div class="px-3 px-sm-4 mt-3 mb-4">
             <!-- <p style="font-size:xx-large">{{bookObj.title}} By {{bookObj.author}}</p> -->
-            <p>Add some quality, svg illustrations to your project courtesy of <a target="_blank" rel="nofollow" href="https://undraw.co/">unDraw</a>, a constantly updated collection of beautiful svg images that you can use completely free and without attribution!</p>
-            <a target="_blank" rel="nofollow" href="https://undraw.co/">Edit &rarr;</a>
+            The publisher is {{bookObj.publisher}} and the year of publication is {{bookObj.year_of_publication}}
+            Price is Rs. {{bookObj.price}}
           </div>
-
+          <div class="px-3 px-sm-4 mt-3 mb-4">
+          <button class="btn btn-lg btn-outline-primary" (click)="openAddTransaction()">Click to Borrow </button></div>
         </div>
       </div>
     </div>

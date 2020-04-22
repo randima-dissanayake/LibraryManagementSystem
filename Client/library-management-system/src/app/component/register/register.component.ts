@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
-import { UserService } from 'src/app/service/user.service';
+import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { User } from 'src/app/model/User';
 import { Router } from '@angular/router';
+import { PasswordStrengthValidator } from 'src/app/shared/password-strength.validators';
+import { AuthService } from 'src/app/service/auth.service';
 
 @Component({
   selector: 'app-register',
@@ -12,35 +13,79 @@ import { Router } from '@angular/router';
 export class RegisterComponent implements OnInit {
 
   registerForm;
-  constructor(private formBuilder: FormBuilder, private userService: UserService, private router: Router) { 
+  submitted = false;
+  constructor(private formBuilder: FormBuilder, private authService: AuthService, private router: Router) { 
     this.registerForm = this.formBuilder.group({
-      studentId : 0,
-      firstName : '',
-      lastName : '',
-      username : '',
-      password : '',
-      repeatPassword:'',
-      telephones : this.formBuilder.array([]) ,
-      roles : this.formBuilder.array([{"role":"USER"}]),
+      universityId : ['', Validators.required],
+      firstName : ['', Validators.required],
+      lastName : ['', Validators.required],
+      username : ['',[Validators.required, Validators.email]],
+      password : ['', [Validators.required,PasswordStrengthValidator]],
+      repeatPassword:['', Validators.required],
+      telephone1 : ['', Validators.required] ,
+      telephone2 : '' 
+
       // telephone : '',
       // role : "USER",
-      enable : false,
-      locked: false
+    },
+    {    
+      validator: this.MustMatch('password', 'repeatPassword')
     });
   }
 
   ngOnInit(): void {
   }
 
+  get f() { return this.registerForm.controls; }
+
   addNewUser(registerForm) {
-    console.log("qqqq"+JSON.stringify(registerForm));
-    this.userService.save(registerForm).subscribe(
+    this.submitted = true;
+    if (this.registerForm.valid) {
+      let userData = {
+        "firstName": this.f.firstName.value,
+        "lastName": this.f.lastName.value,
+        "username": this.f.username.value,
+        "universityId": this.f.universityId.value,
+        "password": this.f.password.value,
+        "telephones": [
+          {"number":this.f.telephone1.value},
+          {"number":this.f.telephone2.value} 
+        ] ,
+        "roles" : [
+          {"role" : "USER"}
+        ],
+        "enable" : false ,
+        "locked" : false  
+      }
+    console.log("qqqq"+userData);
+    this.authService.save(userData).subscribe(
       (data: User) => {
+        this.registerForm.reset();
         this.router.navigate(["dashboard"]);
         console.log(data)},
       (error) => console.log(error)
     );
-    this.registerForm.reset();
+    
   }
+}
+
+MustMatch(controlName: string, matchingControlName: string) {
+  return (formGroup: FormGroup) => {
+    const control = formGroup.controls[controlName];
+    const matchingControl = formGroup.controls[matchingControlName];
+
+    if (matchingControl.errors && !matchingControl.errors.mustMatch) {
+      // return if another validator has already found an error on the matchingControl
+      return;
+    }
+
+    // set error on matchingControl if validation fails
+    if (control.value !== matchingControl.value) {
+      matchingControl.setErrors({ mustMatch: true });
+    } else {
+      matchingControl.setErrors(null);
+    }
+  }
+}
 
 }

@@ -2,10 +2,10 @@ export interface User{
 	id : number,
 	firstName : string,
 	lastName : string,
-    studentId : number,
+    universityId : number,
 	username : string,
 	password : string,
-	roles : String,
+	roles : Role[],
 	telephones : Telephone[],
 	enable : false
 }

@@ -10,27 +10,22 @@ import { AppConstants } from '../app.component';
 export class BookService {
 
   baseUrl
+  private httpOptions = {
+    headers: new HttpHeaders({
+      'Authorization':  sessionStorage.getItem('token'),
+      'Content-Type': 'application/json'
+    })
+  };
   constructor(private http : HttpClient) {
-    this.baseUrl = AppConstants.baseURL+"8082/"
+    this.baseUrl = AppConstants.baseURLBook+"book"
    }
 
   save(formData : FormData):Observable<any>{
-    const headers = new HttpHeaders({
-      'Content-Type':'application/json',
-      'Authorization' : sessionStorage.getItem('token'),
-      'Access-Control-Allow-Origin': '*'
-    });
     console.log("book service"+formData)
-    return this.http.post(this.baseUrl+"book",formData,{headers:headers});
+    return this.http.post(this.baseUrl,formData);
   }
 
   fetchAllBooks(){
-    const headers = new HttpHeaders({
-      'Content-Type':'application/json',
-      'Authorization' : sessionStorage.getItem('token'),
-      'Access-Control-Allow-Origin': '*'
-    });
-    
-    return this.http.get<Book[]>(this.baseUrl+"book",{headers:headers});
+    return this.http.get<Book[]>(this.baseUrl,this.httpOptions);
   }
 }

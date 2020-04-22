@@ -56,15 +56,14 @@ public class JwtAuthenticationController {
         libUser.setUsername(userModel.getUsername());
         libUser.setPassword(bcryptEncoder.encode(userModel.getPassword()));
         libUser.setLocked(false);
-        for (Role r : userModel.getRoles()) {
-            r.setUsers(libUser);
-        }
+        libUser.setRoles(userModel.getRoles());
+        libUser.setUniversityId(userModel.getUniversityId());
         userDetailsService.save(libUser);
 
         User user=new User();
         user.setFirstName(userModel.getFirstName());
         user.setLastName(userModel.getLastName());
-        user.setStudentId(userModel.getStudentId());
+        user.setUniversityId(userModel.getUniversityId());
         user.setUserEmail(userModel.getUsername());
         user.setTelephones(userModel.getTelephones());
         String token = userDetailsService.createAuthenticationToken(userModel.getUsername(),userModel.getPassword());

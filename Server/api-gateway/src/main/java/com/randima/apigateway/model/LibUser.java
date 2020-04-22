@@ -18,12 +18,12 @@ public class LibUser {
     private String username;
     //    @NotEmpty(message = "*Please provide your firstName")
     private String password;
-
+    private Integer universityId;
     private Integer active = 1;
     private boolean locked;
     private boolean enabled = true;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "users",cascade = CascadeType.ALL, orphanRemoval=true)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user",cascade = CascadeType.ALL, orphanRemoval=true)
     private List<Role> roles;
 
     public Integer getId() {
@@ -80,5 +80,13 @@ public class LibUser {
 
     public void setRoles(List<Role> roles) {
         this.roles = roles;
+    }
+
+    public Integer getUniversityId() {
+        return universityId;
+    }
+
+    public void setUniversityId(Integer universityId) {
+        this.universityId = universityId;
     }
 }

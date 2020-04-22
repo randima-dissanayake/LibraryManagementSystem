@@ -20,34 +20,42 @@
                     <table class="table table-striped">
                         <thead>
                             <tr>
-                                <th>#</th>
-                                <th>Name</th>
-                                <th>Student Id</th>
-                                <th>Email Address</th>
-                                <th>Telephone Number(s)</th>
+                              
+                                <th>BookId</th>
+                                <th>UserId</th>
+                                <th>Chekin date</th>
+                                <th>Checkout Date</th>
+                                <th>Renew Flag</th>
+                                <th>Fine</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr
-                                *ngFor="let user of users | filter:searchTerm | paginate: {itemsPerPage: 5, currentPage: p};let i=index">
-                                <th scope="row">{{ i }}</th>
+                                *ngFor="let transaction of transactions | filter:searchTerm | paginate: {itemsPerPage: 5, currentPage: p}">
+                                <!-- <th scope="row">{{ i }}</th> -->
                                 <td>
                                     <!-- <img [src]="'https://upload.wikimedia.org/wikipedia/commons/' + country.flag" class="mr-2" style="width: 20px">
         <ngb-highlight [result]="country.name" [term]="service.searchTerm"></ngb-highlight> -->
-                                    {{ user.firstName }} {{user.lastName}}
+                                    {{ transaction.bookId }}
                                 </td>
 
                                 <td>
                                     <!-- <ngb-highlight [result]="country.area | number" [term]="service.searchTerm"></ngb-highlight> -->
-                                    {{user.studentId}}
+                                    {{transaction.userId}}
                                 </td>
                                 <td>
                                     <!-- <ngb-highlight [result]="country.population | number" [term]="service.searchTerm"></ngb-highlight> -->
-                                    {{user.userEmail}}
+                                    {{transaction.checkin_date}}
                                 </td>
                                 <td>
-                                    {{user.telephones[0].number}}  {{user.telephones[1].number}}
+                                    {{transaction.checkout_date}}
+                                </td>
+                                <td>
+                                    {{transaction.renew_flag}}
+                                </td>
+                                <td>
+                                    {{transaction.fine}}
                                 </td>
                                 <td>
                                     <i class="fa fa-pencil-square-o" aria-hidden="true"></i>

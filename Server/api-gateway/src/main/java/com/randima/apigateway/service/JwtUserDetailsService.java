@@ -45,6 +45,9 @@ public class JwtUserDetailsService implements UserDetailsService {
     }
 
     public LibUser save(LibUser libUser) throws Exception {
+        for (Role r : libUser.getRoles()) {
+            r.setUser(libUser);
+        }
         return userRepository.save(libUser);
     }
 

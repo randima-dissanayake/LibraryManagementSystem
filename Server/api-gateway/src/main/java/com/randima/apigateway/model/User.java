@@ -5,7 +5,7 @@ import java.util.List;
 public class User {
     private String firstName;
     private String lastName;
-    private String studentId;
+    private Integer universityId;
     private String userEmail;
     private List<Telephone> telephones;
 
@@ -25,12 +25,12 @@ public class User {
         this.lastName = lastName;
     }
 
-    public String getStudentId() {
-        return studentId;
+    public Integer getUniversityId() {
+        return universityId;
     }
 
-    public void setStudentId(String studentId) {
-        this.studentId = studentId;
+    public void setUniversityId(Integer universityId) {
+        this.universityId = universityId;
     }
 
     public String getUserEmail() {

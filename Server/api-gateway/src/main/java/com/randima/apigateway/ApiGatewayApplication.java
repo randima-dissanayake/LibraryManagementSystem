@@ -40,19 +40,19 @@ public class ApiGatewayApplication {
 //			@Override
 //			public void addCorsMappings(CorsRegistry registry) {
 ////                registry.addMapping("/*").allowedOrigins("192.168.8.102:4200");
-//				registry.addMapping("/**").allkowedOrigins("*");
+//				registry.addMapping("/**").allowedOrigins("*");
 //			}
 //		};
 //	}
 
-	@Bean
-	public WebMvcConfigurer corsConfigurer() {
-		return new WebMvcConfigurerAdapter() {
-			@Override
-			public void addCorsMappings(CorsRegistry registry) {
-				registry.addMapping("/**");
-			}
-		};
-	}
+//	@Bean
+//	public WebMvcConfigurer corsConfigurer() {
+//		return new WebMvcConfigurerAdapter() {
+//			@Override
+//			public void addCorsMappings(CorsRegistry registry) {
+//				registry.addMapping("/**");
+//			}
+//		};
+//	}
 
 }

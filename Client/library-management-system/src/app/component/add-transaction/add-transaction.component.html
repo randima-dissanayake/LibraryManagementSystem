@@ -9,17 +9,11 @@
     <form [formGroup]="addTransactionForm" (ngSubmit)="addNewTransaction(addTransactionForm.value)">
       <div class="form-group">
         <label for="exampleInputEmail1">bookId</label>
-        <input type="text" class="form-control" formControlName="bookId" id="studentId" placeholder="Enter First Name">
+        <input type="text" class="form-control" formControlName="bookId" id="studentId" placeholder="Enter Book Id">
       </div>
       <div class="form-group">
-        <label for="exampleInputEmail1">userId</label>
-        <input type="text" class="form-control" formControlName="userId" id="studentId" placeholder="Enter Last Name">
-      </div>
-      <div class="form-group">
-        <label for="exampleInputEmail1">Checkout date</label>
-        <input type="number" class="form-control" formControlName="checkout_date" id="studentId" aria-describedby="emailHelp"
-          placeholder="Enter Title">
-        <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
+        <label for="exampleInputEmail1">University Id</label>
+        <input type="text" class="form-control" formControlName="universityId" id="universityId" placeholder="Enter University Id">
       </div>
       <button type="submit" class="btn btn-primary">Submit</button>
     </form>

@@ -1,14 +1,11 @@
 package com.randima.apigateway.model;
 
-import javax.persistence.CascadeType;
-import javax.persistence.FetchType;
-import javax.persistence.OneToMany;
 import java.util.List;
 
 public class UserModel {
     private String firstName;
     private String lastName;
-    private String studentId;
+    private Integer universityId;
     private List<Telephone> telephones;
     private String username;
     private String password;
@@ -33,12 +30,12 @@ public class UserModel {
         this.lastName = lastName;
     }
 
-    public String getStudentId() {
-        return studentId;
+    public Integer getUniversityId() {
+        return universityId;
     }
 
-    public void setStudentId(String studentId) {
-        this.studentId = studentId;
+    public void setUniversityId(Integer universityId) {
+        this.universityId = universityId;
     }
 
     public List<Telephone> getTelephones() {

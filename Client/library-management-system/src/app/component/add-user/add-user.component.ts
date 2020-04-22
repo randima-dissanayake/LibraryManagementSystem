@@ -1,8 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { UserService } from 'src/app/service/user.service';
 import { User } from 'src/app/model/User';
+import { AuthService } from 'src/app/service/auth.service';
 
 @Component({
   selector: 'app-add-user',
@@ -14,7 +14,7 @@ export class AddUserComponent implements OnInit {
   @Input() public user; 
   checkoutForm;
   title;
-  constructor(public activeModal: NgbActiveModal, private formBuilder: FormBuilder, private userService: UserService) { 
+  constructor(public activeModal: NgbActiveModal, private formBuilder: FormBuilder, private authService: AuthService) { 
     
   }
 
@@ -46,7 +46,7 @@ export class AddUserComponent implements OnInit {
 
   addNewUser(data){
     console.log(data);
-    this.userService.save(data).subscribe(
+    this.authService.save(data).subscribe(
       (data: User)=>  console.log(data),
       (error)=>console.log(error)
     );

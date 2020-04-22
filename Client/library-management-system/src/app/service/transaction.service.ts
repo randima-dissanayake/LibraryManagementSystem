@@ -16,11 +16,11 @@ export class TransactionService {
     })
   };
   constructor(private http: HttpClient) { 
-    this.baseUrl=AppConstants.baseURL+"8081/transaction";
+    this.baseUrl=AppConstants.baseURLTransaction+"transaction";
   }
 
   fetchAllTransactions(){
-    return this.http.get<Transaction[]>(this.baseUrl);
+    return this.http.get<any[]>(this.baseUrl);
   }
 
   getTransactionByUserId(userId){
@@ -29,5 +29,9 @@ export class TransactionService {
 
   save(data){
     return this.http.post<Transaction>(this.baseUrl,data,this.httpOptions);
+  }
+
+  renew(id){
+    return this.http.get<Transaction>(this.baseUrl+"/renew/"+id,this.httpOptions);
   }
 }
