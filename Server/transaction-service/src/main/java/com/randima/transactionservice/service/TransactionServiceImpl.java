@@ -46,7 +46,7 @@ public class TransactionServiceImpl implements TransactionService {
 
     @Override
     public List<Transaction> findByUserId(Integer id) {
-        return transactionRepository.findByUserId(id);
+        return transactionRepository.findByUniversityId(id);
     }
 
     @Override
@@ -78,7 +78,7 @@ public class TransactionServiceImpl implements TransactionService {
         HttpHeaders httpHeaders=new HttpHeaders();
         HttpEntity<String> httpEntity=new HttpEntity<>("",httpHeaders);
         for (Transaction transaction:transactions){
-            ResponseEntity<User> responseEntity=restTemplate.exchange("http://localhost:8181/user/"+transaction.getUserId(),
+            ResponseEntity<User> responseEntity=restTemplate.exchange("http://localhost:8181/user/"+transaction.getUniversityId(),
                     HttpMethod.GET,httpEntity, User.class);
             User user=responseEntity.getBody();
             userlist.add(user);
@@ -93,7 +93,7 @@ public class TransactionServiceImpl implements TransactionService {
         HttpHeaders httpHeaders=new HttpHeaders();
         HttpEntity<String> httpEntity=new HttpEntity<>("",httpHeaders);
         for (Transaction transaction: transactionRepository.findAll()){
-            ResponseEntity<User> user=restTemplate.exchange("http://localhost:8181/user/"+transaction.getUserId(),
+            ResponseEntity<User> user=restTemplate.exchange("http://localhost:8181/user/uid/"+transaction.getUniversityId(),
                     HttpMethod.GET,httpEntity, User.class);
             transaction.setUser(user.getBody());
             ResponseEntity<Book> book=restTemplate.exchange("http://localhost:8080/book/"+transaction.getBookId(),
@@ -102,5 +102,11 @@ public class TransactionServiceImpl implements TransactionService {
             transactions.add(transaction);
         }
         return transactions;
+//        return transactionRepository.findAll();
+    }
+
+    @Override
+    public Transaction updateTransaction(Transaction transaction) {
+        return transactionRepository.save(transaction);
     }
 }

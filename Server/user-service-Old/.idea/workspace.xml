@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="b6183041-c975-4dae-a0fd-227fdb28556f" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/randima/userservice/UserServiceApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/randima/userservice/UserServiceApplication.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="ProjectId" id="1ZvxePW9SsvgNyJt5Oj2Ms7JSPv" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../transaction-service" />
+  </component>
+  <component name="RunManager">
+    <configuration name="UserServiceApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.randima.userservice.UserServiceApplication" />
+      <module name="user-service" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.randima.userservice.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.UserServiceApplication" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="b6183041-c975-4dae-a0fd-227fdb28556f" name="Default Changelist" comment="" />
+      <created>1585733463771</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1585733463771</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="503" y="100" width="374" height="575" key="#com.intellij.ide.util.MemberChooser" timestamp="1586294138217">
+      <screen x="35" y="27" width="1331" height="741" />
+    </state>
+    <state x="503" y="100" width="374" height="575" key="#com.intellij.ide.util.MemberChooser/35.27.1331.741@35.27.1331.741" timestamp="1586294138217" />
+    <state x="524" y="100" width="374" height="592" key="#com.intellij.ide.util.MemberChooser/67.27.1299.741@67.27.1299.741" timestamp="1585766446025" />
+    <state x="483" y="154" width="424" height="484" key="FileChooserDialogImpl" timestamp="1587306001221">
+      <screen x="35" y="27" width="1331" height="741" />
+    </state>
+    <state x="483" y="154" width="424" height="484" key="FileChooserDialogImpl/35.27.1331.741@35.27.1331.741" timestamp="1587306001221" />
+    <state width="1285" height="215" key="GridCell.Tab.0.bottom" timestamp="1587377531890">
+      <screen x="35" y="27" width="1331" height="741" />
+    </state>
+    <state width="1285" height="215" key="GridCell.Tab.0.bottom/35.27.1331.741@35.27.1331.741" timestamp="1587377531890" />
+    <state width="1253" height="175" key="GridCell.Tab.0.bottom/67.27.1299.741@67.27.1299.741" timestamp="1585766573207" />
+    <state width="1285" height="215" key="GridCell.Tab.0.center" timestamp="1587377531890">
+      <screen x="35" y="27" width="1331" height="741" />
+    </state>
+    <state width="1285" height="215" key="GridCell.Tab.0.center/35.27.1331.741@35.27.1331.741" timestamp="1587377531890" />
+    <state width="1253" height="175" key="GridCell.Tab.0.center/67.27.1299.741@67.27.1299.741" timestamp="1585766573207" />
+    <state width="1285" height="215" key="GridCell.Tab.0.left" timestamp="1587377531890">
+      <screen x="35" y="27" width="1331" height="741" />
+    </state>
+    <state width="1285" height="215" key="GridCell.Tab.0.left/35.27.1331.741@35.27.1331.741" timestamp="1587377531890" />
+    <state width="1253" height="175" key="GridCell.Tab.0.left/67.27.1299.741@67.27.1299.741" timestamp="1585766573207" />
+    <state width="1285" height="215" key="GridCell.Tab.0.right" timestamp="1587377531890">
+      <screen x="35" y="27" width="1331" height="741" />
+    </state>
+    <state width="1285" height="215" key="GridCell.Tab.0.right/35.27.1331.741@35.27.1331.741" timestamp="1587377531890" />
+    <state width="1253" height="175" key="GridCell.Tab.0.right/67.27.1299.741@67.27.1299.741" timestamp="1585766573207" />
+    <state x="348" y="224" key="com.intellij.ide.util.TipDialog" timestamp="1585937797484">
+      <screen x="35" y="27" width="1331" height="741" />
+    </state>
+    <state x="348" y="224" key="com.intellij.ide.util.TipDialog/35.27.1331.741@35.27.1331.741" timestamp="1585937797484" />
+    <state x="372" y="224" key="com.intellij.ide.util.TipDialog/67.27.1299.741@67.27.1299.741" timestamp="1585762879659" />
+    <state x="356" y="175" key="run.anything.popup" timestamp="1585936602744">
+      <screen x="35" y="27" width="1331" height="741" />
+    </state>
+    <state x="356" y="175" key="run.anything.popup/35.27.1331.741@35.27.1331.741" timestamp="1585936602744" />
+    <state x="380" y="175" key="run.anything.popup/67.27.1299.741@67.27.1299.741" timestamp="1585765425968" />
+  </component>
+</project>

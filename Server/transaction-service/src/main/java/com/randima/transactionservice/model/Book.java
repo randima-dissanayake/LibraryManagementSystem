@@ -9,8 +9,7 @@ public class Book {
     private String year_of_publication;
     private String location;
     private Integer num_of_copies;
-
-    private User user;
+    private byte[] book_image;
 
     public String getIsbn() {
         return isbn;
@@ -76,11 +75,11 @@ public class Book {
         this.num_of_copies = num_of_copies;
     }
 
-    public User getUser() {
-        return user;
+    public byte[] getBook_image() {
+        return book_image;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setBook_image(byte[] book_image) {
+        this.book_image = book_image;
     }
 }

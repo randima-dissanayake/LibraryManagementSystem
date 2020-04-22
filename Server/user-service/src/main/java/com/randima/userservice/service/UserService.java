@@ -12,4 +12,5 @@ public interface UserService {
     User getUserById(Integer id);
     List<User> getAll();
     User updateUser(User user);
+    User getUserByUniversityId(Integer uId);
 }

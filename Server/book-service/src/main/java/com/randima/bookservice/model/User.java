@@ -5,10 +5,11 @@ import lombok.Data;
 @Data
 public class User {
     private Integer id;
-    private String studentId;
+    private Integer universityId;
     private String userEmail;
-    private String password;
-    private String role;
     private boolean enabled;
+    private String firstName;
+    private String lastName;
+    private boolean isDelete;
 
 }

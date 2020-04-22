@@ -12,7 +12,7 @@ import java.util.List;
 
 @RestController
 @CrossOrigin(origins = "*")
-@RequestMapping("")
+@RequestMapping("/user")
 public class UserController {
     @Autowired
     UserService userService;
@@ -23,9 +23,14 @@ public class UserController {
         return userService.saveUser(user);
     }
 
+//    @RequestMapping(value = "",method = RequestMethod.GET)
+//    public List<User> getAll(@RequestHeader HttpHeaders headers){
+//        System.out.println("tttttttttt "+headers.getContentType());
+//        return userService.getAll();
+//    }
+
     @RequestMapping(value = "",method = RequestMethod.GET)
-    public List<User> getAll(@RequestHeader HttpHeaders headers){
-        System.out.println("tttttttttt "+headers.getContentType());
+    public List<User> getAll(){
         return userService.getAll();
     }
 
@@ -47,6 +52,11 @@ public class UserController {
     @RequestMapping(value = "/{id}",method = RequestMethod.GET)
     public User findById(@PathVariable Integer id){
         return userService.getUserById(id);
+    }
+
+    @RequestMapping(value = "/uid/{uId}",method = RequestMethod.GET)
+    public User findByUniversityId(@PathVariable Integer uId){
+        return userService.getUserByUniversityId(uId);
     }
 
 }

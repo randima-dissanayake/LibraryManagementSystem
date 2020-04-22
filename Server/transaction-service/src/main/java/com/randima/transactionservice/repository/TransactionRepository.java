@@ -6,6 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface TransactionRepository extends JpaRepository<Transaction,Integer> {
-    List<Transaction> findByUserId(Integer id);
+    List<Transaction> findByUniversityId(Integer id);
     List<Transaction> findByBookId(Integer id);
 }

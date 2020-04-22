@@ -3,6 +3,7 @@ package com.randima.bookservice.model;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,20 +19,20 @@ public class Book {
     private String publisher;
     private String year_of_publication;
     private String location;
+    private String price;
     private Integer num_of_copies;
-    private String file_name;
+    private LocalDate last_available_date;
     private boolean enabled;
     private boolean isDelete;
     @Lob
     private byte[] book_image;
-    private String last_available_date;
     @Transient
     List<Transaction> currentUsers = new ArrayList<Transaction>();
 
 //    @Transient
 //    private List<User> waitUsers = new LinkedList<User>();
 
-    public Book(String author, String title, String publisher, String year_of_publication, String location, int num_of_copies, boolean enabled, boolean isDelete, String last_available_date, byte[] book_image) {
+    public Book(String author, String title, String publisher, String year_of_publication, String location, int num_of_copies, boolean enabled, boolean isDelete, LocalDate last_available_date, byte[] book_image) {
         this.author = author;
         this.title = title;
         this.publisher = publisher;
@@ -126,14 +127,6 @@ public class Book {
         this.book_image = book_image;
     }
 
-    public String getFile_name() {
-        return file_name;
-    }
-
-    public void setFile_name(String file_name) {
-        this.file_name = file_name;
-    }
-
     public boolean isEnabled() {
         return enabled;
     }
@@ -150,11 +143,20 @@ public class Book {
         isDelete = delete;
     }
 
-    public String getLast_available_date() {
+    public LocalDate getLast_available_date() {
         return last_available_date;
     }
 
-    public void setLast_available_date(String last_available_date) {
+    public void setLast_available_date(LocalDate last_available_date) {
         this.last_available_date = last_available_date;
     }
+
+    public String getPrice() {
+        return price;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
+    }
+
 }

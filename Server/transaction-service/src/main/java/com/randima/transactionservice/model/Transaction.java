@@ -3,6 +3,9 @@ package com.randima.transactionservice.model;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Date;
 
 @Entity
 @Data
@@ -11,8 +14,9 @@ public class Transaction {
     @Id
     private Integer id;
     private Integer bookId;
-    private Integer userId;
-    private String checkout_date;
+    private Integer universityId;
+    private LocalDate checkin_date;
+    private LocalDate checkout_date;
     private Integer renew_flag;
     private Integer fine;
     @Transient
@@ -52,19 +56,19 @@ public class Transaction {
         this.bookId = bookId;
     }
 
-    public Integer getUserId() {
-        return userId;
+    public Integer getUniversityId() {
+        return universityId;
     }
 
-    public void setUserId(Integer userId) {
-        this.userId = userId;
+    public void setUniversityId(Integer userId) {
+        this.universityId = userId;
     }
 
-    public String getCheckout_date() {
+    public LocalDate getCheckout_date() {
         return checkout_date;
     }
 
-    public void setCheckout_date(String checkout_date) {
+    public void setCheckout_date(LocalDate checkout_date) {
         this.checkout_date = checkout_date;
     }
 
@@ -76,6 +80,14 @@ public class Transaction {
         this.renew_flag = renew_flag;
     }
 
+    public LocalDate getCheckin_date() {
+        return checkin_date;
+    }
+
+    public void setCheckin_date(LocalDate checkin_date) {
+        this.checkin_date = checkin_date;
+    }
+
     public Integer getFine() {
         return fine;
     }
@@ -83,4 +95,5 @@ public class Transaction {
     public void setFine(Integer fine) {
         this.fine = fine;
     }
+
 }

@@ -33,6 +33,9 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public User saveUser(User user) {
+        for (Telephone telephone : user.getTelephones()) {
+            telephone.setUser(user);
+        }   
         return userRepository.save(user);
     }
 
@@ -76,5 +79,10 @@ public class UserServiceImpl implements UserService{
         } else {
             return null;
         }
+    }
+
+    @Override
+    public User getUserByUniversityId(Integer uId){
+        return userRepository.findByUniversityId(uId);
     }
 }

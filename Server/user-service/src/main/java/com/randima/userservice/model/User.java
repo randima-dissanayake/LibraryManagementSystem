@@ -1,6 +1,7 @@
 package com.randima.userservice.model;
 
 import lombok.Data;
+import lombok.extern.apachecommons.CommonsLog;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -14,7 +15,8 @@ public class User {
     private Integer id;
     private String firstName;
     private String lastName;
-    private String studentId;
+    @Column(unique = true)
+    private Integer universityId;
     private String userEmail;
     private boolean isDelete = false;
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user",cascade = CascadeType.ALL, orphanRemoval=true)
@@ -24,7 +26,7 @@ public class User {
 //    private List<Book> waitingList = new ArrayList<Book>();
 
     public User(User user) {
-        this.studentId = user.getStudentId();
+        this.universityId = user.getUniversityId();
         this.firstName = user.getFirstName();
         this.lastName = user.getLastName();
         this.userEmail = user.getUserEmail();
@@ -50,12 +52,12 @@ public class User {
         this.id = id;
     }
 
-    public String getStudentId() {
-        return studentId;
+    public Integer getUniversityId() {
+        return universityId;
     }
 
-    public void setStudentId(String studentId) {
-        this.studentId = studentId;
+    public void setUniversityId(Integer universityId) {
+        this.universityId = universityId;
     }
 
     public String getUserEmail() {

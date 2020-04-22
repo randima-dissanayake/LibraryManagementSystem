@@ -15,4 +15,5 @@ public interface TransactionService {
     List<Book> getCurrentBookListByUserId(Integer id);
     List<User> getUserListByBookId(Integer id);
     List<Transaction> findAll();
+    Transaction updateTransaction(Transaction transaction);
 }
