@@ -2,24 +2,49 @@ import { Component, OnInit } from '@angular/core';
 import { Transaction } from 'src/app/model/Transaction';
 import { TransactionService } from 'src/app/service/transaction.service';
 import Swal from 'sweetalert2';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
-  selector: 'app-transaction-details',
-  templateUrl: './transaction-details.component.html',
-  styleUrls: ['./transaction-details.component.scss']
+  selector: 'app-my-transactions',
+  templateUrl: './my-transactions.component.html',
+  styleUrls: ['./my-transactions.component.scss']
 })
-export class TransactionDetailsComponent implements OnInit {
+export class MyTransactionsComponent implements OnInit {
 
-  transaction: Transaction
-
-  constructor(private transactionService: TransactionService, public activeModal: NgbActiveModal) { }
+  transactions: Array<Transaction>=[];
+  p: number = 1;
+  searchTerm;
+  constructor(private transactionService: TransactionService) { }
 
   ngOnInit(): void {
-    this.transaction = JSON.parse(localStorage.getItem('transaction'));
+    this.fetchAllUsers(JSON.parse(sessionStorage.getItem('user')).universityId);
   }
 
-  renewBook(){
+  fetchAllUsers(id){
+    this.transactionService.getTransactionByUniversityId(id).subscribe(
+      (data: any)=> {
+        if(data!=null)
+          this.transactions = data
+          console.log("mytransactions  ",this.transactions)
+      },
+      (error)=>{
+        let errorMsg = "Something went Wrong";
+        if (error.status === 401) {
+          errorMsg = "Unauthorized";
+        } 
+        console.log("error", error)
+        Swal.fire({
+          position: 'center',
+          icon: 'error',
+          title: errorMsg,
+          showConfirmButton: true,
+          timer: 5500
+        })
+        console.log(error)
+      }
+    )
+  }
+
+  renewTransaction(id){
     Swal.fire({
       title: 'Are you sure?',
       text: "Return book before time exceed, If not fine will be calculated (Rs. 5 per day)",
@@ -27,19 +52,18 @@ export class TransactionDetailsComponent implements OnInit {
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, borrow it!'
+      confirmButtonText: 'Yes, renew it!'
     }).then((result) => {
       if (result.value) {
-        this.transactionService.renew(this.transaction.id).subscribe(
+        this.transactionService.renew(id).subscribe(
           (data: Transaction) => {
-            this.transaction = data; 
             console.log("saved transaction ",data)
           Swal.fire({
                   position: 'center',
                   icon: 'success',
                   title: 'Renewed for 7 more days',
                   showConfirmButton: true,
-                  timer: 5000
+                  timer: 5500
                 })
           },
           (error) => {
@@ -59,10 +83,9 @@ export class TransactionDetailsComponent implements OnInit {
           }
         );
       }});
-    
   }
 
-  returnBook(){
+  returnTransaction(id){
     Swal.fire({
       title: 'Are you sure?',
       text: "You can renew If you are not already renew the book, Or return",
@@ -73,9 +96,8 @@ export class TransactionDetailsComponent implements OnInit {
       confirmButtonText: 'Yes, return it!'
     }).then((result) => {
       if (result.value) {
-        this.transactionService.return(this.transaction.id).subscribe(
+        this.transactionService.return(id).subscribe(
           (data: Transaction) => {
-            this.transaction = data; 
             console.log("saved transaction ",data)
             Swal.fire({
               position: 'center',
@@ -102,7 +124,6 @@ export class TransactionDetailsComponent implements OnInit {
           }
         );
       }});
-    
   }
 
 }

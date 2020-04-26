@@ -26,6 +26,9 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { ManageBooksComponent } from './component/manage-books/manage-books.component';
 import { ManageTransactionsComponent } from './component/manage-transactions/manage-transactions.component';
+import { UpdateMyProfileComponent } from './component/update-my-profile/update-my-profile.component';
+import { MyTransactionsComponent } from './component/my-transactions/my-transactions.component';
+import { ManageFinesComponent } from './component/manage-fines/manage-fines.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +49,10 @@ import { ManageTransactionsComponent } from './component/manage-transactions/man
     MyProfileComponent,
     ManageUsersComponent,
     ManageBooksComponent,
-    ManageTransactionsComponent
+    ManageTransactionsComponent,
+    UpdateMyProfileComponent,
+    MyTransactionsComponent,
+    ManageFinesComponent
   ],
   imports: [
     BrowserModule,

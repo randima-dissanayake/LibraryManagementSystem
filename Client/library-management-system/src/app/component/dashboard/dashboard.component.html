@@ -39,12 +39,15 @@
             </div>
 
             <!-- Pending Requests Card Example -->
-            <div class="col-xl-3 col-md-6 mb-4" (click)="changeSelectedTab($event,'User')">
+            <div class="col-xl-3 col-md-6 mb-4" (click)="changeSelectedTab($event,'User')" *ngIf="isAdmin">
                 <app-card [color]="userColor" [childItem]="user"></app-card>
             </div>
+            <div class="col-xl-3 col-md-6 mb-4" (click)="changeSelectedTab($event,'myProfile')" *ngIf="!isAdmin">
+              <app-card [color]="userColor" [childItem]="user"></app-card>
+          </div>
           </div>
 
-          <div class="d-sm-flex align-items-center justify-content-between mb-4">
+          <div class="d-sm-flex align-items-center justify-content-between mb-4" *ngIf="isAdmin">
             <h1 class="h3 mb-0 text-gray-800">{{selectedTab}}</h1>
             <button class="btn btn-lg btn-outline-primary" (click)="open()">Add {{selectedTab}}</button>
           </div>
@@ -62,8 +65,8 @@
               </div>
             </div>
             <div class="row" *ngIf="selectedTab == 'Fine'">
-              <div class="col-xl-3 col-md-6 mb-4" *ngFor= "let book of books">
-                <app-item-card [bookObj]="book"></app-item-card>
+              <div class="col-xl-3 col-md-6 mb-4" *ngFor= "let fine of fines">
+                <app-item-card [transactionObj]="fine"></app-item-card>
               </div>
             </div>
             <div class="row" *ngIf="selectedTab == 'User'">
@@ -71,6 +74,9 @@
                 <app-item-card [userObj]="user"></app-item-card>
               </div>
             </div>
+            <!-- <div class="row" *ngIf="selectedTab == 'myProfile'">
+                <app-my-profile></app-my-profile>
+            </div> -->
 
         </div>
         <!-- /.container-fluid -->

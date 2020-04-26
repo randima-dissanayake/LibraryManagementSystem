@@ -69,7 +69,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 //        httpSecurity.csrf().disable()
         httpSecurity.addFilterBefore(new CorsConfiguration(), ChannelProcessingFilter.class).cors().and().csrf().disable();
                 // dont authenticate this particular request
-                httpSecurity.authorizeRequests().antMatchers("/authenticate", "/register").permitAll().
+                httpSecurity.authorizeRequests().antMatchers("/authenticate", "/register","/delete/{id}").permitAll().
 //                httpSecurity.authorizeRequests().antMatchers("*").permitAll().
                 // all other requests need to be authenticated
                         anyRequest().authenticated();

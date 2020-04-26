@@ -23,8 +23,8 @@ export class TransactionService {
     return this.http.get<any[]>(this.baseUrl);
   }
 
-  getTransactionByUserId(userId){
-    return this.http.get<Transaction[]>(this.baseUrl);
+  getTransactionByUniversityId(uId){
+    return this.http.get<Transaction[]>(this.baseUrl+"/user/"+uId,this.httpOptions);
   }
 
   save(data){
@@ -34,4 +34,13 @@ export class TransactionService {
   renew(id){
     return this.http.get<Transaction>(this.baseUrl+"/renew/"+id,this.httpOptions);
   }
+
+  return(id){
+    return this.http.get<Transaction>(this.baseUrl+"/return/"+id,this.httpOptions);
+  }
+
+  fetchAllFinesNotReturned(){
+    return this.http.get<Transaction[]>(this.baseUrl+"/fine/notreturned",this.httpOptions)
+  }
+
 }

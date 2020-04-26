@@ -33,6 +33,9 @@ public class JwtUserDetailsService implements UserDetailsService {
     @Autowired
     private JwtTokenUtil jwtTokenUtil;
 
+    @Autowired
+    UserService userService;
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         libUser = userRepository.findByUsername(username);
@@ -45,16 +48,22 @@ public class JwtUserDetailsService implements UserDetailsService {
     }
 
     public LibUser save(LibUser libUser) throws Exception {
-        for (Role r : libUser.getRoles()) {
-            r.setUser(libUser);
-        }
-        return userRepository.save(libUser);
+//        LibUser user = userRepository.findByUsername(libUser.getUsername());
+//        if (user == null) {
+            for (Role r : libUser.getRoles()) {
+                r.setUser(libUser);
+            }
+            return userRepository.save(libUser);
+//        } else {
+//            return null;
+//        }
+
     }
 
     public String createAuthenticationToken(String username, String password) throws Exception {
         authenticate(username, password);
         final UserDetails userDetails = loadUserByUsername(username);
-        System.out.println("create Authentication token method    "+userDetails);
+        System.out.println("create Authentication token method    " + userDetails);
         return jwtTokenUtil.generateToken(userDetails);
     }
 
@@ -68,7 +77,22 @@ public class JwtUserDetailsService implements UserDetailsService {
         }
     }
 
-    public List<LibUser> getAll(){
+    public List<LibUser> getAll() {
         return userRepository.findAll();
+    }
+
+    public LibUser deleteUser(Integer uid) {
+        User user = userService.deleteUser(uid);
+        if (user!=null){
+            LibUser libUser = userRepository.findByUniversityId(uid);
+            libUser.setDelete(true);
+            return userRepository.save(libUser);
+        }
+        return null;
+    }
+
+    public void delete(Integer uid){
+        System.out.println("is delete   "+uid);
+        userRepository.deleteById(userRepository.findByUniversityId(uid).getId());
     }
 }

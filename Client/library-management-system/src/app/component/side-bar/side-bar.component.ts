@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/service/auth.service';
 
 @Component({
   selector: 'app-side-bar',
@@ -7,12 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SideBarComponent implements OnInit {
 
-  userName;
+  isAdmin;
   constructor() { 
-    this.userName = sessionStorage.getItem('username');
+    this.isAdmin = AuthService.isAdmin();
   }
 
   ngOnInit(): void {
+    console.log("role isadmin ",this.isAdmin)
   }
 
 }

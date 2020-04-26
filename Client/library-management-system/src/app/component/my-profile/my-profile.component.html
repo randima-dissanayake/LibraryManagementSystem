@@ -3,7 +3,7 @@
     <div id="content-wrapper" class="d-flex flex-column">
         <div id="content">
             <app-nav-bar></app-nav-bar>
-            <div class="container-fluid">
+            <div class="container-fluid" *ngIf="user!=null">
                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
                     <h1 class="h3 mb-0 text-gray-800">{{user.firstName}} {{user.lastName}}</h1>
                     <button class="btn btn-lg btn-outline-primary" (click)="editUserDetails()">Edit </button>
@@ -20,7 +20,23 @@
 									<div class="profile-info-name"> Email Address :  </div>
 
 									<div class="profile-info-value">
-										<span>{{user.userEmail}}</span>
+										<span>{{user.username}}</span>
+									</div>
+								</div>
+
+								<div class="profile-info-row">
+									<div class="profile-info-name"> User Role :  </div>
+
+									<div class="profile-info-value">
+										<span>{{user.role}}</span>
+									</div>
+								</div>
+								
+								<div class="profile-info-row">
+									<div class="profile-info-name"> Telephone Number :  </div>
+
+									<div class="profile-info-value">
+										<span>{{user.telephones[0].number}}  {{user.telephones[1].number}}</span>
 									</div>
                                 </div>
                                 
@@ -28,17 +44,17 @@
 									<div class="profile-info-name"> University Id :  </div>
 
 									<div class="profile-info-value">
-										<span>{{user.studentId}}</span>
+										<span>{{user.universityId}}</span>
 									</div>
 								</div>
 
-								<div class="profile-info-row">
+								<!-- <div class="profile-info-row">
 									<div class="profile-info-name"> Role :  </div>
 
 									<div class="profile-info-value">
-										<span>{{user.role}}</span>
+										<span>{{user.roles[0].role}}</span>
 									</div>
-								</div>
+								</div> -->
 
 								<!-- <div class="profile-info-row">
 									<div class="profile-info-name"> Age </div>

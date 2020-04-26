@@ -1,8 +1,11 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { User } from 'src/app/model/User';
 import { AuthService } from 'src/app/service/auth.service';
+import { PasswordStrengthValidator } from 'src/app/shared/password-strength.validators';
+import { UserService } from 'src/app/service/user.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-add-user',
@@ -12,45 +15,145 @@ import { AuthService } from 'src/app/service/auth.service';
 export class AddUserComponent implements OnInit {
 
   @Input() public user; 
-  checkoutForm;
+  registerForm;
   title;
-  constructor(public activeModal: NgbActiveModal, private formBuilder: FormBuilder, private authService: AuthService) { 
+  submitted = false
+  roles = [ 'USER', 'LIBRARIAN'];
+  constructor(public activeModal: NgbActiveModal, private formBuilder: FormBuilder, private authService: AuthService, private userService:UserService) { 
     
   }
 
   ngOnInit(): void {
     if(this.user!=null){
       this.title = "Edit User"
-      this.checkoutForm = this.formBuilder.group({
-        studentId : this.user.studentId,
-        firstName : this.user.firstName,
-        lastName : this.user.lastName,
-        userEmail : this.user.userEmail,
-        password : this.user.password,
-        role : this.user.role,
-        enabled : true
+      this.registerForm = this.formBuilder.group({
+        universityId : [this.user.universityId, Validators.required],
+        firstName : [this.user.firstName, Validators.required],
+        lastName : [this.user.lastName, Validators.required],
+        username : [this.user.username, [Validators.required,Validators.email]],
+        password : [this.user.password, Validators.required],
+        role : [this.user.roles[0].role, Validators.required],
+        telephone1 : [this.user.telephones[0].number, [Validators.required, Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")]] ,
+        telephone2 : [this.user.telephones[1].number,Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")]
       });
     } else {
       this.title = "Add User"
-      this.checkoutForm = this.formBuilder.group({
-        studentId : 0,
-        firstName : '',
-        lastName : '',
-        userEmail : '',
-        password : '',
-        role : '',
-        enabled : true
-      });
+      this.registerForm = this.formBuilder.group({
+        universityId : ['', Validators.required],
+      firstName : ['', Validators.required],
+      lastName : ['', Validators.required],
+      username : ['',[Validators.required, Validators.email]],
+      password : ['', [Validators.required,PasswordStrengthValidator]],
+      role:['USER',Validators.required],
+      telephone1 : ['', [Validators.required, Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")]] ,
+      telephone2 : ['',Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")] 
+    });
     }
   }
 
+  get f() { return this.registerForm.controls; }
+
   addNewUser(data){
-    console.log(data);
-    this.authService.save(data).subscribe(
-      (data: User)=>  console.log(data),
-      (error)=>console.log(error)
+    this.submitted = true;
+    if(this.title = "Add User"){
+    if (this.registerForm.valid) {
+      let userData = {
+        "firstName": this.f.firstName.value,
+        "lastName": this.f.lastName.value,
+        "username": this.f.username.value,
+        "universityId": this.f.universityId.value,
+        "password": this.f.password.value,
+        "telephones": [
+          {"number":this.f.telephone1.value},
+          {"number":this.f.telephone2.value} 
+        ] ,
+        "roles" : [
+          {"role" : this.f.role.value}
+        ],
+        "enable" : false ,
+        "locked" : false  
+      }
+    this.authService.save(userData).subscribe(
+      (data: User)=>  {
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: 'User Added Successfully',
+          showConfirmButton: true,
+          timer: 5500
+        })
+        this.activeModal.close();
+        this.registerForm.reset();
+        console.log(data)
+      },
+      (error)=>{
+        let errorMsg = "Something went Wrong";
+        if (error.status === 401) {
+          errorMsg = "Username Password mismatch";
+        }
+        console.log("error", error)
+        Swal.fire({
+          position: 'center',
+          icon: 'error',
+          title: errorMsg,
+          showConfirmButton: true,
+          timer: 5500
+        })
+        console.log(error)
+      }
     );
-    this.checkoutForm.reset();
+    
+  } 
+} else {
+    if (this.registerForm.valid) {
+      let userData = {
+        "id" : this.user.universityId,
+        "firstName": this.f.firstName.value,
+        "lastName": this.f.lastName.value,
+        "username": this.f.username.value,
+        "universityId": this.f.universityId.value,
+        "password": this.f.password.value,
+        "telephones": [
+          {"number":this.f.telephone1.value},
+          {"number":this.f.telephone2.value} 
+        ] ,
+        "roles" : [
+          {"role" : this.f.role.value}
+        ],
+        "enable" : false ,
+        "locked" : false  
+      }
+    this.userService.updateUser(userData).subscribe(
+      (data: User)=>  {
+        console.log(data)
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: 'User Updated Successfully',
+          showConfirmButton: true,
+          timer: 5000
+        })
+        this.activeModal.close();
+      },
+      (error)=>{
+        let errorMsg = "Something went Wrong";
+        if (error.status === 401) {
+          errorMsg = "Username Password mismatch";
+        }
+        console.log("error", error)
+        Swal.fire({
+          position: 'center',
+          icon: 'error',
+          title: errorMsg,
+          showConfirmButton: true,
+          timer: 5500
+        })
+        console.log(error)
+      }
+    );
+    
   }
+  }
+}
 
 }

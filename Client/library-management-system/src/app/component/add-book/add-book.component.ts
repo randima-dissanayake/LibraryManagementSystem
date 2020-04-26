@@ -1,9 +1,10 @@
 import { Component, OnInit, Input, EventEmitter } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BookService } from 'src/app/service/book.service';
 import { Book } from 'src/app/model/Book';
 import { FileUploader } from 'ng2-file-upload';
+import Swal from 'sweetalert2';
 
 const URL = 'http://localhost:3000/fileupload/';
 
@@ -14,21 +15,13 @@ const URL = 'http://localhost:3000/fileupload/';
 })
 export class AddBookComponent implements OnInit {
 
-  // @Input() name;
-  checkoutForm: any = FormGroup;
+  @Input() book;
+  registerForm: any = FormGroup;
   public bookFile: File;
-
+  title;
+  submitted = false
   constructor(public activeModal: NgbActiveModal, private bookService: BookService, private formBuilder: FormBuilder) {
-    this.checkoutForm = this.formBuilder.group({
-      title: '',
-      isbn: '',
-      author: '',
-      publisher: '',
-      year_of_publication: '',
-      location: '',
-      num_of_copies: 0,
-      price: ''
-    });
+    
   }
 
   public uploader: FileUploader = new FileUploader({
@@ -43,18 +36,120 @@ export class AddBookComponent implements OnInit {
     });
 
   ngOnInit(): void {
+    if(this.book == null){
+      this.title = "Add Book"
+      this.registerForm = this.formBuilder.group({
+        title: ['',Validators.required],
+        isbn: ['',Validators.required],
+        author: ['',Validators.required],
+        publisher: ['',Validators.required],
+        year_of_publication: ['',Validators.required],
+        location: ['',Validators.required],
+        num_of_copies: 0,
+        price: ['',Validators.required]
+      });
+    } else {
+      this.title = "Edit Book"
+      this.registerForm = this.formBuilder.group({
+        title: [this.book.title,Validators.required],
+        isbn: [this.book.isbn,Validators.required],
+        author: [this.book.author,Validators.required],
+        publisher: [this.book.publisher,Validators.required],
+        year_of_publication: [this.book.year_of_publication,Validators.required],
+        location: [this.book.location,Validators.required],
+        num_of_copies: this.book.num_of_copies,
+        price: [this.book.price,Validators.required]
+      });
+    }
   }
 
+  get f() { return this.registerForm.controls; }
+
   addNewBook(data: FormGroup) {
+    if(this.book ==null){
     const formData = new FormData();
     formData.append('book', JSON.stringify(data));
     formData.append('file', this.bookFile)
 
     this.bookService.save(formData).subscribe(
-      (data: Book) => console.log(data),
-      (error) => console.log(error)
+      (data: Book) => {
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: 'Book added Successfully',
+          showConfirmButton: true,
+          timer: 5000
+        })
+        this.registerForm.reset();
+        this.activeModal.close();
+        console.log(data)
+      },
+      (error) => {
+        let errorMsg = "Something went Wrong";
+        if (error.status === 401) {
+          error = "Unauthorized";
+        }
+        console.log("error", error)
+        Swal.fire({
+          position: 'center',
+          icon: 'error',
+          title: errorMsg,
+          showConfirmButton: true,
+          timer: 5500
+        })
+        console.log(error)
+      }
     );
-    this.checkoutForm.reset();
+    } else {
+     let bookData = {
+       "id" : this.book.id,
+        "title": this.f.title.value,
+        "isbn": this.f.isbn.value,
+        "author": this.f.author.value,
+        "publisher": this.f.publisher.value,
+        "year_of_publication": this.f.year_of_publication.value,
+        "location": this.f.location.value,
+        "num_of_copies": this.f.num_of_copies.value,
+        "price": this.f.price.value
+      }
+      console.log("bookData" ,bookData)
+      console.log("bookData             " ,this.book.book_image)
+      const formData = new FormData();
+    formData.append('book', JSON.stringify(bookData));
+    formData.append('file', this.book.book_image)
+
+    this.bookService.update(formData).subscribe(
+      (data: Book) => {
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: 'Book Updated Successfully',
+          showConfirmButton: true,
+          timer: 5000
+        })
+        this.registerForm.reset();
+        this.activeModal.close();
+        console.log(data)
+      },
+      (error) => {
+        let errorMsg = "Something went Wrong";
+        if (error.status === 401) {
+          errorMsg = "Unauthorized";
+        } else if(error.status === 400){
+          errorMsg = "Bad Request"
+        }
+        console.log("error", error)
+        Swal.fire({
+          position: 'center',
+          icon: 'error',
+          title: errorMsg,
+          showConfirmButton: true,
+          timer: 5500
+        })
+        console.log(error)
+      }
+    );
+    }
   }
 
   // onSelectFile(filelist:FileList) {

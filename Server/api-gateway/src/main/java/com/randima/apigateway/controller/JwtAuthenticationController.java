@@ -5,6 +5,8 @@ import com.randima.apigateway.model.*;
 import com.randima.apigateway.service.JwtUserDetailsService;
 import com.randima.apigateway.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -55,20 +57,32 @@ public class JwtAuthenticationController {
         LibUser libUser = new LibUser();
         libUser.setUsername(userModel.getUsername());
         libUser.setPassword(bcryptEncoder.encode(userModel.getPassword()));
-        libUser.setLocked(false);
+        libUser.setDelete(false);
         libUser.setRoles(userModel.getRoles());
         libUser.setUniversityId(userModel.getUniversityId());
-        userDetailsService.save(libUser);
+        LibUser savedLibUser = userDetailsService.save(libUser);
+        if (savedLibUser == null){
+            return null;
 
-        User user=new User();
-        user.setFirstName(userModel.getFirstName());
-        user.setLastName(userModel.getLastName());
-        user.setUniversityId(userModel.getUniversityId());
-        user.setUserEmail(userModel.getUsername());
-        user.setTelephones(userModel.getTelephones());
-        String token = userDetailsService.createAuthenticationToken(userModel.getUsername(),userModel.getPassword());
-        System.out.println("token    " +token);
-        return ResponseEntity.ok(userService.saveInUserService(user,token));
+        } else {
+            User user=new User();
+            user.setFirstName(userModel.getFirstName());
+            user.setLastName(userModel.getLastName());
+            user.setUniversityId(userModel.getUniversityId());
+            user.setUsername(userModel.getUsername());
+            user.setTelephones(userModel.getTelephones());
+            String token = userDetailsService.createAuthenticationToken(userModel.getUsername(),userModel.getPassword());
+            System.out.println("token    " +token);
+            User user_submitted = userService.saveInUserService(user,token);
+            System.out.println("user saved   "+user_submitted);
+            if (user_submitted==null){
+                userDetailsService.delete(userModel.getUniversityId());
+                return null;
+            } else {
+                return ResponseEntity.ok(user_submitted);
+            }
+        }
+
     }
 
 //    @PreAuthorize("hasRole('LIBRARIAN')")
@@ -76,6 +90,12 @@ public class JwtAuthenticationController {
     public List<LibUser> getAll() {
         return userDetailsService.getAll();
     }
+
+    @RequestMapping(value = "/delete/{uid}", method = RequestMethod.DELETE)
+    public LibUser deleteUser(@PathVariable Integer uid) {
+        return userDetailsService.deleteUser(uid);
+    }
+
 
 
 }

@@ -32,7 +32,7 @@
                         </thead>
                         <tbody>
                             <tr
-                                *ngFor="let book of books | filter:searchTerm | paginate: {itemsPerPage: 5, currentPage: p}">
+                                *ngFor="let book of books | filter:searchTerm | paginate: {itemsPerPage: 10, currentPage: p}">
                                 <!-- <th scope="row">{{ i }}</th> -->
                                 <td>
                                     <!-- <img [src]="'https://upload.wikimedia.org/wikipedia/commons/' + country.flag" class="mr-2" style="width: 20px">
@@ -61,8 +61,9 @@
                                     {{book.num_of_copies}}
                                 </td>
                                 <td>
-                                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                                    <i class="fa fa-trash" aria-hidden="true"></i>
+                                    <button class="btn" (click)=editBook(book) *ngIf="isAdmin"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
+                                    <button class="btn" (click)=deleteBook(book) *ngIf="isAdmin"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                                    <button class="btn" (click)=viewBook(book)><i class="fa fa-eye" aria-hidden="true"></i></button>
                                 </td>
                             </tr>
                         </tbody>

@@ -4,6 +4,7 @@ import { User } from 'src/app/model/User';
 import { Router } from '@angular/router';
 import { PasswordStrengthValidator } from 'src/app/shared/password-strength.validators';
 import { AuthService } from 'src/app/service/auth.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-register',
@@ -22,8 +23,8 @@ export class RegisterComponent implements OnInit {
       username : ['',[Validators.required, Validators.email]],
       password : ['', [Validators.required,PasswordStrengthValidator]],
       repeatPassword:['', Validators.required],
-      telephone1 : ['', Validators.required] ,
-      telephone2 : '' 
+      telephone1 : ['', [Validators.required,Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")]] ,
+      telephone2 : ['' ,Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")]
 
       // telephone : '',
       // role : "USER",
@@ -60,10 +61,26 @@ export class RegisterComponent implements OnInit {
     console.log("qqqq"+userData);
     this.authService.save(userData).subscribe(
       (data: User) => {
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: 'Registered Successfully',
+          showConfirmButton: true,
+          timer: 5000
+        })
         this.registerForm.reset();
         this.router.navigate(["dashboard"]);
         console.log(data)},
-      (error) => console.log(error)
+      (error) => {
+        Swal.fire({
+          position: 'center',
+          icon: 'error',
+          title: 'Somthing went Wrong',
+          showConfirmButton: true,
+          timer: 5500
+        })
+        console.log(error)
+      }
     );
     
   }

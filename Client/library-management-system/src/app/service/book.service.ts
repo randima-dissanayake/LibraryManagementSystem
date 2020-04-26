@@ -28,4 +28,13 @@ export class BookService {
   fetchAllBooks(){
     return this.http.get<Book[]>(this.baseUrl,this.httpOptions);
   }
+
+  update(formData : FormData){
+    console.log("book service"+formData)
+    return this.http.put(this.baseUrl,formData);
+  }
+
+  delete(id){
+    return this.http.delete(this.baseUrl+"/delete/"+id);
+  }
 }

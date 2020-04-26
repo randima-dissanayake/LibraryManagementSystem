@@ -1,38 +1,55 @@
 <div class="modal-header">
-  <h4 class="modal-title">Add book</h4>
+  <h4 class="modal-title">{{title}}</h4>
   <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
     <span aria-hidden="true">&times;</span>
   </button>
 </div>
 <div class="modal-body">
 
-  <form [formGroup]="checkoutForm"  (ngSubmit)="addNewBook(checkoutForm.value)">
+  <form [formGroup]="registerForm"  (ngSubmit)="addNewBook(registerForm.value)">
     <div class="form-group">
       <label for="exampleInputEmail1">Title</label>
       <input type="text" class="form-control" formControlName="title" id="title" aria-describedby="emailHelp"
-        placeholder="Enter Title">
-      <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
+        placeholder="Enter Title" [ngClass]="{ 'is-invalid': submitted && f.title.errors }">
+        <div *ngIf="submitted && f.title.errors" class="invalid-feedback">
+          <div *ngIf="f.title.errors.required">Title is required</div>
+        </div>
     </div>
     <div class="form-group">
       <label for="exampleInputPassword1">ISBN</label>
-      <input type="text" class="form-control" formControlName="isbn" id="isbn" placeholder="ISBN">
+      <input type="text" class="form-control" formControlName="isbn" id="isbn" placeholder="ISBN" [ngClass]="{ 'is-invalid': submitted && f.isbn.errors }">
+      <div *ngIf="submitted && f.isbn.errors" class="invalid-feedback">
+        <div *ngIf="f.isbn.errors.required">ISBN is required</div>
+      </div>
     </div>
     <div class="form-group">
       <label for="exampleInputPassword1">Author</label>
-      <input type="text" class="form-control" formControlName="author" id="author" placeholder="Author">
+      <input type="text" class="form-control" formControlName="author" id="author" placeholder="Author" [ngClass]="{ 'is-invalid': submitted && f.author.errors }">
+      <div *ngIf="submitted && f.author.errors" class="invalid-feedback">
+        <div *ngIf="f.author.errors.required">Author is required</div>
+      </div>
     </div>
     <div class="form-group">
       <label for="exampleInputPassword1">Publisher</label>
-      <input type="text" class="form-control" formControlName="publisher" id="publisher" placeholder="Publisher">
+      <input type="text" class="form-control" formControlName="publisher" id="publisher" placeholder="Publisher" [ngClass]="{ 'is-invalid': submitted && f.publisher.errors }">
+      <div *ngIf="submitted && f.publisher.errors" class="invalid-feedback">
+        <div *ngIf="f.publisher.errors.required">Publisher is required</div>
+      </div>
     </div>
     <div class="form-group">
       <label for="exampleInputPassword1">Year of publication</label>
       <input type="text" class="form-control" formControlName="year_of_publication" id="year_of_publication"
-        placeholder="Year of publication">
+        placeholder="Year of publication" [ngClass]="{ 'is-invalid': submitted && f.year_of_publication.errors }">
+        <div *ngIf="submitted && f.year_of_publication.errors" class="invalid-feedback">
+          <div *ngIf="f.year_of_publication.errors.required">Year of publication is required</div>
+        </div>
     </div>
     <div class="form-group">
       <label for="exampleInputPassword1">Location</label>
-      <input type="text" class="form-control" formControlName="location" id="location" placeholder="Location">
+      <input type="text" class="form-control" formControlName="location" id="location" placeholder="Location" [ngClass]="{ 'is-invalid': submitted && f.location.errors }">
+      <div *ngIf="submitted && f.location.errors" class="invalid-feedback">
+        <div *ngIf="f.location.errors.required">Location is required</div>
+      </div>
     </div>
     <div class="form-group">
       <label for="exampleInputPassword1">Number of copies</label>
@@ -41,7 +58,10 @@
     </div>
     <div class="form-group">
       <label for="exampleInputPassword1">Price</label>
-      <input type="text" class="form-control" formControlName="price" id="price" placeholder="Price">
+      <input type="text" class="form-control" formControlName="price" id="price" placeholder="Price" [ngClass]="{ 'is-invalid': submitted && f.price.errors }">
+      <div *ngIf="submitted && f.price.errors" class="invalid-feedback">
+        <div *ngIf="f.price.errors.required">Price is required</div>
+      </div>
     </div>
     <div class="form-group">
       <label for="exampleInputPassword1">Image</label>

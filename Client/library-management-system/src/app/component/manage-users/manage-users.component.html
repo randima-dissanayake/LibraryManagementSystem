@@ -30,7 +30,7 @@
                         </thead>
                         <tbody>
                             <tr
-                                *ngFor="let user of users | filter:searchTerm | paginate: {itemsPerPage: 5, currentPage: p};let i=index">
+                                *ngFor="let user of users | filter:searchTerm | paginate: {itemsPerPage: 10, currentPage: p};let i=index">
                                 <th scope="row">{{ i }}</th>
                                 <td>
                                     <!-- <img [src]="'https://upload.wikimedia.org/wikipedia/commons/' + country.flag" class="mr-2" style="width: 20px">
@@ -40,18 +40,23 @@
 
                                 <td>
                                     <!-- <ngb-highlight [result]="country.area | number" [term]="service.searchTerm"></ngb-highlight> -->
-                                    {{user.studentId}}
+                                    {{user.universityId}}
                                 </td>
                                 <td>
                                     <!-- <ngb-highlight [result]="country.population | number" [term]="service.searchTerm"></ngb-highlight> -->
-                                    {{user.userEmail}}
+                                    {{user.username}}
                                 </td>
                                 <td>
                                     {{user.telephones[0].number}}  {{user.telephones[1].number}}
                                 </td>
                                 <td>
-                                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                                    <i class="fa fa-trash" aria-hidden="true"></i>
+                                    <div class="custom-control custom-switch">
+                                        <input type="checkbox" class="custom-control-input" id="customSwitches">
+                                      </div>
+                                </td>
+                                <td>
+                                    <button class="btn" (click)=editUser(user)><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
+                                    <button class="btn" (click)=deleteUser(user)><i class="fa fa-trash" aria-hidden="true"></i></button>
                                 </td>
                             </tr>
                         </tbody>

@@ -1,0 +1,88 @@
+<div class="modal-header">
+    <h4 class="modal-title">{{title}}</h4>
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+  
+    <form class="user" [formGroup]="registerForm" (ngSubmit)="addNewUser(registerForm.value)">
+      <div class="form-group row">
+        <div class="col-sm-6 mb-3 mb-sm-0">
+          <input type="text" formControlName="firstName" class="form-control form-control-user" id="firstName"
+            placeholder="First Name" [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }">
+          <div *ngIf="submitted && f.firstName.errors" class="invalid-feedback">
+            <div *ngIf="f.firstName.errors.required">First Name is required</div>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <input type="text" formControlName="lastName" class="form-control form-control-user" id="lastName"
+            placeholder="Last Name" [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }">
+          <div *ngIf="submitted && f.lastName.errors" class="invalid-feedback">
+            <div *ngIf="f.lastName.errors.required">Last Name is required</div>
+          </div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-sm-6 mb-3 mb-sm-0">
+          <input type="email" formControlName="username" class="form-control form-control-user" id="username"
+            placeholder="Email Address" [ngClass]="{ 'is-invalid': submitted && f.username.errors }">
+          <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
+            <div *ngIf="f.username.errors.required">Email is required</div>
+            <div *ngIf="f.username.errors.email">Email must be a valid email address</div>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <input type="number" formControlName="universityId" class="form-control form-control-user" id="universityId"
+            placeholder="University Id" [ngClass]="{ 'is-invalid': submitted && f.universityId.errors }">
+          <div *ngIf="submitted && f.universityId.errors" class="invalid-feedback">
+            <div *ngIf="f.universityId.errors.required">Student Id is required</div>
+          </div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-sm-6 mb-3 mb-sm-0">
+          <input type="text" formControlName="telephone1" class="form-control form-control-user" id="telephone1"
+            placeholder="Telephone Number(Required)" [ngClass]="{ 'is-invalid': submitted && f.telephone1.errors }">
+          <div *ngIf="submitted && f.telephone1.errors" class="invalid-feedback">
+            <div *ngIf="f.telephone1.errors.required">Telephone Number is required</div>
+            <div *ngIf="f.telephone1.errors.pattern">Please, Enter 10 digit Mobile Number.</div>
+          </div>
+        </div>
+        <div class="col-sm-6 mb-3 mb-sm-0">
+          <input type="text" formControlName="telephone2" class="form-control form-control-user" id="telephone2"
+            placeholder="Telephone Number(If any)" [ngClass]="{ 'is-invalid': submitted && f.telephone2.errors }">
+            <div *ngIf="submitted && f.telephone2.errors" class="invalid-feedback">
+              <div *ngIf="f.telephone2.errors.required">Telephone Number is required</div>
+              <div *ngIf="f.telephone2.errors.pattern">Please, Enter 10 digit Mobile Number.</div>
+            </div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <!-- <div class="col-sm-6 mb-3 mb-sm-0">
+          <input type="password" formControlName="password" class="form-control form-control-user" id="password"
+            placeholder="Password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }">
+          <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+            <div *ngIf="f.password.errors.required">Password is required</div>
+          </div>
+          <div class="invalid-feedback" *ngIf="registerForm.get('password').hasError('passwordStrength')">
+            {{registerForm.get('password').errors['passwordStrength']}}
+          </div>
+        </div> -->
+        <div class="col-sm-6">
+          <select class="form-control" formControlName="role" #data [ngClass]="{ 'is-invalid': submitted && f.role.errors }" disabled>
+            <option [ngValue]="null" disabled>Choose your profile</option>
+            <option *ngFor="let data of roles" [ngValue]="data">{{data}}</option>
+          </select>
+          <div *ngIf="submitted && f.role.errors" class="invalid-feedback">
+            <div *ngIf="f.role.errors.required">Select Role</div>
+          </div>
+        </div>
+        </div>
+        <button type="submit" class="btn btn-primary btn-user btn-block">Submit</button>
+    </form>
+  
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Close</button>
+  </div>

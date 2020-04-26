@@ -12,7 +12,7 @@ export class AppComponent {
 export class AppConstants {
   public static get baseURL(): string { return "http://localhost:8082/"; }
   // public static get baseURL(): string { return "http://localhost:"; }
-  public static get baseURLUser(): string { return "http://192.168.8.103:8181/"; }
-  public static get baseURLBook(): string { return "http://192.168.8.103:8080/"; }
-  public static get baseURLTransaction(): string { return "http://192.168.8.103:8081/"; }
+  public static get baseURLUser(): string { return "http://192.168.8.101:8181/"; }
+  public static get baseURLBook(): string { return "http://192.168.8.101:8080/"; }
+  public static get baseURLTransaction(): string { return "http://192.168.8.101:8081/"; }
 }

@@ -6,7 +6,7 @@ public class User {
     private String firstName;
     private String lastName;
     private Integer universityId;
-    private String userEmail;
+    private String username;
     private List<Telephone> telephones;
 
     public String getFirstName() {
@@ -33,12 +33,12 @@ public class User {
         this.universityId = universityId;
     }
 
-    public String getUserEmail() {
-        return userEmail;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUserEmail(String userEmail) {
-        this.userEmail = userEmail;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public List<Telephone> getTelephones() {

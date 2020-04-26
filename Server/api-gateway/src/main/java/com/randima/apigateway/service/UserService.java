@@ -28,7 +28,18 @@ public class UserService {
 //        ResponseEntity<User> response = restTemplate
 //                .exchange("http://localhost:8082/user", HttpMethod.POST, request, User.class);
         ResponseEntity<User> response = restTemplate
-                .exchange("http://192.168.8.103:8181/user", HttpMethod.POST, request, User.class);
+                .exchange("http://192.168.8.101:8181/user", HttpMethod.POST, request, User.class);
+        return response.getBody();
+    }
+
+    public User deleteUser(Integer uid){
+        RestTemplate restTemplate = new RestTemplate();
+        HttpHeaders httpHeaders=new HttpHeaders();
+        HttpEntity<String> request = new HttpEntity<>("",httpHeaders);
+//        ResponseEntity<User> response = restTemplate
+//                .exchange("http://localhost:8082/user", HttpMethod.POST, request, User.class);
+        ResponseEntity<User> response = restTemplate
+                .exchange("http://192.168.8.101:8181/user/delete/"+uid, HttpMethod.DELETE, request, User.class);
         return response.getBody();
     }
 

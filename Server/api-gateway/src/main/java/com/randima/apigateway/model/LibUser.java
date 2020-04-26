@@ -14,13 +14,14 @@ public class LibUser {
 
     @NaturalId
     @Email(message = "*Please provide a valid username")
+    @Column(unique = true)
 //    @NotEmpty(message = "*Please provide an username")
     private String username;
     //    @NotEmpty(message = "*Please provide your firstName")
     private String password;
     private Integer universityId;
     private Integer active = 1;
-    private boolean locked;
+    private boolean isDelete = false;
     private boolean enabled = true;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user",cascade = CascadeType.ALL, orphanRemoval=true)
@@ -58,14 +59,6 @@ public class LibUser {
         this.active = active;
     }
 
-    public boolean isLocked() {
-        return locked;
-    }
-
-    public void setLocked(boolean locked) {
-        this.locked = locked;
-    }
-
     public boolean isEnabled() {
         return enabled;
     }
@@ -88,5 +81,13 @@ public class LibUser {
 
     public void setUniversityId(Integer universityId) {
         this.universityId = universityId;
+    }
+
+    public boolean isDelete() {
+        return isDelete;
+    }
+
+    public void setDelete(boolean delete) {
+        isDelete = delete;
     }
 }

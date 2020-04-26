@@ -13,9 +13,21 @@ const helper = new JwtHelperService();
   providedIn: 'root'
 })
 export class AuthService {
+  static isAdmin(): any {
+    if(JSON.parse(sessionStorage.getItem('user')).roles[0].role =="LIBRARIAN"){
+      return true;
+     }
+    return false;
+  }
 
   authenticationState = new BehaviorSubject(false);
   baseUrl
+  private httpOptions = {
+    headers: new HttpHeaders({
+      'Authorization':  sessionStorage.getItem('token'),
+      'Content-Type': 'application/json'
+    })
+  };
   constructor(private httpClient:HttpClient, private router: Router) { 
     this.baseUrl = AppConstants.baseURL;
     this.checkToken();
@@ -27,7 +39,6 @@ export class AuthService {
     return this.httpClient.post<any>(this.baseUrl+"authenticate",formData,{headers: headers}).pipe(
      map(
       userData => {
-       console.log("eeeeeeeeeeeee",userData.libUser)
        sessionStorage.setItem('token', 'Bearer '+userData.token)
        sessionStorage.setItem('user', JSON.stringify(userData.libUser))
        sessionStorage.setItem('username', userData.libUser.username)
@@ -68,12 +79,16 @@ export class AuthService {
          this.authenticationState.next(false);
        }
      } else { 
-       this.router.navigate(['login']);
+       this.router.navigate(['']);
      }
  }
 
  save(data){
   console.log("rrrrrrrrrrrrrrr",data)
   return this.httpClient.post<User>(this.baseUrl+"register",data);
+}
+
+delete(id){
+  return this.httpClient.delete(this.baseUrl+"delete/"+id,this.httpOptions);
 }
 }

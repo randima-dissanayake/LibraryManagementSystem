@@ -10,6 +10,8 @@ import { AddBookComponent } from '../add-book/add-book.component';
 import { AddUserComponent } from '../add-user/add-user.component';
 import { DomSanitizer } from '@angular/platform-browser';
 import { AddTransactionComponent } from '../add-transaction/add-transaction.component';
+import Swal from 'sweetalert2';
+import { AuthService } from 'src/app/service/auth.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -26,19 +28,24 @@ export class DashboardComponent implements OnInit {
   books:Array<Book>=[];
   transactions: Array<Transaction>=[];
   users: Array<User>=[];
+  fines: Array<Transaction> = [];
 
-  selectedTab = this.book;
-  bookColor:string = '#fff'; 
+  selectedTab = 'Book';
+  bookColor:string = '#17a2b8'; 
   transactionColor: string = '#fff'; 
   fineColor: string = '#fff'; 
   userColor : string = '#fff';
+
+  isAdmin
 
   constructor(private bookService: BookService, 
     private transactionService : TransactionService, 
     private userService: UserService, 
     private modalService: NgbModal,
     private sanitizer: DomSanitizer
-    ) { }
+    ) { 
+      this.isAdmin = AuthService.isAdmin()
+    }
 
   ngOnInit(): void {
     this.fetchAllBooks();
@@ -64,22 +71,80 @@ export class DashboardComponent implements OnInit {
       this.transactionColor = '#fff'
       this.fineColor = '#fff'; 
       this.fetchAllUsers();
+    } else if(this.selectedTab == 'myProfile'){
+      this.userColor = '#17a2b8'
+      this.bookColor = '#fff'
+      this.transactionColor = '#fff'
+      this.fineColor = '#fff';
+    } else if(this.selectedTab == 'Fine'){
+      this.userColor = '#fff'
+      this.bookColor = '#fff'
+      this.transactionColor = '#fff'
+      this.fineColor = '#17a2b8';
+      this.fetchAllFines();
     }
+
   }
 
   fetchAllBooks(){
     this.bookService.fetchAllBooks().subscribe(
       (data: Book[])=> {
         this.books = data
-      },(error)=>console.log(error)
+      },(error)=>{
+        let errorMsg = "Something went Wrong";
+        if (error.status === 401) {
+          errorMsg = "Unauthorized";
+        } 
+        console.log("error", error)
+        Swal.fire({
+          position: 'center',
+          icon: 'error',
+          title: errorMsg,
+          showConfirmButton: true,
+          timer: 5500
+        })
+        console.log(error)
+      }
     )
   } 
 
   fetchAllTransactions(){
+    if(this.isAdmin){
     this.transactionService.fetchAllTransactions().subscribe(
       (data: Transaction[])=> this.transactions = data,
-      (error)=>console.log(error)
-    )
+      (error)=>{
+        let errorMsg = "Something went Wrong";
+        if (error.status === 401) {
+          errorMsg = "Unauthorized";
+        } 
+        console.log("error", error)
+        Swal.fire({
+          position: 'center',
+          icon: 'error',
+          title: errorMsg,
+          showConfirmButton: true,
+          timer: 5500
+        })
+      }
+    )} else {
+      this.transactionService.getTransactionByUniversityId(JSON.parse(sessionStorage.getItem('user')).universityId).subscribe(
+        (data: Transaction[])=> this.transactions = data,
+      (error)=>{
+        let errorMsg = "Something went Wrong";
+        if (error.status === 401) {
+          errorMsg = "Unauthorized";
+        } 
+        console.log("error", error)
+        Swal.fire({
+          position: 'center',
+          icon: 'error',
+          title: errorMsg,
+          showConfirmButton: true,
+          timer: 5500
+        })
+      }
+      )
+    }
   }
 
   fetchAllUsers(){
@@ -88,8 +153,75 @@ export class DashboardComponent implements OnInit {
         if(data!=null)
           this.users = data
       },
-      (error)=>console.log(error)
+      (error)=>{
+        let errorMsg = "Something went Wrong";
+        if (error.status === 401) {
+          errorMsg = "Unauthorized";
+        } 
+        console.log("error", error)
+        Swal.fire({
+          position: 'center',
+          icon: 'error',
+          title: errorMsg,
+          showConfirmButton: true,
+          timer: 5500
+        })
+      }
     )
+  }
+
+  fetchAllFines(){
+    if(this.isAdmin){
+    this.transactionService.fetchAllFinesNotReturned().subscribe(
+      (data: any)=> {
+        // for (let i = 0; i < data.length; i++) {
+        //   if(data[i].fine > 0){
+        //     this.fines.push(data[i]);
+        //   }
+        // }
+        this.fines = data;
+      },
+      (error)=>{
+        let errorMsg = "Something went Wrong";
+        if (error.status === 401) {
+          errorMsg = "Unauthorized";
+        } 
+        console.log("error", error)
+        Swal.fire({
+          position: 'center',
+          icon: 'error',
+          title: errorMsg,
+          showConfirmButton: true,
+          timer: 5500
+        })
+      }
+    )
+    } else {
+      this.fines = []
+      this.transactionService.getTransactionByUniversityId(JSON.parse(sessionStorage.getItem('user')).universityId).subscribe(
+        (data: Transaction[])=> {
+          for (let i = 0; i < data.length; i++) {
+            if(data[i].fine>0){
+              this.fines.push(data[i]);
+            }
+          }
+        },
+      (error)=>{
+        let errorMsg = "Something went Wrong";
+        if (error.status === 401) {
+          errorMsg = "Unauthorized";
+        } 
+        console.log("error", error)
+        Swal.fire({
+          position: 'center',
+          icon: 'error',
+          title: errorMsg,
+          showConfirmButton: true,
+          timer: 5500
+        })
+      }
+      )
+    }
   }
 
   open() {
