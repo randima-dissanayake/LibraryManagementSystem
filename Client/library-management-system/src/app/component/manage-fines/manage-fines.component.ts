@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Transaction } from 'src/app/model/Transaction';
 import Swal from 'sweetalert2';
 import { TransactionService } from 'src/app/service/transaction.service';
+import { AuthService } from 'src/app/service/auth.service';
 
 @Component({
   selector: 'app-manage-fines',
@@ -10,26 +11,29 @@ import { TransactionService } from 'src/app/service/transaction.service';
 })
 export class ManageFinesComponent implements OnInit {
 
+  isAdmin
   transactions: Array<Transaction>=[];
   p: number = 1;
   searchTerm;
-  constructor(private transactionService:TransactionService) { }
+  constructor(private transactionService:TransactionService) { 
+    this.isAdmin = AuthService.isAdmin();
+  }
 
   ngOnInit(): void {
     this.fetchAllFines();
   }
 
   fetchAllFines(){
-this.transactions = []
-    this.transactionService.fetchAllTransactions().subscribe(
+    if(this.isAdmin){
+      this.transactions=[]
+    this.transactionService.fetchAllFinesNotReturned().subscribe(
       (data: any)=> {
-        if(data!=null)
         for (let i = 0; i < data.length; i++) {
-          if(data[i].fine>0 && !data[i].returned){
+          if(!data[i].returned && data[i].fine > 0){
             this.transactions.push(data[i]);
           }
         }
-          // this.transactions = data
+        // this.fines = data;
       },
       (error)=>{
         let errorMsg = "Something went Wrong";
@@ -44,9 +48,35 @@ this.transactions = []
           showConfirmButton: true,
           timer: 5500
         })
-        console.log(error)
       }
     )
+    } else {
+      this.transactions = []
+      this.transactionService.getTransactionByUniversityId(JSON.parse(sessionStorage.getItem('user')).universityId).subscribe(
+        (data: Transaction[])=> {
+          for (let i = 0; i < data.length; i++) {
+            if(!data[i].returned && data[i].fine>0){
+              this.transactions.push(data[i]);
+            }
+          }
+        },
+      (error)=>{
+        let errorMsg = "Something went Wrong";
+        if (error.status === 401) {
+          errorMsg = "Unauthorized";
+        } 
+        console.log("error", error)
+        Swal.fire({
+          position: 'center',
+          icon: 'error',
+          title: errorMsg,
+          showConfirmButton: true,
+          timer: 5500
+        })
+      }
+      )
+    }
+  
   }
 
   

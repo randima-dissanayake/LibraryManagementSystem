@@ -46,7 +46,9 @@ export class AddBookComponent implements OnInit {
         year_of_publication: ['',Validators.required],
         location: ['',Validators.required],
         num_of_copies: 0,
-        price: ['',Validators.required]
+        price: ['',Validators.required],
+        enabled: true,
+        isDelete: false
       });
     } else {
       this.title = "Edit Book"

@@ -9,14 +9,14 @@
     <form class="user" [formGroup]="registerForm" (ngSubmit)="addNewUser(registerForm.value)">
       <div class="form-group row">
         <div class="col-sm-6 mb-3 mb-sm-0">
-          <input type="text" formControlName="firstName" class="form-control form-control-user" id="firstName"
+          <input type="text" formControlName="firstName" class="form-control" id="firstName"
             placeholder="First Name" [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }">
           <div *ngIf="submitted && f.firstName.errors" class="invalid-feedback">
             <div *ngIf="f.firstName.errors.required">First Name is required</div>
           </div>
         </div>
         <div class="col-sm-6">
-          <input type="text" formControlName="lastName" class="form-control form-control-user" id="lastName"
+          <input type="text" formControlName="lastName" class="form-control" id="lastName"
             placeholder="Last Name" [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }">
           <div *ngIf="submitted && f.lastName.errors" class="invalid-feedback">
             <div *ngIf="f.lastName.errors.required">Last Name is required</div>
@@ -25,7 +25,7 @@
       </div>
       <div class="form-group row">
         <div class="col-sm-6 mb-3 mb-sm-0">
-          <input type="email" formControlName="username" class="form-control form-control-user" id="username"
+          <input type="email" formControlName="username" class="form-control" id="username"
             placeholder="Email Address" [ngClass]="{ 'is-invalid': submitted && f.username.errors }">
           <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
             <div *ngIf="f.username.errors.required">Email is required</div>
@@ -33,7 +33,7 @@
           </div>
         </div>
         <div class="col-sm-6">
-          <input type="number" formControlName="universityId" class="form-control form-control-user" id="universityId"
+          <input type="number" formControlName="universityId" class="form-control" id="universityId"
             placeholder="University Id" [ngClass]="{ 'is-invalid': submitted && f.universityId.errors }">
           <div *ngIf="submitted && f.universityId.errors" class="invalid-feedback">
             <div *ngIf="f.universityId.errors.required">Student Id is required</div>
@@ -42,7 +42,7 @@
       </div>
       <div class="form-group row">
         <div class="col-sm-6 mb-3 mb-sm-0">
-          <input type="text" formControlName="telephone1" class="form-control form-control-user" id="telephone1"
+          <input type="text" formControlName="telephone1" class="form-control" id="telephone1"
             placeholder="Telephone Number(Required)" [ngClass]="{ 'is-invalid': submitted && f.telephone1.errors }">
           <div *ngIf="submitted && f.telephone1.errors" class="invalid-feedback">
             <div *ngIf="f.telephone1.errors.required">Telephone Number is required</div>
@@ -50,7 +50,7 @@
           </div>
         </div>
         <div class="col-sm-6 mb-3 mb-sm-0">
-          <input type="text" formControlName="telephone2" class="form-control form-control-user" id="telephone2"
+          <input type="text" formControlName="telephone2" class="form-control" id="telephone2"
             placeholder="Telephone Number(If any)" [ngClass]="{ 'is-invalid': submitted && f.telephone2.errors }">
             <div *ngIf="submitted && f.telephone2.errors" class="invalid-feedback">
               <div *ngIf="f.telephone2.errors.required">Telephone Number is required</div>
@@ -60,7 +60,7 @@
       </div>
       <div class="form-group row">
         <!-- <div class="col-sm-6 mb-3 mb-sm-0">
-          <input type="password" formControlName="password" class="form-control form-control-user" id="password"
+          <input type="password" formControlName="password" class="form-control" id="password"
             placeholder="Password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }">
           <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
             <div *ngIf="f.password.errors.required">Password is required</div>
@@ -79,10 +79,7 @@
           </div>
         </div>
         </div>
-        <button type="submit" class="btn btn-primary btn-user btn-block">Submit</button>
+        <button type="submit" class="btn btn-primary btn-block">Submit</button>
     </form>
   
-  </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Close</button>
   </div>

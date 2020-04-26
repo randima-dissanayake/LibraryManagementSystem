@@ -8,17 +8,17 @@
 
       <div class="container-fluid">
         <div class="card-body d-flex ">
-          <div class="text-center">
+          <div class="text-center row">
             <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 25rem;"
               src="data:image/jpeg;base64,{{transaction.book.book_image}}" alt="">
           </div>
-          <div class="px-3 px-sm-4 mt-3 mb-4">
+          <div class="row px-3 px-sm-4 mt-3 mb-4">
             <div>
-              <div>Borrowed by {{transaction.user.firstName}} {{transaction.user.lastName}}</div><br>
+              <div *ngIf="transaction.user !==null">Borrowed by {{transaction.user.firstName}} {{transaction.user.lastName}}</div><br>
               <div>Checkin date : {{transaction.checkin_date}}</div><br>
               <div>Checkout_date : {{transaction.checkout_date}}</div><br>
               <div>Fine : {{transaction.fine}}</div><br>
-              <div>{{transaction.renew_flag}} time renewed</div><br>
+              <div *ngIf="transaction.renew_flag ==1">renewed</div><br>
             </div>
           </div>
           <!-- <div class="px-3 px-sm-4 mt-3 mb-4">
@@ -30,7 +30,7 @@
       </div>
   
     </div>
-    <div class="modal-footer">
+    <div class="modal-footer" *ngIf="transaction.returned">
       <div class="px-3 px-sm-4 mt-3 mb-4">
         <button class="btn btn-lg " (click)="renewBook()">Click to Renew </button></div>
 
