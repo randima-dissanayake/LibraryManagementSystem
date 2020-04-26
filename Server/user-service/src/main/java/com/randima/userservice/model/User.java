@@ -17,7 +17,8 @@ public class User {
     private String lastName;
     @Column(unique = true)
     private Integer universityId;
-    private String userEmail;
+    @Column(unique = true)
+    private String username;
     private boolean isDelete = false;
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user",cascade = CascadeType.ALL, orphanRemoval=true)
     private List<Telephone> telephones;
@@ -29,7 +30,7 @@ public class User {
         this.universityId = user.getUniversityId();
         this.firstName = user.getFirstName();
         this.lastName = user.getLastName();
-        this.userEmail = user.getUserEmail();
+        this.username = user.getUsername();
         this.telephones = user.getTelephones();
     }
     public  User(){
@@ -58,14 +59,6 @@ public class User {
 
     public void setUniversityId(Integer universityId) {
         this.universityId = universityId;
-    }
-
-    public String getUserEmail() {
-        return userEmail;
-    }
-
-    public void setUserEmail(String userEmail) {
-        this.userEmail = userEmail;
     }
 
     public List<Book> getCurrentBookList() {
@@ -98,5 +91,13 @@ public class User {
 
     public void setDelete(boolean delete) {
         isDelete = delete;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 }

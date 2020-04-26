@@ -25,6 +25,8 @@ public class TransactionController {
         transaction.setCheckout_date(LocalDate.now().plusDays(14));
         transaction.setRenew_flag(0);
         transaction.setFine(0);
+        transaction.setReturned(false);
+        transaction.setReturnedDate(null);
         return transactionService.saveTransaction(transaction);
     }
 
@@ -39,8 +41,8 @@ public class TransactionController {
     }
 
     @RequestMapping(value = "/user/{id}",method = RequestMethod.GET)
-    public List<Transaction> findByUserId(@PathVariable Integer id){
-        return transactionService.findByUserId(id);
+    public List<Transaction> findByUniversityId(@PathVariable Integer id){
+        return transactionService.findByUniversityId(id);
     }
 
     @RequestMapping(value = "/user/currentbooks/{id}",method = RequestMethod.GET)
@@ -60,11 +62,17 @@ public class TransactionController {
 
     @RequestMapping(value = "/renew/{id}",method = RequestMethod.GET)
     public Transaction updateRenewFlag(@PathVariable Integer id){
-        Transaction transaction= transactionService.findById(id);
-        transaction.setCheckout_date(transaction.getCheckin_date().plusDays(21));
-        transaction.setRenew_flag(1);
-        return transactionService.updateTransaction(transaction);
+        return transactionService.renewTransaction(id);
     }
 
+    @RequestMapping(value = "/return/{id}",method = RequestMethod.GET)
+    public Transaction updateReturnBook(@PathVariable Integer id){
+        return transactionService.returnBook(id);
+    }
+
+    @RequestMapping(value = "/fine/notreturned",method = RequestMethod.GET)
+    public List<Transaction> getFineNotReturned(){
+        return transactionService.getFineNotReturned();
+    }
 
 }

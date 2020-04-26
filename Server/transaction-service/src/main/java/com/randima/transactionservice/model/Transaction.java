@@ -19,6 +19,8 @@ public class Transaction {
     private LocalDate checkout_date;
     private Integer renew_flag;
     private Integer fine;
+    private boolean isReturned;
+    private LocalDate returnedDate;
     @Transient
     private User user;
     @Transient
@@ -96,4 +98,19 @@ public class Transaction {
         this.fine = fine;
     }
 
+    public boolean isReturned() {
+        return isReturned;
+    }
+
+    public void setReturned(boolean returned) {
+        isReturned = returned;
+    }
+
+    public LocalDate getReturnedDate() {
+        return returnedDate;
+    }
+
+    public void setReturnedDate(LocalDate returnedDate) {
+        this.returnedDate = returnedDate;
+    }
 }

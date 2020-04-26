@@ -9,7 +9,7 @@ import java.util.List;
 
 
 public interface BookRepository extends JpaRepository<Book,Integer> {
-    @Query("SELECT u FROM Book u WHERE u.isDelete = false")
+    @Query(value = "SELECT * FROM Book u WHERE u.isDelete = false",nativeQuery = true)
     List<Book> findAll();
 
 }

@@ -14,4 +14,8 @@ public interface BookService {
     Book updateBook(Book book);
     List<User> getUserList(Integer id);
     List<Book> findAll();
+    Book borrowBook(Integer id);
+    Book returnBook(Integer id);
+    Book renewTransaction(Integer id);
+    Book deleteBook(Integer id);
 }

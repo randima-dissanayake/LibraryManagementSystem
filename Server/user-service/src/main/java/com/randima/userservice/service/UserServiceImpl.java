@@ -85,4 +85,14 @@ public class UserServiceImpl implements UserService{
     public User getUserByUniversityId(Integer uId){
         return userRepository.findByUniversityId(uId);
     }
+
+    @Override
+    public User deleteUser(Integer uid){
+        User user = userRepository.findByUniversityId(uid);
+        if (user!= null){
+            user.setDelete(true);
+            return userRepository.save(user);
+        }
+        return null;
+    }
 }

@@ -24,6 +24,8 @@ public class Book {
     private LocalDate last_available_date;
     private boolean enabled;
     private boolean isDelete;
+
+
     @Lob
     private byte[] book_image;
     @Transient

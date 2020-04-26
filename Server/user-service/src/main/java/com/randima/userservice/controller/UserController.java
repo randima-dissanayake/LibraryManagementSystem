@@ -59,4 +59,9 @@ public class UserController {
         return userService.getUserByUniversityId(uId);
     }
 
+    @RequestMapping(value = "/delete/{id}",method = RequestMethod.DELETE)
+    public User deleteUser(@PathVariable Integer id){
+        return userService.deleteUser(id);
+    }
+
 }

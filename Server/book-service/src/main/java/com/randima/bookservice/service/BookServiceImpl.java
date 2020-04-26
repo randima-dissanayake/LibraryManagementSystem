@@ -15,6 +15,7 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -72,5 +73,49 @@ public class BookServiceImpl implements BookService{
     @Override
     public List<Book> findAll() {
         return bookRepository.findAll();
+    }
+
+    @Override
+    public Book borrowBook(Integer id){
+        Optional<Book> book = bookRepository.findById(id);
+        if (book.isPresent()) {
+            book.get().setLast_available_date(LocalDate.now().plusDays(14));
+            book.get().setEnabled(false);
+            return bookRepository.save(book.get());
+        } else {
+            return null;
+        }
+    }
+
+    @Override
+    public Book returnBook(Integer id){
+        Optional<Book> book = bookRepository.findById(id);
+        if (book.isPresent()) {
+            book.get().setLast_available_date(null);
+            book.get().setEnabled(true);
+            return bookRepository.save(book.get());
+        } else {
+            return null;
+        }
+    }
+    @Override
+    public Book renewTransaction(Integer id){
+        Optional<Book> book = bookRepository.findById(id);
+        if (book.isPresent()) {
+            book.get().setLast_available_date(book.get().getLast_available_date().plusDays(7));
+            book.get().setEnabled(false);
+            return bookRepository.save(book.get());
+        } else {
+            return null;
+        }
+    }
+    @Override
+    public Book deleteBook(Integer id){
+        Optional<Book> book = bookRepository.findById(id);
+        if (book.isPresent()){
+            book.get().setDelete(true);
+            return bookRepository.save(book.get());
+        }
+        return null;
     }
 }

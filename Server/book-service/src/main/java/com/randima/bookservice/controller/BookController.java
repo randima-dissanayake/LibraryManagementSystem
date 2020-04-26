@@ -48,8 +48,11 @@ public class BookController {
     }
 
     @RequestMapping(value = "",method = RequestMethod.PUT)
-    public Book updateBook(@RequestBody Book book){
-        return bookService.updateBook(book);
+    public Book updateBook(@RequestParam("file") MultipartFile file, @RequestParam("book") String book)throws IOException{
+        Book updated_book = new ObjectMapper().readValue(book, Book.class);
+        System.out.println("updated book"+updated_book);
+        updated_book.setBook_image((file.getBytes()));
+        return bookService.updateBook(updated_book);
     }
 
     @RequestMapping(value = "/currentusers/{id}",method = RequestMethod.GET)
@@ -57,4 +60,23 @@ public class BookController {
         return bookService.getUserList(id);
     }
 
+    @RequestMapping(value = "/borrow/{id}",method = RequestMethod.GET)
+    public Book borrowBook(@PathVariable Integer id){
+        return bookService.borrowBook(id);
+    }
+
+    @RequestMapping(value = "/return/{id}",method = RequestMethod.GET)
+    public Book returnBook(@PathVariable Integer id){
+        return bookService.returnBook(id);
+    }
+
+    @RequestMapping(value = "/renew/{id}",method = RequestMethod.GET)
+    public Book renewTransaction(@PathVariable Integer id){
+        return bookService.renewTransaction(id);
+    }
+
+    @RequestMapping(value = "/delete/{id}",method = RequestMethod.DELETE)
+    public Book deleteBook(@PathVariable Integer id){
+        return bookService.deleteBook(id);
+    }
 }
