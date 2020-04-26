@@ -84,11 +84,14 @@ export class AuthService {
  }
 
  save(data){
-  console.log("rrrrrrrrrrrrrrr",data)
   return this.httpClient.post<User>(this.baseUrl+"register",data);
 }
 
 delete(id){
   return this.httpClient.delete(this.baseUrl+"delete/"+id,this.httpOptions);
+}
+
+fetchAllUsers(){
+  return this.httpClient.get<any>(this.baseUrl+"users",this.httpOptions);
 }
 }

@@ -6,7 +6,7 @@
             <div class="container-fluid" *ngIf="user!=null">
                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
                     <h1 class="h3 mb-0 text-gray-800">{{user.firstName}} {{user.lastName}}</h1>
-                    <button class="btn btn-lg btn-outline-primary" (click)="editUserDetails()">Edit </button>
+                    <button class="btn btn-lg" (click)="editUserDetails()"><i class="fa fa-pencil" aria-hidden="true"></i> &nbsp;&nbsp;&nbsp;Edit </button>
                 </div>
                 <div class="row">
                     <div class="text-center d-flex col-sm-3">

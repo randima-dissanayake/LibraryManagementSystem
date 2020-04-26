@@ -13,6 +13,13 @@ export class CardComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    if(this.childItem == "Transaction"){
+      this.childItem = "Pending to Return"
+    } else if(this.childItem == "OldTransaction") {
+      this.childItem = "Read Books"
+    }
   }
+
+
 
 }

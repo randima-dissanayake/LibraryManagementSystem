@@ -30,6 +30,7 @@ export class ManageBooksComponent implements OnInit {
       (data: any)=> {
         if(data!=null)
           this.books = data
+        
       },
       (error)=>{
         let errorMsg = "Something went Wrong";
@@ -81,6 +82,7 @@ export class ManageBooksComponent implements OnInit {
               'Your file has been deleted.',
               'success'
             )
+            window.location.reload()
           },
           (error)=>{
             let errorMsg = "Something went Wrong";

@@ -50,6 +50,7 @@ export class BookDetailsComponent implements OnInit {
               showConfirmButton: true,
               timer: 5000
             })
+            window.location.reload()
         },
           (error) => {
             let errorMsg = "Something went Wrong";

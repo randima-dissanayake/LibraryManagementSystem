@@ -10,8 +10,8 @@ public class UserModel {
     private String username;
     private String password;
     private Integer active = 1;
-    private boolean locked;
-    private boolean enabled = true;
+    private boolean isDelete;
+    private boolean enabled;
     private List<Role> roles;
 
     public String getFirstName() {
@@ -70,12 +70,20 @@ public class UserModel {
         this.active = active;
     }
 
-    public boolean isLocked() {
-        return locked;
+    public List<Role> getRoles() {
+        return roles;
     }
 
-    public void setLocked(boolean locked) {
-        this.locked = locked;
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
+    }
+
+    public boolean isDelete() {
+        return isDelete;
+    }
+
+    public void setDelete(boolean delete) {
+        isDelete = delete;
     }
 
     public boolean isEnabled() {
@@ -84,13 +92,5 @@ public class UserModel {
 
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
-    }
-
-    public List<Role> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(List<Role> roles) {
-        this.roles = roles;
     }
 }

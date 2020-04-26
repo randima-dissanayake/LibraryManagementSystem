@@ -77,8 +77,25 @@ public class JwtUserDetailsService implements UserDetailsService {
         }
     }
 
-    public List<LibUser> getAll() {
-        return userRepository.findAll();
+    public List<UserModel> getAll() {
+        List<LibUser>  libUsers = userRepository.findAll();
+        List<UserModel> userModelList = new ArrayList<>();
+        for (LibUser libUser: libUsers){
+            User user = userService.getUserByUid(libUser.getUniversityId());
+            UserModel userModel = new UserModel();
+            userModel.setFirstName(user.getFirstName());
+            userModel.setLastName(user.getLastName());
+            userModel.setTelephones(user.getTelephones());
+            userModel.setUniversityId(user.getUniversityId());
+            userModel.setUsername(libUser.getUsername());
+            userModel.setActive(libUser.getActive());
+            userModel.setRoles(libUser.getRoles());
+            userModel.setDelete(user.isDelete());
+            userModel.setEnabled(libUser.isEnabled());
+            userModel.setEnabled(libUser.isEnabled());
+            userModelList.add(userModel);
+        }
+        return userModelList;
     }
 
     public LibUser deleteUser(Integer uid) {

@@ -24,23 +24,26 @@ export class DashboardComponent implements OnInit {
   transaction = 'Transaction';
   fine = 'Fine';
   user = 'User';
+  oldTransaction = 'OldTransaction'
 
   books:Array<Book>=[];
   transactions: Array<Transaction>=[];
   users: Array<User>=[];
   fines: Array<Transaction> = [];
+  returnedList: Array<Transaction> = [];
 
   selectedTab = 'Book';
-  bookColor:string = '#17a2b8'; 
+  bookColor:string = '#afbfed'; 
   transactionColor: string = '#fff'; 
   fineColor: string = '#fff'; 
   userColor : string = '#fff';
+  oldTransactionColor: string = '#fff';
 
   isAdmin
 
   constructor(private bookService: BookService, 
     private transactionService : TransactionService, 
-    private userService: UserService, 
+    private userService: AuthService, 
     private modalService: NgbModal,
     private sanitizer: DomSanitizer
     ) { 
@@ -54,25 +57,25 @@ export class DashboardComponent implements OnInit {
   changeSelectedTab( event: any,value: string){
     this.selectedTab = value;
     if(this.selectedTab == 'Book'){
-      this.bookColor = '#17a2b8'
+      this.bookColor = '#afbfed'
       this.transactionColor = '#fff'; 
       this.fineColor = '#fff'; 
       this.userColor = '#fff';
       this.fetchAllBooks();
     } else if(this.selectedTab == 'Transaction'){
       this.bookColor = '#fff'
-      this.transactionColor = '#17a2b8'
+      this.transactionColor = '#afbfed'
       this.fineColor = '#fff'; 
       this.userColor = '#fff';
       this.fetchAllTransactions();
     } else if(this.selectedTab == 'User') {
-      this.userColor = '#17a2b8'
+      this.userColor = '#afbfed'
       this.bookColor = '#fff'
       this.transactionColor = '#fff'
       this.fineColor = '#fff'; 
       this.fetchAllUsers();
     } else if(this.selectedTab == 'myProfile'){
-      this.userColor = '#17a2b8'
+      this.userColor = '#afbfed'
       this.bookColor = '#fff'
       this.transactionColor = '#fff'
       this.fineColor = '#fff';
@@ -80,8 +83,14 @@ export class DashboardComponent implements OnInit {
       this.userColor = '#fff'
       this.bookColor = '#fff'
       this.transactionColor = '#fff'
-      this.fineColor = '#17a2b8';
+      this.fineColor = '#afbfed';
       this.fetchAllFines();
+    } else if(this.selectedTab == 'OldTransaction'){
+      this.fineColor = '#fff'
+      this.bookColor = '#fff'
+      this.transactionColor = '#fff'
+      this.oldTransactionColor = '#afbfed';
+      this.fetchAllOldTransactions();
     }
 
   }
@@ -110,8 +119,16 @@ export class DashboardComponent implements OnInit {
 
   fetchAllTransactions(){
     if(this.isAdmin){
+      this.transactions=[]
     this.transactionService.fetchAllTransactions().subscribe(
-      (data: Transaction[])=> this.transactions = data,
+      (data: Transaction[])=> {
+        for (let i = 0; i < data.length; i++) {
+          if(!data[i].returned){
+            this.transactions.push(data[i]);
+          }
+        }
+        // this.transactions = data
+      },
       (error)=>{
         let errorMsg = "Something went Wrong";
         if (error.status === 401) {
@@ -127,8 +144,16 @@ export class DashboardComponent implements OnInit {
         })
       }
     )} else {
+      this.transactions=[]
       this.transactionService.getTransactionByUniversityId(JSON.parse(sessionStorage.getItem('user')).universityId).subscribe(
-        (data: Transaction[])=> this.transactions = data,
+        (data: Transaction[])=> {
+          for (let i = 0; i < data.length; i++) {
+            if(!data[i].returned){
+              this.transactions.push(data[i]);
+            }
+          }
+          // this.transactions = data
+        },
       (error)=>{
         let errorMsg = "Something went Wrong";
         if (error.status === 401) {
@@ -148,10 +173,15 @@ export class DashboardComponent implements OnInit {
   }
 
   fetchAllUsers(){
+    this.users = []
     this.userService.fetchAllUsers().subscribe(
       (data: any)=> {
-        if(data!=null)
-          this.users = data
+        for (let i = 0; i < data.length; i++) {
+          if(!data[i].delete){
+            this.users.push(data[i]);
+          }
+        }
+        
       },
       (error)=>{
         let errorMsg = "Something went Wrong";
@@ -172,14 +202,15 @@ export class DashboardComponent implements OnInit {
 
   fetchAllFines(){
     if(this.isAdmin){
+      this.fines=[]
     this.transactionService.fetchAllFinesNotReturned().subscribe(
       (data: any)=> {
-        // for (let i = 0; i < data.length; i++) {
-        //   if(data[i].fine > 0){
-        //     this.fines.push(data[i]);
-        //   }
-        // }
-        this.fines = data;
+        for (let i = 0; i < data.length; i++) {
+          if(!data[i].returned && data[i].fine > 0){
+            this.fines.push(data[i]);
+          }
+        }
+        // this.fines = data;
       },
       (error)=>{
         let errorMsg = "Something went Wrong";
@@ -201,7 +232,7 @@ export class DashboardComponent implements OnInit {
       this.transactionService.getTransactionByUniversityId(JSON.parse(sessionStorage.getItem('user')).universityId).subscribe(
         (data: Transaction[])=> {
           for (let i = 0; i < data.length; i++) {
-            if(data[i].fine>0){
+            if(!data[i].returned && data[i].fine>0){
               this.fines.push(data[i]);
             }
           }
@@ -224,7 +255,36 @@ export class DashboardComponent implements OnInit {
     }
   }
 
+  fetchAllOldTransactions(){
+    this.returnedList = []
+      this.transactionService.getTransactionByUniversityId(JSON.parse(sessionStorage.getItem('user')).universityId).subscribe(
+        (data: Transaction[])=> {
+          for (let i = 0; i < data.length; i++) {
+            if(data[i].returned){
+              this.returnedList.push(data[i]);
+            }
+          }
+        },
+      (error)=>{
+        let errorMsg = "Something went Wrong";
+        if (error.status === 401) {
+          errorMsg = "Unauthorized";
+        } 
+        console.log("error", error)
+        Swal.fire({
+          position: 'center',
+          icon: 'error',
+          title: errorMsg,
+          showConfirmButton: true,
+          timer: 5500
+        })
+      }
+      )
+    }
+  
+
   open() {
+    console.log("add 0",this.selectedTab)
     if(this.selectedTab=='Book')
       this.modalService.open(AddBookComponent);
     else if(this.selectedTab=='Transaction')

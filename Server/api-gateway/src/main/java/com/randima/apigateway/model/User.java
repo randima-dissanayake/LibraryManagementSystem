@@ -8,6 +8,7 @@ public class User {
     private Integer universityId;
     private String username;
     private List<Telephone> telephones;
+    private boolean isDelete;
 
     public String getFirstName() {
         return firstName;
@@ -47,5 +48,13 @@ public class User {
 
     public void setTelephones(List<Telephone> telephones) {
         this.telephones = telephones;
+    }
+
+    public boolean isDelete() {
+        return isDelete;
+    }
+
+    public void setDelete(boolean delete) {
+        isDelete = delete;
     }
 }

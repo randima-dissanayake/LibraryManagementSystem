@@ -9,6 +9,7 @@ export interface Transaction{
 	checkout_date : Date,
 	renew_flag : number,
 	fine : number,
+	returned : boolean,
 	user:User,
 	book: Book
 }

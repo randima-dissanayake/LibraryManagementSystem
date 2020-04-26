@@ -16,17 +16,21 @@ export class ManageUsersComponent implements OnInit {
   users: Array<User>=[];
   p: number = 1;
   searchTerm;
-  constructor(private userService: UserService, private modalService: NgbModal, private authService: AuthService) { }
+  constructor(private userService: AuthService, private modalService: NgbModal, private authService: AuthService) { }
 
   ngOnInit(): void {
     this.fetchAllUsers();
   }
 
   fetchAllUsers(){
+    this.users=[]
     this.userService.fetchAllUsers().subscribe(
       (data: any)=> {
-        if(data!=null)
-          this.users = data
+        for (let i = 0; i < data.length; i++) {
+          if(!data[i].delete){
+            this.users.push(data[i]);
+          }
+        }
       },
       (error)=>{
         let errorMsg = "Something went Wrong";
@@ -52,6 +56,14 @@ export class ManageUsersComponent implements OnInit {
   }
 
   deleteUser(user){
+    if(user.universityId == JSON.parse(sessionStorage.getItem('user')).universityId){
+      Swal.fire({
+        position: 'center',
+        icon: 'error',
+        title: 'Not allowed to delete your account',
+        showConfirmButton: true
+      })
+    } else {
     const swalWithBootstrapButtons = Swal.mixin({
       customClass: {
         confirmButton: 'btn btn-success',
@@ -77,6 +89,7 @@ export class ManageUsersComponent implements OnInit {
               'Your file has been deleted.',
               'success'
             )
+            window.location.reload()
           },
           (error)=>{
             let errorMsg = "Something went Wrong";
@@ -106,6 +119,7 @@ export class ManageUsersComponent implements OnInit {
         )
       }
     })
+  }
 
   }
 

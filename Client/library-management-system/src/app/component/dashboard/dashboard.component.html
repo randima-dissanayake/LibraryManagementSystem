@@ -42,20 +42,20 @@
             <div class="col-xl-3 col-md-6 mb-4" (click)="changeSelectedTab($event,'User')" *ngIf="isAdmin">
                 <app-card [color]="userColor" [childItem]="user"></app-card>
             </div>
-            <div class="col-xl-3 col-md-6 mb-4" (click)="changeSelectedTab($event,'myProfile')" *ngIf="!isAdmin">
-              <app-card [color]="userColor" [childItem]="user"></app-card>
+            <div class="col-xl-3 col-md-6 mb-4" (click)="changeSelectedTab($event,'OldTransaction')" *ngIf="!isAdmin">
+              <app-card [color]="oldTransactionColor" [childItem]="oldTransaction"></app-card>
           </div>
           </div>
 
           <div class="d-sm-flex align-items-center justify-content-between mb-4" *ngIf="isAdmin">
             <h1 class="h3 mb-0 text-gray-800">{{selectedTab}}</h1>
-            <button class="btn btn-lg btn-outline-primary" (click)="open()">Add {{selectedTab}}</button>
+            <button class="btn btn-lg" (click)="open()" *ngIf="selectedTab!=='Fine'"><i class="fa fa-plus" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Add {{selectedTab}}</button>
           </div>
 
 
           <!-- Content Row -->
             <div class="row" *ngIf="selectedTab == 'Book'">
-              <div class="col-xl-3 col-md-6 mb-4" *ngFor= "let book of books" style="height: 20rem;">
+              <div class="col-xl-3 col-md-6 mb-4" *ngFor= "let book of books">
                 <app-item-card [bookObj]="book"></app-item-card>
               </div>
             </div>
@@ -72,6 +72,11 @@
             <div class="row" *ngIf="selectedTab == 'User'">
               <div class="col-xl-3 col-md-6 mb-4" *ngFor= "let user of users">
                 <app-item-card [userObj]="user"></app-item-card>
+              </div>
+            </div>
+            <div class="row" *ngIf="selectedTab == 'OldTransaction'">
+              <div class="col-xl-3 col-md-6 mb-4" *ngFor= "let transaction of returnedList">
+                <app-item-card [transactionObj]="transaction"></app-item-card>
               </div>
             </div>
             <!-- <div class="row" *ngIf="selectedTab == 'myProfile'">
@@ -100,26 +105,3 @@
   </div>
   <!-- End of Page Wrapper -->
 
-  <!-- Scroll to Top Button-->
-  <a class="scroll-to-top rounded" href="#page-top">
-    <i class="fas fa-angle-up"></i>
-  </a>
-
-  <!-- Logout Modal-->
-  <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">×</span>
-          </button>
-        </div>
-        <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-        <div class="modal-footer">
-          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-          <a class="btn btn-primary" href="login.html">Logout</a>
-        </div>
-      </div>
-    </div>
-  </div>

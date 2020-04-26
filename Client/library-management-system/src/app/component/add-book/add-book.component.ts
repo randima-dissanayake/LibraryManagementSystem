@@ -83,6 +83,7 @@ export class AddBookComponent implements OnInit {
         this.registerForm.reset();
         this.activeModal.close();
         console.log(data)
+        window.location.reload()
       },
       (error) => {
         let errorMsg = "Something went Wrong";
@@ -130,6 +131,7 @@ export class AddBookComponent implements OnInit {
         this.registerForm.reset();
         this.activeModal.close();
         console.log(data)
+        window.location.reload()
       },
       (error) => {
         let errorMsg = "Something went Wrong";

@@ -3,6 +3,7 @@ import { Transaction } from 'src/app/model/Transaction';
 import { TransactionService } from 'src/app/service/transaction.service';
 import Swal from 'sweetalert2';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { AuthService } from 'src/app/service/auth.service';
 
 @Component({
   selector: 'app-transaction-details',
@@ -12,14 +13,16 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 export class TransactionDetailsComponent implements OnInit {
 
   transaction: Transaction
-
+  isAdmin
   constructor(private transactionService: TransactionService, public activeModal: NgbActiveModal) { }
 
   ngOnInit(): void {
+    this.isAdmin = AuthService.isAdmin();
     this.transaction = JSON.parse(localStorage.getItem('transaction'));
   }
 
   renewBook(){
+    if(this.transaction.renew_flag == 0){
     Swal.fire({
       title: 'Are you sure?',
       text: "Return book before time exceed, If not fine will be calculated (Rs. 5 per day)",
@@ -32,15 +35,14 @@ export class TransactionDetailsComponent implements OnInit {
       if (result.value) {
         this.transactionService.renew(this.transaction.id).subscribe(
           (data: Transaction) => {
-            this.transaction = data; 
             console.log("saved transaction ",data)
           Swal.fire({
                   position: 'center',
                   icon: 'success',
                   title: 'Renewed for 7 more days',
-                  showConfirmButton: true,
-                  timer: 5000
+                  showConfirmButton: true
                 })
+                window.location.reload()
           },
           (error) => {
             let errorMsg = "Something went Wrong";
@@ -52,14 +54,20 @@ export class TransactionDetailsComponent implements OnInit {
               position: 'center',
               icon: 'error',
               title: errorMsg,
-              showConfirmButton: true,
-              timer: 5500
+              showConfirmButton: true
             })
             console.log(error)
           }
         );
       }});
-    
+    } else {
+      Swal.fire({
+        position: 'center',
+        icon: 'info',
+        title: "You already renewed!",
+        showConfirmButton: true
+      })
+    }
   }
 
   returnBook(){
@@ -75,15 +83,14 @@ export class TransactionDetailsComponent implements OnInit {
       if (result.value) {
         this.transactionService.return(this.transaction.id).subscribe(
           (data: Transaction) => {
-            this.transaction = data; 
             console.log("saved transaction ",data)
             Swal.fire({
               position: 'center',
               icon: 'success',
               title: 'Returned Successfully',
-              showConfirmButton: true,
-              timer: 5000
+              showConfirmButton: true
             })
+            window.location.reload()
           },
           (error) => {
             let errorMsg = "Something went Wrong";
@@ -95,14 +102,12 @@ export class TransactionDetailsComponent implements OnInit {
               position: 'center',
               icon: 'error',
               title: errorMsg,
-              showConfirmButton: true,
-              timer: 5500
+              showConfirmButton: true
             })
             console.log(error)
           }
         );
       }});
-    
   }
 
 }

@@ -87,7 +87,7 @@ public class JwtAuthenticationController {
 
 //    @PreAuthorize("hasRole('LIBRARIAN')")
     @RequestMapping(value = "/users", method = RequestMethod.GET)
-    public List<LibUser> getAll() {
+    public List<UserModel> getAll() {
         return userDetailsService.getAll();
     }
 

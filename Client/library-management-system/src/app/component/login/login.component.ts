@@ -69,8 +69,7 @@ export class LoginComponent implements OnInit {
           position: 'center',
           icon: 'error',
           title: errorMsg,
-          showConfirmButton: true,
-          timer: 5500
+          showConfirmButton: true
         })
         this.invalidLogin = true
       })

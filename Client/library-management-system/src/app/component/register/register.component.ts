@@ -76,8 +76,7 @@ export class RegisterComponent implements OnInit {
           position: 'center',
           icon: 'error',
           title: 'Somthing went Wrong',
-          showConfirmButton: true,
-          timer: 5500
+          showConfirmButton: true
         })
         console.log(error)
       }

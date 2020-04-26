@@ -61,9 +61,10 @@
                                     {{book.num_of_copies}}
                                 </td>
                                 <td>
+                                    <button class="btn" (click)=viewBook(book)><i class="fa fa-eye" aria-hidden="true"></i></button>
                                     <button class="btn" (click)=editBook(book) *ngIf="isAdmin"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
                                     <button class="btn" (click)=deleteBook(book) *ngIf="isAdmin"><i class="fa fa-trash" aria-hidden="true"></i></button>
-                                    <button class="btn" (click)=viewBook(book)><i class="fa fa-eye" aria-hidden="true"></i></button>
+                                    
                                 </td>
                             </tr>
                         </tbody>

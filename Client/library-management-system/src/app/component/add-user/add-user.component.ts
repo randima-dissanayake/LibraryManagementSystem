@@ -134,6 +134,7 @@ export class AddUserComponent implements OnInit {
           timer: 5000
         })
         this.activeModal.close();
+        window.location.reload()
       },
       (error)=>{
         let errorMsg = "Something went Wrong";

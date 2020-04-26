@@ -20,10 +20,16 @@ export class ManageFinesComponent implements OnInit {
   }
 
   fetchAllFines(){
+this.transactions = []
     this.transactionService.fetchAllTransactions().subscribe(
       (data: any)=> {
         if(data!=null)
-          this.transactions = data
+        for (let i = 0; i < data.length; i++) {
+          if(data[i].fine>0 && !data[i].returned){
+            this.transactions.push(data[i]);
+          }
+        }
+          // this.transactions = data
       },
       (error)=>{
         let errorMsg = "Something went Wrong";
@@ -65,6 +71,7 @@ export class ManageFinesComponent implements OnInit {
               showConfirmButton: true,
               timer: 5000
             })
+            window.location.reload()
           },
           (error) => {
             let errorMsg = "Something went Wrong";

@@ -29,6 +29,7 @@ import { ManageTransactionsComponent } from './component/manage-transactions/man
 import { UpdateMyProfileComponent } from './component/update-my-profile/update-my-profile.component';
 import { MyTransactionsComponent } from './component/my-transactions/my-transactions.component';
 import { ManageFinesComponent } from './component/manage-fines/manage-fines.component';
+import { OldTransactionsComponent } from './component/old-transactions/old-transactions.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +53,8 @@ import { ManageFinesComponent } from './component/manage-fines/manage-fines.comp
     ManageTransactionsComponent,
     UpdateMyProfileComponent,
     MyTransactionsComponent,
-    ManageFinesComponent
+    ManageFinesComponent,
+    OldTransactionsComponent
   ],
   imports: [
     BrowserModule,

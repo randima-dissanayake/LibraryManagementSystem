@@ -16,14 +16,19 @@ export class ManageTransactionsComponent implements OnInit {
   constructor(private transactionService : TransactionService) { }
 
   ngOnInit(): void {
-    this.fetchAllUsers();
+    this.fetchAllTransactions();
   }
 
-  fetchAllUsers(){
+  fetchAllTransactions(){
+    this.transactions = []
     this.transactionService.fetchAllTransactions().subscribe(
       (data: any)=> {
-        if(data!=null)
-          this.transactions = data
+        for (let i = 0; i < data.length; i++) {
+          if(!data[i].returned){
+            this.transactions.push(data[i]);
+          }
+        }
+        
       },
       (error)=>{
         let errorMsg = "Something went Wrong";
@@ -35,15 +40,15 @@ export class ManageTransactionsComponent implements OnInit {
           position: 'center',
           icon: 'error',
           title: errorMsg,
-          showConfirmButton: true,
-          timer: 5500
+          showConfirmButton: true
         })
         console.log(error)
       }
     )
   }
 
-  renewTransaction(id){
+  renewTransaction(transaction){
+    if(transaction.renew_flag == 0){
     Swal.fire({
       title: 'Are you sure?',
       text: "Return book before time exceed, If not fine will be calculated (Rs. 5 per day)",
@@ -54,16 +59,16 @@ export class ManageTransactionsComponent implements OnInit {
       confirmButtonText: 'Yes, borrow it!'
     }).then((result) => {
       if (result.value) {
-        this.transactionService.renew(id).subscribe(
+        this.transactionService.renew(transaction.id).subscribe(
           (data: Transaction) => {
             console.log("saved transaction ",data)
           Swal.fire({
                   position: 'center',
                   icon: 'success',
                   title: 'Renewed for 7 more days',
-                  showConfirmButton: true,
-                  timer: 5000
+                  showConfirmButton: true
                 })
+                window.location.reload()
           },
           (error) => {
             let errorMsg = "Something went Wrong";
@@ -75,13 +80,20 @@ export class ManageTransactionsComponent implements OnInit {
               position: 'center',
               icon: 'error',
               title: errorMsg,
-              showConfirmButton: true,
-              timer: 5500
+              showConfirmButton: true
             })
             console.log(error)
           }
         );
       }});
+    } else {
+      Swal.fire({
+        position: 'center',
+        icon: 'info',
+        title: "You already renewed!",
+        showConfirmButton: true
+      })
+    }
   }
 
   returnTransaction(id){
@@ -102,9 +114,9 @@ export class ManageTransactionsComponent implements OnInit {
               position: 'center',
               icon: 'success',
               title: 'Returned Successfully',
-              showConfirmButton: true,
-              timer: 5000
+              showConfirmButton: true
             })
+            window.location.reload()
           },
           (error) => {
             let errorMsg = "Something went Wrong";
@@ -116,8 +128,7 @@ export class ManageTransactionsComponent implements OnInit {
               position: 'center',
               icon: 'error',
               title: errorMsg,
-              showConfirmButton: true,
-              timer: 5500
+              showConfirmButton: true
             })
             console.log(error)
           }

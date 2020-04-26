@@ -1,6 +1,10 @@
 .sidebar {
-    width: 6.5rem;
+    width: 20%;
     min-height: 100vh;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    z-index: 9999;
   }
   
   .sidebar .nav-item {

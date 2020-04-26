@@ -13,6 +13,7 @@ import { ManageBooksComponent } from './component/manage-books/manage-books.comp
 import { ManageTransactionsComponent } from './component/manage-transactions/manage-transactions.component';
 import { MyTransactionsComponent } from './component/my-transactions/my-transactions.component';
 import { ManageFinesComponent } from './component/manage-fines/manage-fines.component';
+import { OldTransactionsComponent } from './component/old-transactions/old-transactions.component';
 
 
 const routes: Routes = [
@@ -27,7 +28,8 @@ const routes: Routes = [
   { path: 'books', component: ManageBooksComponent, canActivate:[AuthGaurdService] },
   { path: 'transactions', component: ManageTransactionsComponent, canActivate:[AuthGaurdService] },
   { path: 'mytransactions', component: MyTransactionsComponent, canActivate:[AuthGaurdService] },
-  { path: 'fines', component: ManageFinesComponent, canActivate:[AuthGaurdService] }
+  { path: 'fines', component: ManageFinesComponent, canActivate:[AuthGaurdService] },
+  { path: 'oldtransactions', component: OldTransactionsComponent, canActivate:[AuthGaurdService] }
 ];
 
 @NgModule({

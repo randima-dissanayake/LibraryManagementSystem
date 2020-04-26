@@ -10,6 +10,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class UserService {
     @Bean
@@ -28,7 +31,7 @@ public class UserService {
 //        ResponseEntity<User> response = restTemplate
 //                .exchange("http://localhost:8082/user", HttpMethod.POST, request, User.class);
         ResponseEntity<User> response = restTemplate
-                .exchange("http://192.168.8.101:8181/user", HttpMethod.POST, request, User.class);
+                .exchange("http://192.168.8.103:8181/user", HttpMethod.POST, request, User.class);
         return response.getBody();
     }
 
@@ -39,8 +42,20 @@ public class UserService {
 //        ResponseEntity<User> response = restTemplate
 //                .exchange("http://localhost:8082/user", HttpMethod.POST, request, User.class);
         ResponseEntity<User> response = restTemplate
-                .exchange("http://192.168.8.101:8181/user/delete/"+uid, HttpMethod.DELETE, request, User.class);
+                .exchange("http://192.168.8.103:8181/user/delete/"+uid, HttpMethod.DELETE, request, User.class);
         return response.getBody();
+    }
+
+    public User getUserByUid(Integer uid){
+        RestTemplate restTemplate = new RestTemplate();
+        HttpHeaders httpHeaders=new HttpHeaders();
+        HttpEntity<String> request = new HttpEntity<>("",httpHeaders);
+//        ResponseEntity<User> response = restTemplate
+//                .exchange("http://localhost:8082/user", HttpMethod.POST, request, User.class);
+        ResponseEntity<User> response = restTemplate
+                .exchange("http://192.168.8.103:8181/user/uid/"+uid, HttpMethod.GET, request, User.class);
+       return response.getBody();
+
     }
 
 }

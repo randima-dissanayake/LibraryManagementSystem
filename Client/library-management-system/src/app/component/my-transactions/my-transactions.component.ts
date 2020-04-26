@@ -85,45 +85,6 @@ export class MyTransactionsComponent implements OnInit {
       }});
   }
 
-  returnTransaction(id){
-    Swal.fire({
-      title: 'Are you sure?',
-      text: "You can renew If you are not already renew the book, Or return",
-      icon: 'question',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, return it!'
-    }).then((result) => {
-      if (result.value) {
-        this.transactionService.return(id).subscribe(
-          (data: Transaction) => {
-            console.log("saved transaction ",data)
-            Swal.fire({
-              position: 'center',
-              icon: 'success',
-              title: 'Returned Successfully',
-              showConfirmButton: true,
-              timer: 5000
-            })
-          },
-          (error) => {
-            let errorMsg = "Something went Wrong";
-            if (error.status === 401) {
-              errorMsg = "Unauthorized";
-            } 
-            console.log("error", error)
-            Swal.fire({
-              position: 'center',
-              icon: 'error',
-              title: errorMsg,
-              showConfirmButton: true,
-              timer: 5500
-            })
-            console.log(error)
-          }
-        );
-      }});
-  }
+  
 
 }
