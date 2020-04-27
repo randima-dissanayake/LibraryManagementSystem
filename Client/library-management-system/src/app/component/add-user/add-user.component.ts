@@ -20,7 +20,7 @@ export class AddUserComponent implements OnInit {
   submitted = false
   roles = [ 'USER', 'LIBRARIAN'];
   constructor(public activeModal: NgbActiveModal, private formBuilder: FormBuilder, private authService: AuthService, private userService:UserService) { 
-    
+    console.log("edit user", this.user)
   }
 
   ngOnInit(): void {

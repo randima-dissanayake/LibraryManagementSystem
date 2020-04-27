@@ -51,6 +51,7 @@ export class ManageUsersComponent implements OnInit {
   }
 
   editUser(user){
+    console.log("edit user manage",user)
     const modalRef = this.modalService.open(AddUserComponent,user);
     modalRef.componentInstance.user = user
   }

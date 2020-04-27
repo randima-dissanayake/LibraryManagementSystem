@@ -49,43 +49,43 @@ export class ManageTransactionsComponent implements OnInit {
 
   renewTransaction(transaction){
     if(transaction.renew_flag == 0){
-    Swal.fire({
-      title: 'Are you sure?',
-      text: "Return book before time exceed, If not fine will be calculated (Rs. 5 per day)",
-      icon: 'question',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, borrow it!'
-    }).then((result) => {
-      if (result.value) {
-        this.transactionService.renew(transaction.id).subscribe(
-          (data: Transaction) => {
-            console.log("saved transaction ",data)
-          Swal.fire({
-                  position: 'center',
-                  icon: 'success',
-                  title: 'Renewed for 7 more days',
-                  showConfirmButton: true
-                })
-                window.location.reload()
-          },
-          (error) => {
-            let errorMsg = "Something went Wrong";
-            if (error.status === 401) {
-              errorMsg = "Unauthorized";
-            } 
-            console.log("error", error)
+      Swal.fire({
+        title: 'Are you sure?',
+        text: "Return book before time exceed, If not fine will be calculated (Rs. 5 per day)",
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, borrow it!'
+      }).then((result) => {
+        if (result.value) {
+          this.transactionService.renew(transaction.id).subscribe(
+            (data: Transaction) => {
+              console.log("saved transaction ",data)
             Swal.fire({
-              position: 'center',
-              icon: 'error',
-              title: errorMsg,
-              showConfirmButton: true
-            })
-            console.log(error)
-          }
-        );
-      }});
+                    position: 'center',
+                    icon: 'success',
+                    title: 'Renewed for 7 more days',
+                    showConfirmButton: true
+                  })
+                  window.location.reload()
+            },
+            (error) => {
+              let errorMsg = "Something went Wrong";
+              if (error.status === 401) {
+                errorMsg = "Unauthorized";
+              } 
+              console.log("error", error)
+              Swal.fire({
+                position: 'center',
+                icon: 'error',
+                title: errorMsg,
+                showConfirmButton: true
+              })
+              console.log(error)
+            }
+          );
+        }});
     } else {
       Swal.fire({
         position: 'center',

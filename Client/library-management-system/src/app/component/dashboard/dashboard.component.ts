@@ -61,29 +61,34 @@ export class DashboardComponent implements OnInit {
       this.transactionColor = '#fff'; 
       this.fineColor = '#fff'; 
       this.userColor = '#fff';
+      this.oldTransactionColor = '#fff'
       this.fetchAllBooks();
     } else if(this.selectedTab == 'Transaction'){
       this.bookColor = '#fff'
       this.transactionColor = '#afbfed'
       this.fineColor = '#fff'; 
       this.userColor = '#fff';
+      this.oldTransactionColor = '#fff'
       this.fetchAllTransactions();
     } else if(this.selectedTab == 'User') {
       this.userColor = '#afbfed'
       this.bookColor = '#fff'
       this.transactionColor = '#fff'
       this.fineColor = '#fff'; 
+      this.oldTransactionColor = '#fff'
       this.fetchAllUsers();
     } else if(this.selectedTab == 'myProfile'){
       this.userColor = '#afbfed'
       this.bookColor = '#fff'
       this.transactionColor = '#fff'
       this.fineColor = '#fff';
+      this.oldTransactionColor = '#fff'
     } else if(this.selectedTab == 'Fine'){
       this.userColor = '#fff'
       this.bookColor = '#fff'
       this.transactionColor = '#fff'
       this.fineColor = '#afbfed';
+      this.oldTransactionColor = '#fff'
       this.fetchAllFines();
     } else if(this.selectedTab == 'OldTransaction'){
       this.fineColor = '#fff'

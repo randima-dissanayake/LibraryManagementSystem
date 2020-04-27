@@ -30,8 +30,8 @@
       </div>
   
     </div>
-    <div class="modal-footer" *ngIf="transaction.returned">
-      <div class="px-3 px-sm-4 mt-3 mb-4">
+    <div class="modal-footer" >
+      <div class="px-3 px-sm-4 mt-3 mb-4" *ngIf="!transaction.returned">
         <button class="btn btn-lg " (click)="renewBook()">Click to Renew </button></div>
 
         <div class="px-3 px-sm-4 mt-3 mb-4" *ngIf="isAdmin">
